@@ -13,7 +13,7 @@ class Code(Page):
         """
             Return the central HTML content of this page
         """
-        return read_file("content/under_construction.html")
+        return read_file("content/pages/code.html")
 
 
     def title(self):
