@@ -15,9 +15,11 @@ class Code(Page):
         """
         return read_file("content/under_construction.html")
 
+
     def title(self):
         return "Jon Tedesco &#183; Code"
 
+    
     @cherrypy.expose
     def index(self):
         """
