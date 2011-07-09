@@ -1,0 +1,66 @@
+
+.image-style1 {
+	float: left;
+	position: relative;
+	width: 257px;
+	height: 225px;
+	margin-right: 25px;
+}
+
+.image-style1 span {
+	position: absolute;
+	width: 259px;
+	height: 211px;
+	top: 14px;
+	left: 15px;
+}
+
+.image-style1 .thumbnails {
+	background: url(images/homepage10.gif) no-repeat left top;
+}
+
+.image-style2 .thumbnails {
+	background: url(images/homepage13.gif) no-repeat left top;
+}
+
+.image-style3 .thumbnails {
+	background: url(images/homepage15.gif) no-repeat left top;
+}
+
+#sidebox .bgbtm {
+	padding-bottom: 100px;
+}
+
+ul.style1 {
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+	line-height: normal;
+	font-size: 14px;
+	color: #A58481;
+}
+
+ul.style1 li {
+	line-height: 1;
+	padding: 5px 0px 35px 0px;
+}
+
+ul.style1 img {
+	float: left;
+	padding-right: 20px;
+}
+
+ul.style1 h3 {
+	margin: 0px;
+	padding: 5px 0px;
+	letter-spacing: -1px;
+	font-weight: bold;
+	color: #E6D4D2;
+}
+
+ul.style1 a {
+	color: #D56836;
+}
+
+
+
