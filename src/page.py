@@ -173,6 +173,7 @@ class Page(object):
             Gets the standard header of the page (logo, search box)
         """
         try:
+            # Fill the query into the text box if a query was submitted
             return read_file("content/header.html") % self.query
         except AttributeError:
             return read_file("content/header.html") % ""
@@ -374,3 +375,27 @@ class Page(object):
         return formatted_results
 
 
+    def view_source(self, path, language):
+        """
+            View the source code of the given file, in the standard <code>view_source</code> template.
+
+                @param  path    The path of the file to display
+        """
+
+        # Read the source code file
+        source_file = open(path, 'r')
+        source_code = source_file.read()
+        source_file.close()
+
+        # Form the page content
+        content = read_file("content/pages/view_source.html") & (path, language, source_code)
+
+        # Build the components of the page
+        meta_header = self.meta_header(self.title())
+        page_header = self.header()
+        menu = self.menu()
+        sidebar = self.sidebar()
+        footer = self.footer()
+
+        # Put the page together and return it
+        return read_file("content/template.html") % (meta_header, page_header, content, menu, sidebar, footer)
