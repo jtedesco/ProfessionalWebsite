@@ -138,7 +138,13 @@ class Page(object):
                 @param  title   The title of this page
                 @return The meta data to go in the HEAD tag of the page
         """
-        return read_file("content/meta_header.html") % (title, " ".join(self.keywords()), self.description(), get_server_root())
+
+        # There are a lot of server root entries because there are many syntax highlighting brushes, and each
+        #   brush is imported separately
+        return read_file("content/meta_header.html") % (title, " ".join(self.keywords()), self.description(), get_server_root(),
+                                                        get_server_root(), get_server_root(), get_server_root(), get_server_root(),
+                                                        get_server_root(), get_server_root(), get_server_root(), get_server_root(),
+                                                        get_server_root(), get_server_root(), get_server_root(), get_server_root())
 
 
     def keywords(self):

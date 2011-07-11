@@ -1,11 +1,14 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
+    <!-- The title of th page -->
     <title> %s </title>
 
+    <!-- The meta keywords and description for search engine optimization -->
     <meta name="keywords" content="%s" />
     <meta name="description" content="%s" />
 
+       <!-- Global style files -->
     <link href="../style/default.css" rel="stylesheet" type="text/css" media="all" />
     <style type="text/css">
         @import "../style/layout.css";
@@ -14,8 +17,35 @@
     <!--[if IE 6]><link href="../style/ie6fix.css" rel="stylesheet" type="text/css" /><![endif]-->
     <!--[if IE 7]><link href="../style/ie6fix.css" rel="stylesheet" type="text/css" /><![endif]-->
 
+
+
+    <!-- Core scripts for syntax highlighting -->
+    <script type="text/javascript" src="%sscripts/syntaxhighlighter/src/shCore.js"></script>
+
+    <!-- Include the brushes for each language displayed on the site -->
+    <script type="text/javascript" src="%sscripts/syntaxhighlighter/scripts/shBrushCpp.js"></script>
+    <script type="text/javascript" src="%sscripts/syntaxhighlighter/scripts/shBrushCss.js"></script>
+    <script type="text/javascript" src="%sscripts/syntaxhighlighter/scripts/shBrushJava.js"></script>
+    <script type="text/javascript" src="%sscripts/syntaxhighlighter/scripts/shBrushJScript.js"></script>
+    <script type="text/javascript" src="%sscripts/syntaxhighlighter/scripts/shBrushPhp.js"></script>
+    <script type="text/javascript" src="%sscripts/syntaxhighlighter/scripts/shBrushPython.js"></script>
+    <script type="text/javascript" src="%sscripts/syntaxhighlighter/scripts/shBrushRuby.js"></script>
+    <script type="text/javascript" src="%sscripts/syntaxhighlighter/scripts/shBrushSql.js"></script>
+    <script type="text/javascript" src="%sscripts/syntaxhighlighter/scripts/shBrushXml.js"></script>
+
+    <!-- Use the default syntax highlighting style -->
+    <link href="%sscripts/syntaxhighlighter/styles/shCore.css" rel="stylesheet" type="text/css" />
+    <link href="%sscripts/syntaxhighlighter/styles/shThemeDefault.css" rel="stylesheet" type="text/css" />
+
+    <!-- Launch the syntax highlighter -->
+    <script type="text/javascript">
+        SyntaxHighlighter.all();
+    </script>
+
+    <!-- JQuery -->
     <script type="text/javascript" src="%sscripts/jquery-min.js"></script>
-    
+
+    <!-- Script for hiding/showing elements using JQuery -->
     <script type="text/javascript">
         function toggleInfo(className) {
             linkClassName = className + "_link";
@@ -24,6 +54,7 @@
         }
     </script>
 
+    <!-- Google analytics script -->
     <script type="text/javascript">
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-21869266-2']);
