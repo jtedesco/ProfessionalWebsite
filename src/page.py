@@ -375,6 +375,7 @@ class Page(object):
         return formatted_results
 
 
+    @cherrypy.expose
     def view_source(self, path, language):
         """
             View the source code of the given file, in the standard <code>view_source</code> template.
@@ -388,10 +389,10 @@ class Page(object):
         source_file.close()
 
         # Form the page content
-        content = read_file("content/pages/view_source.html") & (path, language, source_code)
+        content = read_file("content/pages/view_source.html") % (path, language, source_code)
 
         # Build the components of the page
-        meta_header = self.meta_header(self.title())
+        meta_header = self.meta_header("View Source &#183; %s (%s)" % (path, language.title()))
         page_header = self.header()
         menu = self.menu()
         sidebar = self.sidebar()

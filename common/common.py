@@ -4,7 +4,7 @@ from util.file_reader import read_file
 __author__ = 'Jon Tedesco'
 
 def get_root_directory():
-    return "ROOT_DIRECTORY"
+    return "/home/jtedesco/Dropbox/Projects/ProfessionalWebsite"
 
 def get_server_root():
     return "http://localhost:8080/"
