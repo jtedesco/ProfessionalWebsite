@@ -1,6 +1,4 @@
-import os
-import re
-import cherrypy
+import os, re, cherrypy
 from datetime import datetime
 from cherrypy.lib.static import serve_file
 from whoosh.fields import Schema, TEXT
@@ -399,6 +397,76 @@ class Page(object):
 
         # Build the components of the page
         meta_header = self.meta_header("View Source &#183; %s (%s)" % (path, language.title()))
+        page_header = self.header()
+        menu = self.menu()
+        sidebar = self.sidebar()
+        footer = self.footer()
+
+        # Put the page together and return it
+        return read_file("content/template.html") % (meta_header, page_header, content, menu, sidebar, footer)
+
+
+    @cherrypy.expose
+    def navigate_source(self, path):
+        """
+            View the contents of a directory, and provide a simple interface with which to navigate the directory
+            structure, and view the source of files in the heirarchy.
+
+                @param  path    The path, relative to the root of the site, to display
+        """
+
+        # Matches file extensions with programming languages
+        languages = {
+            "py"    : "python",
+            "rb"    : "ruby",
+            "js"    : "javascript",
+            "html"  : "html",
+            "htm"   : "html",
+            "cpp"   : "cpp",
+            "c"     : "c",
+            "cc"    : "cpp"
+        }
+
+        # List the files in the directory, and import them into a list of tuples, as '(filename, type)'
+        root = get_root_directory()
+        file_names = os.listdir(root + "/" + path)
+        files = []
+        directories = []
+        for file in file_names:
+
+            # Add directories and files to separate lists
+            period_index = file.find('.')
+            if os.path.isfile(root + "/" + path + "/" + file):
+                if period_index > 0:
+                    extension = file[file.find('.')+1:]
+                    if extension in languages.keys():
+                        files.append((path + "/" + file, languages[extension]))
+                    else:
+                        files.append((path + "/" + file, "plain"))
+                else:
+                    files.append((path + "/" + file, "plain"))
+
+            elif period_index == -1 and os.path.isdir(root + "/" + path):
+                directories.append(path + "/" + file)
+
+        # Form the list of links for the file browser
+        links = []
+        for directory in directories:
+            links.append((directory, '../navigate_source/?path=%s' % directory))
+        for file_data in files:
+            links.append((file_data[0], '../view_source/?path=%s&language=%s' % (file_data[0], file_data[1])))
+
+        # Form the main content itself
+        link_content = "<div class='source_navigation'>"
+        for link in links:
+            link_content += "<a href=%s>%s</a><br/><br/>" % (link[1], link[0])
+        link_content += "</div>"
+
+        # Form the page content
+        content = read_file("content/pages/navigate_source.html") % (path, link_content)
+
+        # Build the components of the page
+        meta_header = self.meta_header("Navigate Source &#183; %s" % path)
         page_header = self.header()
         menu = self.menu()
         sidebar = self.sidebar()

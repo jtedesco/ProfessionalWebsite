@@ -16,7 +16,6 @@ body {
 
 .syntaxhighlighter {
     margin-right: -20px;
-    margin-left: -20px;
     width: 650px;
     overflow: visible;
 }
@@ -68,16 +67,12 @@ hr {
 	display: none;
 }
 
-/** For navigation */
-.navigation1 {
-    margin-left: 50px
+/** For source code navigation */
+.source_navigation {
+    margin-left: 30px;
+    font-size: 14px;
 }
-.navigation2 {
-    margin-left: 70px
-}
-.navigation3 {
-    margin-left: 90px
-}
+
 
 .project_links {
     float:right;
@@ -393,6 +388,7 @@ ul.style2 li span {
 /** BOX1 */
 
 #box1 {
+    min-height: 650px;
 	overflow: hidden;
 }
 
