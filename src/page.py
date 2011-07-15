@@ -388,6 +388,10 @@ class Page(object):
         source_code = source_file.read()
         source_file.close()
 
+        # Escape '<' characters
+        source_code = source_code.replace('<', '&lt')
+        source_code = source_code.replace('>', '&gt')
+
         # Form the page content
         content = read_file("content/pages/view_source.html") % (path, language, source_code)
 

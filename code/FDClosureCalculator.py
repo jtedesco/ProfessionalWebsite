@@ -1,5 +1,6 @@
 """
-  This file will implement the menu for users to choose which functionality they'd like to use
+  This file will implement the menu for users to choose which
+  functionality they'd like to use
 """
 from string import split, replace
 from copy import deepcopy
@@ -13,7 +14,8 @@ def build_fds():
     """
 
     # Show the prompt and instructions
-    input = str(raw_input("Please enter each FD as \"#,#,... -> #,#,#,...\", and type in \"done\" when done:\n"))
+    input = str(raw_input("Please enter each FD as " \
+        + "\"#,#,... -> #,#,#,...\", and type in \"done\" when done:\n"))
 
     # Get the list of fds
     replace(input, " ", "")
@@ -35,7 +37,8 @@ def build_fds():
 
 
         # Show the prompt and instructions
-        input = str(raw_input("Please enter an FD as \"X,X,... -> X,X,X,...\", and type in \"done\" when done:\n"))
+        input = str(raw_input("Please enter an FD as " + \
+            "\"X,X,... -> X,X,X,...\", and type in \"done\" when done:\n"))
 
     return fds
 
@@ -49,7 +52,9 @@ def choose_elements(elements):
     while not valid:
 
         # Prompt for user input
-        input = str(raw_input("Enter the set of elements that you would like to compute the closure of as X,X,X..., or type 'done' to return to the previous menu\n"))
+        input = str(raw_input("Enter the set of elements that " \
+        + "you would like to compute the closure of as X,X,X..., or " \
+        + "type 'done' to return to the previous menu\n"))
 
         # Parse the input into a set
         element_strings = split(input, ",")
@@ -64,7 +69,8 @@ def choose_elements(elements):
 
         # Check that the input set is a subset of the elements we have
         if not search_elements.issubset(elements):
-            print "Sorry, it looks like not all those elements were input..."
+            print "Sorry, it looks like not all those elements\
+             were input..."
             valid = False
         else:
             valid = True
@@ -78,7 +84,7 @@ def convert_fds(fds):
      Convert the old form of fds into a list of pairs of sets
 
         @param  fds The dictionary of lhs's : rhs's
-        @retval A list of pairs of sets, representing the fds
+        @return A list of pairs of sets, representing the fds
     """
 
     # Parse the dictionary of user inputs into a list of pairs of sets
@@ -95,8 +101,12 @@ def convert_fds(fds):
         else:
             right_side = [old_fds[old_fd]]
 
-        # Create sets from the right and left side, and add this pair of sides to the list of fds
-        if left_side != [''] and right_side != [''] and left_side != [] and right_side != [] and left_side is not None and right_side is not None:
+        # Create sets from the right and left side, and add this
+        #   pair of sides to the list of fds
+        if left_side != [''] and right_side != [''] and \
+           left_side != [] and right_side != [] and left_side \
+            is not None and right_side is not None:
+            
             left_side_set = set(left_side)
             right_side_set = set(right_side)
             self_fd = (left_side_set, right_side_set)
@@ -125,15 +135,17 @@ def find_closure(fds, elements):
     """
       Finds the closure of a set of elements given a set of FDs
 
-        @param  fds  The set of functional dependencies
-        @param  elements    The set of elements to determine the closure of
-        @retval The closure of these elements with these FDs, as a set
+        @param  fds         The set of functional dependencies
+        @param  elements    The set of elements
+        @return The closure (set) of the elements
     """
 
-    # Create a flag for whether or not we've modified the closure in this iteration
+    # Create a flag for whether or not we've modified the closure
+    #   in this iteration
     modified = True
 
-    # Loop over the closure until we haven't modified it in the last iteration
+    # Loop over the closure until we haven't modified it in the
+    #   last iteration
     while modified:
 
         # Assume we're not going to modify anything...
@@ -162,8 +174,9 @@ def find_closure(fds, elements):
                 new_fd_right = first_fd[1].union(second_fd[1])
                 new_proposed_fd = (new_fd_left, new_fd_right)
 
-                # Check to see if this one exists, if it doesn't, add it
-                if new_proposed_fd not in fds and new_proposed_fd not in added_fds:
+                # Add it if it doesn't exist
+                if new_proposed_fd not in fds and \
+                   new_proposed_fd not in added_fds:
                     modified = True
                     new_fds.append(new_proposed_fd)
                     added_fds.append(new_proposed_fd)
@@ -175,8 +188,10 @@ def find_closure(fds, elements):
         for first_fd in fds:
             for second_fd in fds:
 
-                # If the right side of the first is a subset of the left side of the second, combine them..
-                if second_fd[0].issubset(first_fd[1]) and first_fd != second_fd:
+                # If the right side of the first is a subset of
+                # the left side the second, combine them..
+                if second_fd[0].issubset(first_fd[1])\
+                    and first_fd != second_fd:
 
                     # Build a new fd combining these two
                     new_fd_left = first_fd[0]
@@ -184,7 +199,8 @@ def find_closure(fds, elements):
                     new_proposed_fd = (new_fd_left, new_fd_right)
 
                     # Add it if its not already in our list
-                    if new_proposed_fd not in fds and new_proposed_fd not in added_fds:
+                    if new_proposed_fd not in fds and \
+                       new_proposed_fd not in added_fds:
 
                         # Flag this list as modified
                         modified = True
@@ -225,12 +241,14 @@ def fd_closure_demo():
     done = False
     while not done:
 
-        # Ask the user to select which subset of the given elements we'd like to investigate
+        # Ask the user to select a subset of the given elements
         valid = False
         while not valid:
 
             # Prompt for user input
-            input = str(raw_input("Enter the set of elements that you would like to compute the closure of as X,X,X..., or type 'done' to return to the previous menu\n"))
+            input = str(raw_input("Enter the set of elements that you" \
+                + "would like to compute the closure of as X,X,X...," \
+                + "or type 'done' to return to the previous menu\n"))
             input = input.rstrip().lstrip()
 
 
@@ -242,15 +260,16 @@ def fd_closure_demo():
                 search_elements = set()
                 if type(element_strings) == type(list()):
                     for element_string in element_strings:
-                        element_string = element_string.rstrip().lstrip()
+                        element_string = element_string.strip()
                         search_elements.add(element_string)
                 else:
-                    element_strings = element_strings.rstrip().lstrip()
+                    element_strings = element_strings.strip()
                     search_elements.add(element_strings)
 
-                # Check that the input set is a subset of the elements we have
+                # Check that the input set is a subset of the elements
                 if not search_elements.issubset(elements):
-                    print "Sorry, it looks like not all those elements were input..."
+                    print "Sorry, it looks like not all those elements " \
+                            + "were input..."
                     valid = False
                 else:
                     valid = True

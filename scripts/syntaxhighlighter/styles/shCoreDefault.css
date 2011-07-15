@@ -92,7 +92,6 @@
   width: 100% !important;
   height: 100% !important;
   border: none !important;
-  background: white !important;
   padding-left: 1em !important;
   overflow: hidden !important;
   white-space: pre !important;
@@ -226,13 +225,10 @@
 }
 
 .syntaxhighlighter {
-  background-color: white !important;
 }
 .syntaxhighlighter .line.alt1 {
-  background-color: white !important;
 }
 .syntaxhighlighter .line.alt2 {
-  background-color: white !important;
 }
 .syntaxhighlighter .line.highlighted.alt1, .syntaxhighlighter .line.highlighted.alt2 {
   background-color: #e0e0e0 !important;
@@ -244,7 +240,7 @@
   color: black !important;
 }
 .syntaxhighlighter .gutter {
-  color: #afafaf !important;
+  color: #bb824e !important;
 }
 .syntaxhighlighter .gutter .line {
   border-right: 3px solid #6ce26c !important;
@@ -261,7 +257,6 @@
 }
 .syntaxhighlighter.collapsed .toolbar {
   color: blue !important;
-  background: white !important;
   border: 1px solid #6ce26c !important;
 }
 .syntaxhighlighter.collapsed .toolbar a {
