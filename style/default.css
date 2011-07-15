@@ -79,6 +79,12 @@ hr {
     margin-left: 90px
 }
 
+.project_links {
+    float:right;
+    font-size: 14px;
+    text-transform: lowercase;
+}
+
 
 /** WRAPPER */
 
