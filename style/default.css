@@ -68,6 +68,18 @@ hr {
 	display: none;
 }
 
+/** For navigation */
+.navigation1 {
+    margin-left: 50px
+}
+.navigation2 {
+    margin-left: 70px
+}
+.navigation3 {
+    margin-left: 90px
+}
+
+
 /** WRAPPER */
 
 #wrapper {

@@ -1,5 +1,5 @@
 import cherrypy
-from common.common import get_root_directory, get_server_root
+from common.common import get_server_root
 from src.page import Page
 from util.file_reader import read_file
 
@@ -14,7 +14,7 @@ class Resume(Page):
         """
             Return the central HTML content of this page
         """
-        return read_file("content/pages/resume.html") % (get_root_directory(), get_server_root(), get_root_directory())
+        return read_file("content/pages/resume.html") % get_server_root()
 
     def title(self):
         return "Jon Tedesco &#183; R&eacute;sum&eacute;"

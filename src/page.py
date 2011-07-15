@@ -8,7 +8,7 @@ from whoosh.highlight import ContextFragmenter, HtmlFormatter, highlight
 from whoosh.index import create_in, exists_in, open_dir
 from whoosh.qparser.default import QueryParser
 from whoosh.spelling import SpellChecker
-from common.common import get_server_root
+from common.common import get_server_root, get_root_directory
 from util.file_reader import read_file
 
 __author__ = 'Jon'
@@ -112,8 +112,10 @@ class Page(object):
     def download(self, file_path):
         """
             Helper to allow any page to serve up a file
+
+                @param  file_path   The file to download, relative to the root of the site_
         """
-        return serve_file(file_path, "application/x-download", "attachment")
+        return serve_file(get_root_directory() + "/" + file_path, "application/x-download", "attachment")
 
     
     def main_content(self):
@@ -380,11 +382,11 @@ class Page(object):
         """
             View the source code of the given file, in the standard <code>view_source</code> template.
 
-                @param  path    The path of the file to display
+                @param  path    The path of the file to display (relative to the root of the site)
         """
 
         # Read the source code file
-        source_file = open(path, 'r')
+        source_file = open(get_root_directory() + "/" + path, 'r')
         source_code = source_file.read()
         source_file.close()
 

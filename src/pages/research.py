@@ -1,6 +1,5 @@
 import cherrypy
 from src.page import Page
-from common.common import get_root_directory
 from util.file_reader import read_file
 
 __author__ = 'Jon'
@@ -14,7 +13,7 @@ class Research(Page):
         """
             Return the central HTML content of this page
         """
-        return read_file("content/pages/research.html") % (get_root_directory(), get_root_directory())
+        return read_file("content/pages/research.html")
 
     def title(self):
         return "Jon Tedesco &#183; Research"
