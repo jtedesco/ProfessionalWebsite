@@ -8,7 +8,7 @@
                             <h1 class="title">
                                 <span>current</span> projects
                                 <div style="float:right; padding-right:10px; padding-top:10px; font-size:16px;">
-                                    <a style="padding-bottom:5px;" href="../download/?file_path=resume/Resume.pdf">Current R&eacute;sum&eacute;</a>
+                                    <a style="padding-bottom:5px;" href="%sdownload/?file_path=resume/Resume.pdf">Current R&eacute;sum&eacute;</a>
                                 </div>
                             </h1>
                             <br/>
@@ -20,20 +20,20 @@
 
                             <div class="content">
 
-                                <h2>Generations Website &#183; <a href="http://www.generationschicago.com/">Live Site</a></h2>
+                                <h2>Generations Website</h2>
+                                <h4>Band website</h4>
                                 <div style="padding-left:10px;">
                                        <p>
                                         Homepage of Generations, my cover band from home, which I spent several weeks late 2010 designing and implemented,
                                         and now update regularly. The site features audio and video recordings, photo albums,
                                         and a catalog of events and locations.
-                                       </p>
-
                                     <a class="generations_website_link"
                                        href="javascript:toggleInfo('generations_website')">
                                         See more...</a>
                                     <a class="generations_website_link"
                                        href="javascript:toggleInfo('generations_website')" style="display:none;">
                                         See less...</a>
+                                       </p>
                                     <p></p>
 
                                     <div class="generations_website" style="display:none;">
@@ -49,11 +49,13 @@
                                             with Google Analytics for analysis statistics and relies on a MySQL backend. The site has been tested and adapts to
                                             Firefox, Chrome, and IE.
                                             </p>
-                                       </div>
+                                    </div>
+                                    <h3><a href="http://www.generationschicago.com/">Live Site</a> &#183; <a href="%snavigate_source/?path=code/GenerationsWebsite&project=Generations%%20Website">Source Code</a></h3>
                                 </div>
                                 <br/>
 
-                                <h2>This Website &#183; <a href="http://www.jontedesco.net/">Live Site</a></h2>
+                                <h2>This Website</h2>
+                                <h4>Professional website and blog</h4>
                                 <div style="padding-left:10px;">
                                        <p>
                                         My professional website, which I regularly maintain to keep my projects, ideas, and r&eacute;sum&eacute; up to date. This
@@ -62,10 +64,12 @@
                                         engine, powered by <a href="https://bitbucket.org/mchaput/whoosh/wiki/Home">Whoosh!</a>. Likewise, the Python server, to improve performance and reduce memory footprint, makes use of
                                         the new JIT, or <b>J</b>ust <b>I</b>n <b>T</b>ime compiler called <a href="http://pypy.org/">PyPy</a>.
                                        </p>
+                                    <h3><a href="http://www.jontedesco.net/">Live Site</a>  &#183; <a href="http://www.github.com/jtedesco/ProfessionalWebsite">Source Code</a></h3>
                                 </div>
                                 <br/>
 
                                 <h2>Personal Cloud Server</h2>
+                                <h4>My own private server</h4>
                                 <div style="padding-left:10px;">
                                        <p>
                                         Each of the sites mention here are hosted on my own <b>V</b>irtual <b>P</b>rivate <b>S</b>erver, which I additionally use
@@ -95,15 +99,14 @@
                                             uses the open source toolkit Lucene, the Last.fm API, and a variety of scoring algorithms,
                                             one making use of the Floyd-Warshall shortest paths algorithm for graphs to compute a
                                             the barycenters of graphs.
-                                           </p>
-
                                             <a class="collaborative_music_filter_link"
-                                               href="javascript:toggleInfo('collaborative_music_filter')">
-                                                See more...</a>
+                                              href="javascript:toggleInfo('collaborative_music_filter')">
+                                               See more...</a>
                                             <a class="collaborative_music_filter_link"
-                                               href="javascript:toggleInfo('collaborative_music_filter')" style="display:none;">
-                                                See less...</a>
+                                              href="javascript:toggleInfo('collaborative_music_filter')" style="display:none;">
+                                               See less...</a>
                                             <p></p>
+                                           </p>
 
                                            <div class="collaborative_music_filter" style="display:none;">
                                                <p>
@@ -129,11 +132,12 @@
                                                    </ul>
                                                </p>
                                            </div>
+                                           <h3><a href="%snavigate_source/?path=code/CollaborativeMusicSelector&project=Collaborative%%20Music%%20Selector">Source Code</a></h3>
                                     </div>
                                     <br/>
 
                                     <h2>PyGoogle</h2>
-                                    <h3>Python-based illinois.edu Search Engine</h3>
+                                    <h4>Python-based illinois.edu Search Engine</h4>
                                     <div style="padding-left:10px;">
                                            <p>
                                             For programming studio, I spent a few weeks learning the Python programming language, by developing a
@@ -143,17 +147,15 @@
                                             Likewise, it uses HTML tags to weight keywords and titles, implements politeness checking, ranks results
                                             using Python toolkit <a href="http://whoosh.ca/">Whoosh!</a>, and re-ranks results using Google's
                                             <a href="http://en.wikipedia.org/wiki/PageRank">PageRank</a> algorithm on a graph structure stored in memory.
+                                               <a class="pygoogle_link"
+                                                  href="javascript:toggleInfo('pygoogle')">
+                                                   See more...</a>
+                                               <a class="pygoogle_link"
+                                                  href="javascript:toggleInfo('pygoogle')" style="display:none;">
+                                                   See less...</a>
+                                               <p></p>
                                            </p>
 
-                                        
-                                            <a class="pygoogle_link"
-                                               href="javascript:toggleInfo('pygoogle')">
-                                                See more...</a>
-                                            <a class="pygoogle_link"
-                                               href="javascript:toggleInfo('pygoogle')" style="display:none;">
-                                                See less...</a>
-                                            <p></p>
-    
                                             <div class="pygoogle" style="display:none;">
                                                <p>
                                                 Built entirely in Python, this project consists of three primary components, the crawler, indexer, and GUI,
@@ -163,7 +165,7 @@
                                                 at the end of this semester, I ran this project with roughly nearly 100 threads, but can easily tweak similar
                                                 parameters to tune performance.
                                                </p>
-                                               <h3>Crawler</h3>
+                                               <h4>Crawler</h4>
                                                <p>
                                                 The crawler launches with an arbitrary amount of threads, scaling to the available number of CPUs,
                                                  and essentially outputs results into a MySQL database that is separately accessed by the indexer.
@@ -172,7 +174,7 @@
                                                  <a href="http://www.crummy.com/software/BeautifulSoup/">BeatifulSoup</a> for HTML parsing. Using this parser,
                                                  the crawler separates out the raw html content, title, and meta keywords to better search the pool of crawled pages.
                                                </p>
-                                               <h3>Indexer</h3>
+                                               <h4>Indexer</h4>
                                                <p>
                                                 The indexer scales to the resources available on the host computer, reads in the output of the crawler from
                                                  a shared MySQL database, and creates a text index on the data and graph structure representing pages crawled, while
@@ -180,18 +182,19 @@
                                                  algorithm. On the most recent demo with nearly 200,000 pages in the index, results were retrieved and reranked with PageRank
                                                  in roughly 1/2 second.
                                                </p>
-                                               <h3>Web Interface</h3>
+                                               <h4>Web Interface</h4>
                                                <p>
                                                 Thi GUI is built on the simple Python web framework <a href="http://www.cherrypy.org/">CherryPy</a>, and simply launches the
                                                  crawler and indexer in the background. The interface mimics Google's very closely, searches the illinois.edu domain, and
                                                  even provides statistical and technical information about the backend of the application.
                                                </p>
                                             </div>
+                                        <h3><a href="%snavigate_source/?path=code/PyGoogle&project=PyGoogle">Source Code</a></h3>
                                     </div>
                                     <br/>
 
                                     <h2>SportSQL</h2>
-                                    <h3>PHP &amp; Database-Driven Fantasy Football Trading Website</h3>
+                                    <h4>PHP &amp; Database-Driven Fantasy Football Trading Website</h4>
                                     <div style="padding-left:10px;">
                                            <p>
                                             For database systems fall 2010, one of my classmates and I implemented our
@@ -205,11 +208,12 @@
                                             teams. Our interface allows users to create accounts, make live player trades
                                             with other users, and manage fantasy teams.
                                            </p>
+                                        <h3><a href="%snavigate_source/?path=code/SportSQL&project=SportSQL">Source Code</a></h3>
                                     </div>
                                     <br/>
 
                                     <h2>FlightData</h2>
-                                    <h3>Flight network statistics engine</h3>
+                                    <h4>Flight network statistics engine</h4>
                                     <div style="padding-left:10px;">
                                            <p>
                                             This project allows import and export of data for a (fictional) company's
@@ -220,12 +224,12 @@
                                             communicate with the backend, Doxygen for extensive automated documentation,
                                             and Lucene to allow for robust queries in the graph structure.
                                            </p>
+                                        <h3><a href="%snavigate_source/?path=code/FlightData&project=FlightData">Source Code</a></h3>
                                     </div>
                                     <br/>
 
-                                    <div class="project_links"><a href="../view_source/?path=code/FDClosureCalculator.py&language=python">View Source</a></div>
                                     <h2>FD Closure Calculator</h2>
-                                    <h3>Calculator for Functional Dependencies of Databases</h3>
+                                    <h4>Calculator for Functional Dependencies of Databases</h4>
                                     <div style="padding-left:10px;">
                                         <p>
                                          This project takes inputs of dependency rules of a database and returns
@@ -233,11 +237,12 @@
                                          It can be used to help create a BCNF decomposition of a database or simply
                                          to analyze the data dependency in a database.
                                         </p>
+                                        <h3><a href="%sview_source/?path=code/FDClosureCalculator/FDClosureCalculator.py&language=python">Source Code</a></h3>
                                     </div>
                                     <br/>
 
                                     <h2>BitLibrary</h2>
-                                    <h3>Java Based Image Editor and Image Compression Engine</h3>
+                                    <h4>Java Based Image Editor and Image Compression Engine</h4>
                                     <div style="padding-left:10px;">
                                         <p>
                                         This project is written purely in Java, and presents a GUI for
@@ -252,11 +257,12 @@
                                          allows arbitrary filters, distortions, and effects on images, as well as
                                          importing and exporting a variety of standard and custom image formats.
                                         </p>
+                                        <h3><a href="%snavigate_source/?path=code/BitLibrary&project=BitLibrary">Source Code</a></h3>
                                     </div>
                                     <br/>
 
                                     <h2>DistributedFileSystem</h2>
-                                    <h3>A fault-tolerant distributed file system</h3>
+                                    <h4>A fault-tolerant distributed file system</h4>
                                     <div style="padding-left:10px;">
                                         <p>
                                             This project consisted of three parts: server nodes in the distributed
@@ -264,7 +270,6 @@
                                             to the client, and the client, which requests files, and in our tests, kills
                                             server arbitrary processes to test our system and ensure file validity in the
                                             event of failure.
-                                        </p>
 
                                         <a class="distributed_file_system_link"
                                            href="javascript:toggleInfo('distributed_file_system')">
@@ -272,11 +277,11 @@
                                         <a class="distributed_file_system_link"
                                            href="javascript:toggleInfo('distributed_file_system')" style="display:none;">
                                             See less...</a>
-                                        <p></p>
+                                        </p><p></p>
 
                                            <div class="distributed_file_system" style="display:none;">
 
-                                            <h3>Server Node</h3>
+                                            <h4>Server Node</h4>
                                             <p>
                                                 Each server node is represented by a process in our implementation, and each server
                                                 sends periodic heartbeats to one other server, so that the pool of servers
@@ -284,7 +289,7 @@
                                                 within a second. Each server held two TCP connections for heartbeating, and a TCP connection
                                                 to the load balancer for file requests and failure detection.
                                             </p>
-                                            <h3>Load Balancer</h3>
+                                            <h4>Load Balancer</h4>
                                             <p>
                                                 The load balancer was responsible for forming a layer of abstraction between the client and the
                                                 server pool. It queued requests from the client, and recording server loads from the server pool.
@@ -293,43 +298,44 @@
                                                 fault detetection system, and handled server crashes by redistributing files as necessaryr, even restarting
                                                 active file transfers if necessary.
                                             </p>
-                                            <h3>Client</h3>
+                                            <h4>Client</h4>
                                             <p>
                                                 In our implementation, the client naively requested files from a input file, without pausing
                                                 in between requests. We used the client in our trials to test the performance and fault tolerance
                                                 of our system.
                                             </p>
                                            </div>
+                                        <h3><a href="%snavigate_source/?path=code/DistributedFileSystem&project=Distributed%%20File%%20System">Source Code</a></h3>
                                    </div>
                                     <br/>
 
                                     <h2>DistributedHashTable</h2>
-                                    <h3>A C++ implementation of a distributed hash table</h3>
+                                    <h4>A C++ implementation of a distributed hash table</h4>
                                     <div style="padding-left:10px;">
                                         <p>
                                             This project consisted of two components: first, a process that uses an input file to
                                             run simulations of real-world use cases, and second, a DHT node, which is only aware
                                             of each other node in its adjacency table.
+                                            <a class="distributed_hash_table_link"
+                                                href="javascript:toggleInfo('distributed_hash_table')">
+                                                 See more...</a>
+                                             <a class="distributed_hash_table_link"
+                                                href="javascript:toggleInfo('distributed_hash_table')" style="display:none;">
+                                                 See less...</a>
+                                             <p></p>
                                         </p>
 
-                                        <a class="distributed_hash_table_link"
-                                           href="javascript:toggleInfo('distributed_hash_table')">
-                                            See more...</a>
-                                        <a class="distributed_file_system_link"
-                                           href="javascript:toggleInfo('distributed_hash_table')" style="display:none;">
-                                            See less...</a>
-                                        <p></p>
 
                                         <div class="distributed_hash_table" style="display:none;">
 
-                                        <h3>Listener</h3>
+                                        <h4>Listener</h4>
                                         <p>
                                             This process read input files, and sent commands to the entry point of the DHT
                                             to simulate clients requesting data or adding or leaving the DHT. This was
                                             used for performance analysis of the hash table, and to provide debugging hooks
                                             to test our implementation
                                         </p>
-                                        <h3>DHT Node</h3>
+                                        <h4>DHT Node</h4>
                                         <p>
                                             A node in the hash table represented a single process, that could leave or join
                                             the table arbitrarily. When the node was connected to the hash table, it
@@ -346,34 +352,34 @@
                                             is scalable across many machines.
                                         </p>
                                        </div>
+                                        <h3><a href="%snavigate_source/?path=code/DistributedHashTable&project=Distributed%%20Hash%%Table">Source Code</a></h3>
                                         <br/>
 
 
                                     <h2>DistributedSharedMemory</h2>
-                                    <h3>A distributed shared memory system implementing release consistency</h3>
+                                    <h4>A distributed shared memory system implementing release consistency</h4>
                                     <div style="padding-left:10px;">
                                         <p>
                                             This project consisted of two components: first, the coordinator, a process that uses an input and configuration
                                             files to run simulations of real-world use cases, and second, the shared memory node.
+                                            <a class="distributed_shared_memory_link"
+                                               href="javascript:toggleInfo('distributed_shared_memory')">
+                                                See more...</a>
+                                            <a class="distributed_shared_memory_link"
+                                               href="javascript:toggleInfo('distributed_shared_memory')" style="display:none;">
+                                                See less...</a>
+                                            <p></p>
                                         </p>
-
-                                        <a class="distributed_shared_memory_link"
-                                           href="javascript:toggleInfo('distributed_shared_memory')">
-                                            See more...</a>
-                                        <a class="distributed_file_system_link"
-                                           href="javascript:toggleInfo('distributed_shared_memory')" style="display:none;">
-                                            See less...</a>
-                                        <p></p>
 
                                         <div class="distributed_shared_memory" style="display:none;">
 
-                                        <h3>Coordinator</h3>
+                                        <h4>Coordinator</h4>
                                         <p>
                                             This node provides hooks for running simulations in the shared memory system, and handles
                                             mutual exclusion in our implementation. It reads input files to run commands in the
                                             memory system, and intermediates between the nodes of the memory system.
                                         </p>
-                                        <h3>Shared Memory Node</h3>
+                                        <h4>Shared Memory Node</h4>
                                         <p>
                                             Each node of the memory system implements release consistency by locally caching data
                                             as long as it knows that it is the only process in the critical section. Whenever it must
@@ -381,6 +387,7 @@
                                             a small portion of the total data of the system.
                                         </p>
                                        </div>
+                                        <h3><a href="%snavigate_source/?path=code/DistributedSharedMemory&project=Distributed%%20Shared%%Memory">Source Code</a></h3>
                                    </div>
                                     </div>
                                     <br/>

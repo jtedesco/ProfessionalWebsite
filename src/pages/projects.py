@@ -9,13 +9,13 @@ class Projects(Page):
     """
         The page object for the projects page.
     """
-    # TODO: Link to source code navigation from Projects page
 
     def main_content(self):
         """
             Return the central HTML content of this page
         """
-        return read_file("content/pages/projects.html") % get_server_root()
+        return read_file("content/pages/projects.html") % (get_server_root(), get_server_root(), get_server_root(), get_server_root(), get_server_root(),
+            get_server_root(), get_server_root(), get_server_root(), get_server_root(), get_server_root(), get_server_root(), get_server_root())
 
     def title(self):
         return "Jon Tedesco &#183; Projects"

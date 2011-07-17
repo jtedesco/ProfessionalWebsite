@@ -25,6 +25,10 @@ h1, h2, h3 {
 	margin-top: 0px;
 }
 
+.content h4 {
+    margin-top: -10px;
+}
+
 p, ol, ul {
 	margin-top: 0px;
 }

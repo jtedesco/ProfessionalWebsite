@@ -416,8 +416,6 @@ class Page(object):
                 @param  project The name of the source project we're viewing
         """
 
-        # TODO: Add support for include/exclude filters for each project
-
         # Matches file extensions with programming languages
         languages = {
             "py"    : "python",
@@ -427,7 +425,9 @@ class Page(object):
             "htm"   : "html",
             "cpp"   : "cpp",
             "c"     : "c",
-            "cc"    : "cpp"
+            "cc"    : "cpp",
+            "php"   : "php",
+            "java"  : "java"
         }
 
         # List the files in the directory, and import them into a list of tuples, as '(filename, type)'
@@ -454,17 +454,18 @@ class Page(object):
 
         # Read the 'exclude' file
         try:
-            exclude_file = open(root + '/' + path + '/' + '.exclude', 'r')
-            for exclude_file_name in exclude_file:
-                exclude_file_name = exclude_file_name.strip()
-                exclude_path = path + '/' + exclude_file_name
-                if os.path.exists(root + '/' + exclude_path):
-                    if os.path.isdir(root + '/' + exclude_path):
-                        directories.remove((exclude_path, exclude_file_name))
+            if os.path.exists(root + '/' + path + '/' + '.exclude'):
+                exclude_file = open(root + '/' + path + '/' + '.exclude', 'r')
+                for exclude_file_name in exclude_file:
+                    exclude_file_name = exclude_file_name.strip()
+                    exclude_path = path + '/' + exclude_file_name
+                    if os.path.exists(root + '/' + exclude_path):
+                        if os.path.isdir(root + '/' + exclude_path):
+                            directories.remove((exclude_path, exclude_file_name))
+                        else:
+                            files.remove((exclude_path, "plain", exclude_file_name))
                     else:
-                        files.remove((exclude_path, "plain", exclude_file_name))
-                else:
-                    print "Error parsing exclude file, could not open path '%s'" % exclude_path
+                        print "Error parsing exclude file, could not open path '%s'" % exclude_path
         except Exception:
             print "Error parsing 'exclude' file: '%s'" % str(sys.exc_info()[1])
 
