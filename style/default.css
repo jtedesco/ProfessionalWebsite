@@ -16,6 +16,7 @@ body {
 
 .syntaxhighlighter {
     margin-right: -20px;
+    margin-left: -15px;
     width: 650px;
     overflow: visible;
 }

@@ -1,0 +1,22 @@
+To run the main application, now run the main method of Photoshop.
+
+Improvements to this version:
+    1) Refactored factory for menu actions into factories for each menu to eliminate
+        'MenuActionTypes' and reduce the size of each replacement file
+    2) Improved file dialog functionality to use file filters (no more type errors)
+    3) Refactored main method so that PhotoShop now functions as the starting point
+        for the program. This makes the '...Window' files in the View more consistent
+    4) Refactored image effects, moving all image effects into PixelEffects.java
+    5) Added multiple subMenus for types of image effects
+    6) Added LOTS of extra image effects
+    7) Added key listeners
+    8) Added optional Zip compression layers (GUI hooked into implementation, and implementation in place but debugging required)
+    9) Added tooltips to GUI
+    10) Added GUI system enhancement (look and feel set by system)
+    11) Added key listeners to popups and fixed popups
+
+Problems that remain:
+    1) IndexedColor compression still messes with colors
+    2) Zip, Gzip, and Bzip compression code is written, but not working
+
+NOTE: The source code in the 'effects' directory was taken from http://www.jhlabs.com

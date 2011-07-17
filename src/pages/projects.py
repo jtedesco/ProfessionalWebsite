@@ -9,6 +9,7 @@ class Projects(Page):
     """
         The page object for the projects page.
     """
+    # TODO: Link to source code navigation from Projects page
 
     def main_content(self):
         """

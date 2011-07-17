@@ -393,7 +393,7 @@ class Page(object):
         source_code = source_code.replace('>', '&gt')
 
         # Form the page content
-        content = read_file("content/pages/view_source.html") % (path, language, source_code)
+        content = read_file("content/view_source.html") % (path, language, source_code)
 
         # Build the components of the page
         meta_header = self.meta_header("View Source &#183; %s (%s)" % (path, language.title()))
@@ -407,13 +407,16 @@ class Page(object):
 
 
     @cherrypy.expose
-    def navigate_source(self, path):
+    def navigate_source(self, path, project):
         """
             View the contents of a directory, and provide a simple interface with which to navigate the directory
             structure, and view the source of files in the heirarchy.
 
                 @param  path    The path, relative to the root of the site, to display
+                @param  project The name of the source project we're viewing
         """
+
+        # TODO: Add support for include/exclude filters for each project
 
         # Matches file extensions with programming languages
         languages = {
@@ -440,11 +443,11 @@ class Page(object):
                 if period_index > 0:
                     extension = file[file.find('.')+1:]
                     if extension in languages.keys():
-                        files.append((path + "/" + file, languages[extension]))
+                        files.append((path + "/" + file, languages[extension], file))
                     else:
-                        files.append((path + "/" + file, "plain"))
+                        files.append((path + "/" + file, "plain", file))
                 else:
-                    files.append((path + "/" + file, "plain"))
+                    files.append((path + "/" + file, "plain", file))
 
             elif period_index == -1 and os.path.isdir(root + "/" + path):
                 directories.append(path + "/" + file)
@@ -454,7 +457,7 @@ class Page(object):
         for directory in directories:
             links.append((directory, '../navigate_source/?path=%s' % directory))
         for file_data in files:
-            links.append((file_data[0], '../view_source/?path=%s&language=%s' % (file_data[0], file_data[1])))
+            links.append((file_data[2], '../view_source/?path=%s&language=%s' % (file_data[0], file_data[1])))
 
         # Form the main content itself
         link_content = "<div class='source_navigation'>"
@@ -463,10 +466,10 @@ class Page(object):
         link_content += "</div>"
 
         # Form the page content
-        content = read_file("content/pages/navigate_source.html") % (path, link_content)
+        content = read_file("content/navigate_source.html") % (project, link_content)
 
         # Build the components of the page
-        meta_header = self.meta_header("Navigate Source &#183; %s" % path)
+        meta_header = self.meta_header("Navigate Source &#183; %s" % project)
         page_header = self.header()
         menu = self.menu()
         sidebar = self.sidebar()

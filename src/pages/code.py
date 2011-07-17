@@ -8,6 +8,7 @@ class Code(Page):
     """
         The page object for the code page.
     """
+    # TODO: Remove the 'code' page, replace with blog
 
     def main_content(self):
         """

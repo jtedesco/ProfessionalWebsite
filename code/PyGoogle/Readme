@@ -1,0 +1,31 @@
+For programming studio, I spent a few weeks learning the Python programming language, by developing a feature-rich search engine for the illinois.edu domain. It features an extensive test suite built on the Mockito test framework, and extensive auto-generated documentation using Doxygen customized for Python. Likewise, it uses HTML tags to weight keywords and titles, implements politeness checking, ranks results using Python toolkit Whoosh!, and re-ranks results using Google's PageRank algorithm on a graph structure stored in memory. 
+
+Built entirely in Python, this project consists of three primary components, the crawler, indexer, and GUI, any of which can be run separately or combined with any of the other two components. The entire project is run on the JIT compiler PyPy, and is highly tunable and scalable. For a demo on my netbook at the end of this semester, I ran this project with roughly nearly 100 threads, but can easily tweak similar parameters to tune performance. 
+
+
+Crawler:
+
+The crawler launches with an arbitrary amount of threads, scaling to the available number of CPUs, and essentially outputs results into a MySQL database that is separately accessed by the indexer. The crawler likewise implements common real world crawler features, including breadth-first crawling and politeness checking, and uses a variety of toolkits, including BeatifulSoup for HTML parsing. Using this parser, the crawler separates out the raw html content, title, and meta keywords to better search the pool of crawled pages. 
+
+
+Indexer:
+
+The indexer scales to the resources available on the host computer, reads in the output of the crawler from a shared MySQL database, and creates a text index on the data and graph structure representing pages crawled, while simultaneously maintaining a graph in memory of pages and links between them for later use with the PageRank algorithm. On the most recent demo with nearly 200,000 pages in the index, results were retrieved and reranked with PageRank in roughly 1/2 second. 
+
+
+Web Interface:
+
+Thi GUI is built on the simple Python web framework CherryPy, and simply launches the crawler and indexer in the background. The interface mimics Google's very closely, searches the illinois.edu domain, and even provides statistical and technical information about the backend of the application. 
+
+
+The dependencies of this project are listed below:
+    - MySQLdb
+    - CherryPy
+    - PyParsing
+    - Whoosh
+    - Mockito (used for testing)
+
+Bundled third party libraries:
+    - PyGraph
+    - PyDot
+    - BeautifulSoup

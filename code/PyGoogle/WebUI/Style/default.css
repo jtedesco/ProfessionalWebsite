@@ -1,0 +1,32 @@
+#search_form_div {
+    position: absolute;
+    top: 250px;
+    width: 100%;
+    z-index: 100;
+}
+
+#search_form {
+    display:block;
+    margin:0 auto;
+    background:none;
+    width: 600px;
+}
+
+.invisible_table {
+    border: 0;
+}
+
+.full_cell {
+    width: 100%;
+}
+
+.search_box {
+    width: 100%;
+    border-bottom: 1px solid #e7e7e7;
+    padding: 8px 0 0;
+    position: relative
+}
+
+.search_buttons {
+    border-top:1px solid #ccc
+}
