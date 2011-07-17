@@ -1,4 +1,4 @@
-import os, re, cherrypy
+import os, re, cherrypy, sys
 from datetime import datetime
 from cherrypy.lib.static import serve_file
 from whoosh.fields import Schema, TEXT
@@ -450,23 +450,47 @@ class Page(object):
                     files.append((path + "/" + file, "plain", file))
 
             elif period_index == -1 and os.path.isdir(root + "/" + path):
-                directories.append(path + "/" + file)
+                directories.append((path + "/" + file, file))
+
+        # Read the 'exclude' file
+        try:
+            exclude_file = open(root + '/' + path + '/' + '.exclude', 'r')
+            for exclude_file_name in exclude_file:
+                exclude_file_name = exclude_file_name.strip()
+                exclude_path = path + '/' + exclude_file_name
+                if os.path.exists(root + '/' + exclude_path):
+                    if os.path.isdir(root + '/' + exclude_path):
+                        directories.remove((exclude_path, exclude_file_name))
+                    else:
+                        files.remove((exclude_path, "plain", exclude_file_name))
+                else:
+                    print "Error parsing exclude file, could not open path '%s'" % exclude_path
+        except Exception:
+            print "Error parsing 'exclude' file: '%s'" % str(sys.exc_info()[1])
 
         # Form the list of links for the file browser
-        links = []
+        directory_links = []
+        file_links = []
         for directory in directories:
-            links.append((directory, '../navigate_source/?path=%s' % directory))
+            directory_links.append((directory[1], '../navigate_source/?path=%s&project=%s' % (directory[0], project.replace(' ', '%20'))))
         for file_data in files:
-            links.append((file_data[2], '../view_source/?path=%s&language=%s' % (file_data[0], file_data[1])))
+            file_links.append((file_data[2], '../view_source/?path=%s&language=%s' % (file_data[0], file_data[1])))
 
         # Form the main content itself
-        link_content = "<div class='source_navigation'>"
-        for link in links:
-            link_content += "<a href=%s>%s</a><br/><br/>" % (link[1], link[0])
-        link_content += "</div>"
+        content = "<div class='source_navigation'>"
+        if len(directory_links) > 0:
+            content += "Directories:<br/><br/>"
+        content += "<div style='margin-left: 20px;'>"
+        for link in directory_links:
+            content += "<a href=%s>%s</a><br/><br/>" % (link[1], link[0])
+        if len(file_links) > 0:
+            content += "</div>Files:<br/><br/><div style='margin-left: 20px;'>"
+            for link in file_links:
+                content += "<a href=%s>%s</a><br/><br/>" % (link[1], link[0])
+        content += "</div></div>"
 
         # Form the page content
-        content = read_file("content/navigate_source.html") % (project, link_content)
+        content = read_file("content/navigate_source.html") % (project, content)
 
         # Build the components of the page
         meta_header = self.meta_header("Navigate Source &#183; %s" % project)
