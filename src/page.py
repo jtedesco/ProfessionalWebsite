@@ -197,7 +197,7 @@ class Page(object):
         """
             Get the sidebar code (traditionally the contact information)
         """
-        return read_file("content/sidebar.html")
+        return read_file("content/sidebar.html") % "home"
 
 
     def create_index(self):

@@ -1,5 +1,5 @@
 from src.page import Page
-from src.pages.code import Code
+from src.pages.blog import Blog
 from src.pages.home import Home
 from src.pages.projects import Projects
 from src.pages.research import Research
@@ -27,6 +27,6 @@ class PageFactory(object):
         root_page.projects = Projects() 
         root_page.resume = Resume()
         root_page.research = Research()
-        root_page.code = Code()
+        root_page.blog = Blog()
 
         return root_page

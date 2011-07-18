@@ -1,4 +1,5 @@
 import cherrypy
+from common.common import get_server_root
 from src.page import Page
 from util.file_reader import read_file
 
@@ -17,6 +18,13 @@ class Home(Page):
 
     def title(self):
         return "Jon Tedesco &#183; Home"
+
+
+    def sidebar(self):
+        """
+            Get the sidebar code (traditionally the contact information)
+        """
+        return read_file("content/sidebar.html") % "home"
 
     @cherrypy.expose
     def index(self):

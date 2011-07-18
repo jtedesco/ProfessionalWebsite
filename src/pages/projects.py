@@ -20,6 +20,12 @@ class Projects(Page):
     def title(self):
         return "Jon Tedesco &#183; Projects"
 
+    def sidebar(self):
+        """
+            Get the sidebar code (traditionally the contact information)
+        """
+        return read_file("content/sidebar.html") % "projects"
+
     @cherrypy.expose
     def index(self):
         """

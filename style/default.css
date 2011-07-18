@@ -271,15 +271,15 @@ hr {
 
 /** SIDEBAR BOX */
 
-#sidebox {
+.sidebox {
 	background: url(../images/bg2_03.jpg) repeat-y left top;
 }
 
-#sidebox .bgtop {
+.sidebox .bgtop {
 	background: url(../images/bg2_02.jpg) no-repeat left top;
 }
 
-#sidebox .bgbtm {
+.sidebox .bgbtm {
 	overflow: hidden;
 	margin: 0px;
 	padding: 40px 25px 80px 30px;
@@ -393,7 +393,7 @@ ul.style2 li span {
 /** BOX1 */
 
 #box1 {
-    min-height: 650px;
+    min-height: 950px;
 	overflow: hidden;
 }
 
