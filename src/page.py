@@ -192,7 +192,7 @@ class Page(object):
         """
         return read_file("content/menu.html") % (get_server_root(), get_server_root(), get_server_root(), get_server_root(), get_server_root())
 
-
+    # TODO: Add github & stack overflow to sidebar
     def sidebar(self):
         """
             Get the sidebar code (traditionally the contact information)
@@ -265,7 +265,7 @@ class Page(object):
         # Put this content into index
         index_writer.add_document(content=parsed_content, title=title)
 
-
+    #TODO: Fix querying
     def run_query(self, query):
         """
           Queries the index for data with the given text query
@@ -399,7 +399,7 @@ class Page(object):
         meta_header = self.meta_header("View Source &#183; %s (%s)" % (path, language.title()))
         page_header = self.header()
         menu = self.menu()
-        sidebar = self.sidebar()
+        sidebar = read_file("content/short_sidebar.html")
         footer = self.footer()
 
         # Put the page together and return it
@@ -497,7 +497,7 @@ class Page(object):
         meta_header = self.meta_header("Navigate Source &#183; %s" % project)
         page_header = self.header()
         menu = self.menu()
-        sidebar = self.sidebar()
+        sidebar = read_file("content/short_sidebar.html")
         footer = self.footer()
 
         # Put the page together and return it
