@@ -141,7 +141,7 @@ class Page(object):
 
         # There are a lot of server root entries because there are many syntax highlighting brushes, and each
         #   brush is imported separately
-        return read_file("content/meta_header.html") % (title, " ".join(self.keywords()), self.description(), get_server_root(),
+        return read_file("content/meta_header.html") % (title, " ".join(self.keywords()), self.description(), get_server_root(), get_server_root(),
                                                         get_server_root(), get_server_root(), get_server_root(), get_server_root(),
                                                         get_server_root(), get_server_root(), get_server_root(), get_server_root(),
                                                         get_server_root(), get_server_root(), get_server_root(), get_server_root())
@@ -427,7 +427,8 @@ class Page(object):
             "c"     : "c",
             "cc"    : "cpp",
             "php"   : "php",
-            "java"  : "java"
+            "java"  : "java",
+            "xml"   : "xml"
         }
 
         # List the files in the directory, and import them into a list of tuples, as '(filename, type)'
