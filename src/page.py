@@ -96,8 +96,8 @@ class Page(object):
             search_results = template_content % (more_stats + stats, results)
 
         # Build the components of the page
-        meta_header = self.meta_header(self.title())
-        page_header = self.header()
+        meta_header = self.meta_header("Jon Tedesco &#183; Search '%s'" % query)
+        page_header = self.header(query)
         content = search_results
         menu = self.menu()
         sidebar = self.sidebar()
@@ -168,14 +168,14 @@ class Page(object):
         return "Jon Tedesco, student and software developer at University of Illinois at Urbana-Champaign"
 
 
-    def header(self):
+    def header(self, query = None):
         """
             Gets the standard header of the page (logo, search box)
         """
-        try:
+        if query is not None:
             # Fill the query into the text box if a query was submitted
-            return read_file("content/header.html") % self.query
-        except AttributeError:
+            return read_file("content/header.html") % query
+        else:
             return read_file("content/header.html") % ""
 
 
@@ -192,7 +192,7 @@ class Page(object):
         """
         return read_file("content/menu.html") % (get_server_root(), get_server_root(), get_server_root(), get_server_root(), get_server_root())
 
-    # TODO: Add github & stack overflow to sidebar
+
     def sidebar(self):
         """
             Get the sidebar code (traditionally the contact information)
@@ -265,7 +265,7 @@ class Page(object):
         # Put this content into index
         index_writer.add_document(content=parsed_content, title=title)
 
-    #TODO: Fix querying
+
     def run_query(self, query):
         """
           Queries the index for data with the given text query
