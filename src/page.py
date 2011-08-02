@@ -31,11 +31,14 @@ class Page(object):
 
 
     @cherrypy.expose
-    def index(self):
+    def index(self, redirect=None):
         """
             Returns the content of this page, or in this case, redirects to the 'home' page
         """
-        raise cherrypy.HTTPRedirect("%shome/" % get_server_root(), 301)
+        if redirect is None:
+            raise cherrypy.HTTPRedirect("%shome/" % get_server_root(), 301)
+        else:
+            print redirect
 
     
     def build_content(self):
