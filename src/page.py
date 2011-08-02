@@ -153,10 +153,8 @@ class Page(object):
 
                 @return The list of keywords for this page
         """
-        return ["Jon Tedesco", "Jon", "Tedesco", "Jonathan", "Jonathan Tedesco", "Jon C Tedesco", "Jonathan C Tedesco",
-                "Jonathan Christopher Tedesco", "University of Illinois", "UIUC", "software", "development", "develop",
-                "Java", "c", "c++", "c#", "python", "ruby", "projects", "computer", "science", "projects", "tedesco1",
-                "developer", "design", "architecture", "search", "deep web", "object", "oriented", "programming"]
+        return ["Jon", "Tedesco", "Jonathan", "Christopher", "University of Illinois", "UIUC", "software", "develop",
+                "Java", "c", "c++", "c#", "python", "ruby", "projects", "computer", "science", "projects", "tedesco1"]
 
 
     def description(self):
