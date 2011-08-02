@@ -153,8 +153,8 @@ class Page(object):
 
                 @return The list of keywords for this page
         """
-        return ["Jon", "Tedesco", "Jonathan", "Christopher", "University of Illinois", "UIUC", "software", "develop",
-                "Java", "c", "c++", "c#", "python", "ruby", "projects", "computer", "science", "projects", "tedesco1"]
+        return ["Jon", "Tedesco", "University of Illinois", "UIUC", "software", "computer", "Jonathan", "Christopher", "develop",
+                "Java", "c", "c++", "c#", "python", "ruby", "projects", "science", "projects", "tedesco1"]
 
 
     def description(self):
