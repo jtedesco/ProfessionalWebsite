@@ -31,14 +31,11 @@ class Page(object):
 
 
     @cherrypy.expose
-    def index(self, redirect=None):
+    def index(self):
         """
             Returns the content of this page, or in this case, redirects to the 'home' page
         """
-        if redirect is None:
-            raise cherrypy.HTTPRedirect("%shome/" % get_server_root(), 301)
-        else:
-            print redirect
+        raise cherrypy.HTTPRedirect("%shome/" % get_server_root(), 301)
 
     
     def build_content(self):
@@ -107,6 +104,24 @@ class Page(object):
         footer = self.footer()
 
         return read_file("content/template.html") % (meta_header, page_header, content, menu, sidebar, footer)
+
+
+    # Handle redirects for missing slashes
+    @cherrypy.expose
+    def projects(self):
+        raise cherrypy.HTTPRedirect("%sprojects/" % get_server_root(), 301)
+    @cherrypy.expose
+    def home(self):
+        raise cherrypy.HTTPRedirect("%shome/" % get_server_root(), 301)
+    @cherrypy.expose
+    def resume(self):
+        raise cherrypy.HTTPRedirect("%sresume/" % get_server_root(), 301)
+    @cherrypy.expose
+    def blog(self):
+        raise cherrypy.HTTPRedirect("%sblog/" % get_server_root(), 301)
+    @cherrypy.expose
+    def research(self):
+        raise cherrypy.HTTPRedirect("%sresearch/" % get_server_root(), 301)
 
 
     @cherrypy.expose
