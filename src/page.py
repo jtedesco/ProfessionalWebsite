@@ -61,6 +61,14 @@ class Page(object):
          Try to redirect the browser (correcting trailing slash issues), if the page isn't found.
          If it can't do that, redirect to the home directory.
         """
+        return """
+        <html>
+        <body onload="window.location='http://www.jontedesco.net/'">
+        </body>
+        </html>
+        """
+
+
         path = message.split('\'')[1][1:]
         if path[-1] == '/':
             print "Already has a trailing slash, redirecting to site root"
