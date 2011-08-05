@@ -29,6 +29,12 @@ class Page(object):
         # We haven't initialized the index for this page yet
         self.initialized = False
 
+    @cherrypy.expose
+    def default(self, path):
+        if path[-1] != '/':
+            raise cherrypy.HTTPRedirect("%s%s/" % (get_server_root(), path), 301)
+        else:
+            raise cherrypy.HTTPError(404)
 
     @cherrypy.expose
     def index(self):
@@ -63,20 +69,10 @@ class Page(object):
         """
         return """
         <html>
-        <body onload="window.location='http://www.jontedesco.net/'">
-        </body>
+            <body onload="window.location='http://www.jontedesco.net/'">
+            </body>
         </html>
         """
-
-
-        path = message.split('\'')[1][1:]
-        if path[-1] == '/':
-            print "Already has a trailing slash, redirecting to site root"
-            raise cherrypy.HTTPRedirect("%shome/" % get_server_root(), 301)
-        else:
-            print "No trailing slash, redirecting to", path
-            raise cherrypy.HTTPRedirect("%s%s/" % (get_server_root(), path), 301)
-
     cherrypy.config.update({'error_page.404': handle_404})
 
 
