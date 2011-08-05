@@ -37,7 +37,7 @@ class Page(object):
         """
         raise cherrypy.HTTPRedirect("%shome/" % get_server_root(), 301)
 
-    
+
     def build_content(self):
         """
                 Helper function to allow pages to dynamically update their HTML content
@@ -53,6 +53,23 @@ class Page(object):
 
         # Build this page's content on creation
         self.content = read_file("content/template.html") % (meta_header, page_header, content, menu, sidebar, footer)
+
+
+    @cherrypy.expose
+    def handle_404(status=None, message=None, traceback=None, version=None):
+        """
+         Try to redirect the browser (correcting trailing slash issues), if the page isn't found.
+         If it can't do that, redirect to the home directory.
+        """
+        path = message.split('\'')[1][1:]
+        if path[-1] == '/':
+            print "Already has a trailing slash, redirecting to site root"
+            raise cherrypy.HTTPRedirect("%shome/" % get_server_root(), 301)
+        else:
+            print "No trailing slash, redirecting to", path
+            raise cherrypy.HTTPRedirect("%s%s/" % (get_server_root(), path), 301)
+
+    cherrypy.config.update({'error_page.404': handle_404})
 
 
     @cherrypy.expose
