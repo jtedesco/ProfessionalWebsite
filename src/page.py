@@ -109,8 +109,10 @@ class Page(object):
             end_time = datetime.now()
             stats = "Searched for <i>%s</i>, found %d hits in %1.3f seconds<br>" % (query, result_count, (end_time-start_time).microseconds/1000000.0)
             more_stats=""
-            if result_count <= 1:
+            try:
                 more_stats = "Did you mean <a href='../search/?query=%s'><i>%s</i></a>?" % (suggestions[0][0], suggestions[0][0])
+            except:
+                pass
 
             # Update the page components
             title += " &#183; '%s'" % query
@@ -272,9 +274,12 @@ class Page(object):
             content += line
 
         # Parse out the HTMl content of the file
+        parsed_content = content.replace("<br/>", "\n")
+        closing_tag_re = re.compile("</.*?>")
         tag_re = re.compile("<.*?>")
         white_space_re = re.compile("\s+")
-        parsed_content = tag_re.sub(" ", content)
+        parsed_content = closing_tag_re.sub("\n", parsed_content)
+        parsed_content = tag_re.sub(" ", parsed_content)
         parsed_content = white_space_re.sub(" ", parsed_content)
         parsed_content = unicode(parsed_content, 'utf-8')
 
