@@ -85,6 +85,12 @@ hr {
     text-transform: lowercase;
 }
 
+code, pre {
+    font-size: 13px;
+    font-weight: lighter;
+    font: arial;
+    color: #B84820;
+}
 
 /** WRAPPER */
 
