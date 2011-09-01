@@ -179,7 +179,7 @@ class Page(object):
         return ["Jon", "Tedesco", "University of Illinois", "UIUC", "software", "computer", "Jonathan", "Christopher", "develop",
                 "Java", "c", "c++", "c#", "python", "ruby", "projects", "science", "projects", "tedesco1"]
 
-
+ 
     def description(self):
         """
           Gets the description of the site to be put in the meta data
