@@ -10,7 +10,7 @@ class Resume(Page):
         The page object for the resume page.
     """
 
-    def main_content(self):
+    def main_content(self): 
         """
             Return the central HTML content of this page
         """
