@@ -14,7 +14,7 @@ class Resume(Page):
         """
             Return the central HTML content of this page
         """
-        return read_file("content/pages/resume.html") % get_server_root()
+        return read_file("content/pages/resume.html")
 
     def title(self):
         return "Jon Tedesco &#183; R&eacute;sum&eacute;"
