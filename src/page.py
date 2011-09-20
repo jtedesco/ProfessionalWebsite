@@ -6,11 +6,12 @@ from whoosh.highlight import ContextFragmenter, HtmlFormatter, highlight
 from whoosh.index import create_in, exists_in, open_dir
 from whoosh.qparser.default import QueryParser
 from whoosh.spelling import SpellChecker
-from common.common import get_server_root, get_root_directory
+from common.common import get_server_root, get_root_directory, setup_error_handling
 from util.file_reader import read_file
 
 __author__ = 'Jon'
 
+thePage = None
 class Page(object):
     """
         Abstract class for a page on the website. This exposes the 'index' method, which returns the html
@@ -22,6 +23,7 @@ class Page(object):
         """
             Construct the shell of a page
         """
+        thePage = self
 
         # Build the HTMl content of this page
         self.build_content()
@@ -29,12 +31,6 @@ class Page(object):
         # We haven't initialized the index for this page yet
         self.initialized = False
 
-    @cherrypy.expose
-    def default(self, path):
-        if path[-1] != '/':
-            raise cherrypy.HTTPRedirect("%s%s/" % (get_server_root(), path), 301)
-        else:
-            raise cherrypy.HTTPError(404)
 
     @cherrypy.expose
     def index(self):
@@ -62,19 +58,12 @@ class Page(object):
 
 
     @cherrypy.expose
-    def handle_404(status=None, message=None, traceback=None, version=None):
-        """
-         Try to redirect the browser (correcting trailing slash issues), if the page isn't found.
-         If it can't do that, redirect to the home directory.
-        """
-        return """
-        <html>
-            <body onload="window.location='http://www.jontedesco.net/'">
-            </body>
-        </html>
-        """
-    cherrypy.config.update({'error_page.404': handle_404})
+    def get404(self):
+        raise cherrypy.HTTPError(404)
 
+    @cherrypy.expose
+    def get500(self):
+        raise cherrypy.HTTPError(500)
 
     @cherrypy.expose
     def search(self, query = None):
@@ -176,8 +165,9 @@ class Page(object):
 
                 @return The list of keywords for this page
         """
-        return ["Jon", "Tedesco", "University of Illinois", "UIUC", "software", "computer", "Jonathan", "Christopher", "develop",
-                "Java", "c", "c++", "c#", "python", "ruby", "projects", "science", "projects", "tedesco1"]
+        return ["Jon", "Tedesco", "University of Illinois", "UIUC", "software", "computer", "Jonathan", "Christopher", "developer",
+                "Java", "c", "c++", "c#", "python", "ruby", "projects", "science", "projects", "tedesco1", "undergraduate", "research",
+                "programming"]
 
  
     def description(self):
@@ -527,3 +517,5 @@ class Page(object):
 
         # Put the page together and return it
         return read_file("content/template.html") % (meta_header, page_header, content, menu, sidebar, footer)
+
+    setup_error_handling()
