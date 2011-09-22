@@ -407,7 +407,7 @@ class Page(object):
         source_code = source_code.replace('>', '&gt')
 
         # Form the page content
-        content = read_file("content/view_source.html") % (path, language, source_code)
+        content = read_file("content/view_source.html") % (path.encode('ascii'), language.encode('ascii'), source_code.encode('ascii'))
 
         # Build the components of the page
         meta_header = self.meta_header("View Source &#183; %s (%s)" % (path, language.title()))
