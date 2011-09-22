@@ -403,7 +403,7 @@ class Page(object):
         source_file.close()
 
         # Check if this is a binary file
-        binary_file_extensions = ['jpg', 'png', 'bmp']
+        binary_file_extensions = ['jpg', 'png', 'bmp', 'jpeg']
         if path[path.find('.')+1:] not in binary_file_extensions:
             
             # Escape '<' characters
@@ -411,7 +411,7 @@ class Page(object):
             source_code = source_code.replace('>', '&gt')
 
             # Form the page content
-            content = read_file("content/view_source.html") % (path.encode('ascii'), language.encode('ascii'), source_code.encode('ascii'))
+            content = read_file("content/view_source.html") % (path, language, source_code.decode('utf-8', 'ignore'))
 
         else:
 
