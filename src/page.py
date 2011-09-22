@@ -396,19 +396,30 @@ class Page(object):
 
                 @param  path    The path of the file to display (relative to the root of the site)
         """
-
+        
         # Read the source code file
         source_file = open(get_root_directory() + "/" + path, 'r')
         source_code = source_file.read()
         source_file.close()
 
-        # Escape '<' characters
-        source_code = source_code.replace('<', '&lt')
-        source_code = source_code.replace('>', '&gt')
+        # Check if this is a binary file
+        binary_file_extensions = ['jpg', 'png', 'bmp']
+        if path[path.find('.')+1:] not in binary_file_extensions:
+            
+            # Escape '<' characters
+            source_code = source_code.replace('<', '&lt')
+            source_code = source_code.replace('>', '&gt')
 
-        # Form the page content
-        content = read_file("content/view_source.html") % (path.encode('ascii'), language.encode('ascii'), source_code.encode('ascii'))
+            # Form the page content
+            content = read_file("content/view_source.html") % (path.encode('ascii'), language.encode('ascii'), source_code.encode('ascii'))
 
+        else:
+
+            # Form the page content
+            image_source = "<img width=600 src='%s'></img>" % (get_server_root() + path)
+            content = read_file("content/view_source.html").replace("<pre class=\"brush: %s\">%s</pre>", image_source)
+            content = content % path.encode('ascii')
+            
         # Build the components of the page
         meta_header = self.meta_header("View Source &#183; %s (%s)" % (path, language.title()))
         page_header = self.header()
