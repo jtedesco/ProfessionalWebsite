@@ -6,7 +6,7 @@ from whoosh.highlight import ContextFragmenter, HtmlFormatter, highlight
 from whoosh.index import create_in, exists_in, open_dir
 from whoosh.qparser.default import QueryParser
 from whoosh.spelling import SpellChecker
-from common.common import get_server_root, get_root_directory, setup_error_handling
+from common.common import get_server_root, get_root_directory, setup_error_handling, get_default_keywords
 from util.file_reader import read_file
 
 __author__ = 'Jon'
@@ -165,9 +165,7 @@ class Page(object):
 
                 @return The list of keywords for this page
         """
-        return ["Jon", "Tedesco", "University of Illinois", "UIUC", "software", "computer", "Jonathan", "Christopher", "developer",
-                "Java", "c", "c++", "c#", "python", "ruby", "projects", "science", "projects", "tedesco1", "undergraduate", "research",
-                "programming"]
+        return get_default_keywords()
 
  
     def description(self):
@@ -176,7 +174,7 @@ class Page(object):
 
             @return The description of the page
         """
-        return "Jon Tedesco, student and software developer at University of Illinois at Urbana-Champaign"
+        return "Homepage of Jon Tedesco, a dedicated student and avid software developer at University of Illinois at Urbana-Champaign"
 
 
     def header(self, query = None):

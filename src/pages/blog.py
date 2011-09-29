@@ -10,8 +10,6 @@ class Blog(Page):
         The page object for the blog page.
     """
 
-    #TODO: Add some content
-
     def main_content(self):
         """
             Return the central HTML content of this page
