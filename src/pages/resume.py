@@ -1,5 +1,5 @@
 import cherrypy
-from common.common import get_server_root
+from common.common import get_server_root, get_default_keywords
 from src.page import Page
 from util.file_reader import read_file
 
@@ -18,6 +18,12 @@ class Resume(Page):
 
     def title(self):
         return "Jon Tedesco &#183; R&eacute;sum&eacute;"
+    
+    def description(self):
+        return "Jon Tedesco's r&eacute;sum&eacute; (resume) &#183; My education, experience,skills, coursework, publications, and awards"
+
+    def keywords(self):
+        return ["resume", "education", "experience", "skills", "coursework", "publications", "awards"] + get_default_keywords()
 
     def sidebar(self):
         """

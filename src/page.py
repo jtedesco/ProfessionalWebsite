@@ -174,7 +174,7 @@ class Page(object):
 
             @return The description of the page
         """
-        return "Homepage of Jon Tedesco, a dedicated student and avid software developer at University of Illinois at Urbana-Champaign"
+        return "Website of Jon Tedesco, a dedicated student and avid software developer at University of Illinois at Urbana-Champaign"
 
 
     def header(self, query = None):

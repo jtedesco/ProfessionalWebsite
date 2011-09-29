@@ -1,5 +1,5 @@
 import cherrypy
-from common.common import get_server_root
+from common.common import get_server_root, get_default_keywords
 from src.page import Page
 from util.file_reader import read_file
 
@@ -19,6 +19,12 @@ class Projects(Page):
 
     def title(self):
         return "Jon Tedesco &#183; Projects"
+
+    def description(self):
+        return "Jon Tedesco's projects &#183; Description, demos, and source code of Jon Tedesco's geeky projects"
+
+    def keywords(self):
+        return ["projects", "experience", "technology", "current", "past", "github", "sockit", "skills"] + get_default_keywords()
 
     def sidebar(self):
         """

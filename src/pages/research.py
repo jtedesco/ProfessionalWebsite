@@ -1,5 +1,5 @@
 import cherrypy
-from common.common import get_server_root
+from common.common import get_server_root, get_default_keywords
 from src.page import Page
 from util.file_reader import read_file
 
@@ -18,7 +18,13 @@ class Research(Page):
 
     def title(self):
         return "Jon Tedesco &#183; Research"
-    
+
+    def description(self):
+        return "Jon Tedesco's research &#183; Research interests, projects, and publications"
+
+    def keywords(self):
+        return ["research", "publications", "interests", "projects"] + get_default_keywords()
+
     def sidebar(self):
         """
             Get the sidebar code (traditionally the contact information)

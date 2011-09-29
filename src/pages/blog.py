@@ -1,5 +1,5 @@
 import cherrypy
-from common.common import get_server_root
+from common.common import get_server_root, get_default_keywords
 from src.page import Page
 from util.file_reader import read_file
 
@@ -16,11 +16,15 @@ class Blog(Page):
         """
         return read_file("content/pages/blog.html")
 
+    def description(self):
+        return "Jon Tedesco's blog &#183; Jon Tedesco's collection of thoughts and experiences of his geeky endeavors."
+
+    def keywords(self):
+        return ["blog", "discussion", "geek", "projects", "software", "projects"] + get_default_keywords()
 
     def title(self):
         return "Jon Tedesco &#183; Blog"
 
-    
     def sidebar(self):
         """
             Get the sidebar code (traditionally the contact information)

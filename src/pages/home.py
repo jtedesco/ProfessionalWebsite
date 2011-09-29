@@ -19,6 +19,8 @@ class Home(Page):
     def title(self):
         return "Jon Tedesco &#183; Home"
 
+    def description(self):
+        return "Homepage of Jon Tedesco, a dedicated student and avid software developer at University of Illinois at Urbana-Champaign"
 
     def sidebar(self):
         """
