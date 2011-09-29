@@ -292,6 +292,10 @@ code, pre {
 	background: url(../images/bg2_04.jpg) no-repeat left bottom;
 }
 
+.title {
+    text-transform: lowercase;
+}
+
 /** BOX STYLE 1 */
 
 .box-style1 .title {
