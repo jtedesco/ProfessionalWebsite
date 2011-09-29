@@ -409,6 +409,8 @@ class Page(object):
             source_code = source_code.replace('>', '&gt')
 
             # Form the page content
+            path = path[path.find('/')+1:]
+            path = path[path.find('/')+1:]
             content = read_file("content/view_source.html") % (path, language, source_code.decode('utf-8', 'ignore'))
 
         else:
