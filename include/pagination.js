@@ -6,17 +6,23 @@
  * To change this template use File | Settings | File Templates.
  */
 
+
+var lastPage = 1;
+
 function showPage(pageNumber, pages) {
-    for(var i=0; i<=pages; i++) {
-        $(".page_"+i).hide();
-        $(".page_"+i+"_link").css({
-            'text-decoration':'underline',
-            'color':'#B84820'
-        });
-    }
-    $(".page_"+pageNumber).show();
+
+    $(".page_"+lastPage).fadeOut();
+    $(".page_"+lastPage+"_link").css({
+        'text-decoration':'underline',
+        'color':'#B84820'
+    });
+
+
+    $(".page_"+pageNumber).fadeIn();
     $(".page_"+pageNumber+"_link").css({
-            'text-decoration':'none',
-            'color':'inherit'
-        });
+        'text-decoration':'none',
+        'color':'inherit'
+    });
+
+    lastPage = pageNumber;
 }
