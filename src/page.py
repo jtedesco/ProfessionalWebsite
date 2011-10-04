@@ -155,7 +155,7 @@ class Page(object):
         #   brush is imported separately
         return read_file("content/meta_header.html") % (title, " ".join(self.keywords()), self.description(), get_server_root(), get_server_root(),
                                                         get_server_root(), get_server_root(), get_server_root(), get_server_root(), get_server_root(),
-                                                        get_server_root(), get_server_root(), get_server_root(), get_server_root(),
+                                                        get_server_root(), get_server_root(), get_server_root(), get_server_root(), get_server_root(),
                                                         get_server_root(), get_server_root(), get_server_root(), get_server_root())
 
 
