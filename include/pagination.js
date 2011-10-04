@@ -11,14 +11,14 @@ var lastPage = 1;
 
 function showPage(pageNumber, pages) {
 
-    $(".page_"+lastPage).fadeOut();
+    $(".page_"+lastPage).fadeOut('fast');
     $(".page_"+lastPage+"_link").css({
         'text-decoration':'underline',
         'color':'#B84820'
     });
 
 
-    $(".page_"+pageNumber).fadeIn();
+    $(".page_"+pageNumber).fadeIn('fast');
     $(".page_"+pageNumber+"_link").css({
         'text-decoration':'none',
         'color':'inherit'
