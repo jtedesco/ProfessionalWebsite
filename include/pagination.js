@@ -9,20 +9,31 @@
 
 var lastPage = 1;
 
-function showPage(pageNumber, pages) {
+function showPage(pageNumber, firstPage) {
 
-    $(".page_"+lastPage).fadeOut('fast');
-    $(".page_"+lastPage+"_link").css({
-        'text-decoration':'underline',
-        'color':'#B84820'
-    });
+    if(firstPage) {
+
+        $(".page_"+pageNumber).show();
+        $(".page_"+pageNumber+"_link").css({
+            'text-decoration':'none',
+            'color':'inherit'
+        });
 
 
-    $(".page_"+pageNumber).fadeIn('fast');
-    $(".page_"+pageNumber+"_link").css({
-        'text-decoration':'none',
-        'color':'inherit'
-    });
+    } else {
 
+        $(".page_"+lastPage).fadeOut('fast');
+        $(".page_"+lastPage+"_link").css({
+            'text-decoration':'underline',
+            'color':'#B84820'
+        });
+
+        $(".page_"+pageNumber).fadeIn('fast');
+        $(".page_"+pageNumber+"_link").css({
+            'text-decoration':'none',
+            'color':'inherit'
+        });
+    }
+    
     lastPage = pageNumber;
 }
