@@ -79,7 +79,7 @@ class Projects(Page):
         """
 
         # The template for the link to show/hide a page
-        linkTemplate = "<a class='page_%d_link' href='javascript:showPage(%d);'>%d</a> &#183;\n"
+        showPageLinkTemplate = "<a class='page_%d_link' href='javascript:showPage(%d, %d);'>%d</a> &#183;\n"
 
         # The template for a page
         pageTemplate = """
@@ -96,8 +96,8 @@ class Projects(Page):
         # Build the HTML links content
         linksHtml = ""
         for linkNumber in xrange(1, len(splitProjects)):
-            linksHtml += linkTemplate % tuple([linkNumber]*3)
-        linksHtml += linkTemplate[0:-9] % tuple([len(splitProjects)]*3)
+            linksHtml += showPageLinkTemplate % (linkNumber, linkNumber, len(splitProjects), linkNumber)
+        linksHtml += showPageLinkTemplate[0:-9] % tuple([len(splitProjects)]*4)
 
         # Build the project content HTML
         projectsContent = ""

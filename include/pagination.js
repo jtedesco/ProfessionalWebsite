@@ -9,7 +9,7 @@
 
 var lastPage = 1;
 
-function showPage(pageNumber, firstPage) {
+function showPage(pageNumber, numberOfPages, firstPage) {
 
     if(firstPage) {
 
@@ -34,6 +34,17 @@ function showPage(pageNumber, firstPage) {
         });
         $(".page_"+pageNumber).fadeIn('fast');
     }
+
+    // Hide all other pages
+    for(var i = 1; i<numberOfPages+1; i++) {
+        if(i != pageNumber) {
+            hidePage(i);
+        }
+    }
     
     lastPage = pageNumber;
+}
+
+function hidePage(pageNumber) {
+    $(".page_"+pageNumber).hide();
 }
