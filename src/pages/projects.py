@@ -68,12 +68,12 @@ class Projects(Page):
             projects.append(projectContent)
 
         # Build the paginated projects
-        projectsContent = self.__buildProjectsPages(projects)
+        projectsContent = self.__buildProjectsPageContent(projects)
 
         return projectsContent
 
 
-    def __buildProjectsPages(self, projects):
+    def __buildProjectsPageContent(self, projects):
         """
           Builds the pages HTML, splitting the projects list into pages
         """
