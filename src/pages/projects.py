@@ -18,7 +18,7 @@ class Projects(Page):
 
 
         # Special block that says the following are current projects
-        currentProjectsTitle = """
+        current_projects_title = """
             <h1 class="title">
                 <span>current</span> projects
             </h1>
@@ -31,58 +31,58 @@ class Projects(Page):
         """
 
         # List of projects to display on the pages
-        projects = [currentProjectsTitle]
+        projects = [current_projects_title]
 
         # Get the list of current projects
-        currentProjectsList = os.listdir('content/pages/projects/current')
-        currentProjectsList.sort(reverse=True)
-        for currentProject in currentProjectsList:
+        current_projects_list = os.listdir('content/pages/projects/current')
+        current_projects_list.sort(reverse=True)
+        for current_project in current_projects_list:
 
             # Build the project HTML content
-            projectContent = open('content/pages/projects/current/' + currentProject).read()
-            if '%s' in projectContent:
-                projectContent.replace('%s', get_server_root())
+            project_content = open('content/pages/projects/current/' + current_project).read()
+            if '%s' in project_content:
+                project_content.replace('%s', get_server_root())
 
-            projects.append(projectContent)
+            projects.append(project_content)
 
         # Special block that says the rest are past projects
-        pastProjectsTitle = """
+        past_projects_title = """
             <br/>
             <h1 class="title">
                 <span>past</span> projects
             </h1>
             <br/>
         """
-        projects.append(pastProjectsTitle)
+        projects.append(past_projects_title)
 
         # Get the list of past projects
-        pastProjectsList = os.listdir('content/pages/projects/past')
-        pastProjectsList.sort(reverse=True)
-        for pastProject in pastProjectsList:
+        past_projects_list = os.listdir('content/pages/projects/past')
+        past_projects_list.sort(reverse=True)
+        for past_project in past_projects_list:
 
             # Build the project HTML content
-            projectContent = open('content/pages/projects/past/' + pastProject).read()
-            if '%s' in projectContent:
-                projectContent.replace('%s', get_server_root())
+            project_content = open('content/pages/projects/past/' + past_project).read()
+            if '%s' in project_content:
+                project_content.replace('%s', get_server_root())
 
-            projects.append(projectContent)
+            projects.append(project_content)
 
         # Build the paginated projects
-        projectsContent = self.__buildProjectsPageContent(projects)
+        projects_content = self.__build_projects_page_content(projects)
 
-        return projectsContent
+        return projects_content
 
 
-    def __buildProjectsPageContent(self, projects):
+    def __build_projects_page_content(self, projects):
         """
           Builds the pages HTML, splitting the projects list into pages
         """
 
         # The template for the link to show/hide a page
-        showPageLinkTemplate = "<a class='page_%d_link' href='javascript:showPage(%d, %d);'>%d</a> &#183;\n"
+        show_page_link_template = "<a class='page_%d_link' href='javascript:showPage(%d, %d);'>%d</a> &#183;\n"
 
         # The template for a page
-        pageTemplate = """
+        page_template = """
             <div class="page_%d">
                 <div class="content">
                     %s
@@ -91,26 +91,26 @@ class Projects(Page):
         """
 
         # Split the projects into 5 per page
-        splitProjects = self.__group(projects, 6)
+        split_projects = self.__group(projects, 6)
 
         # Build the HTML links content
-        linksHtml = ""
-        for linkNumber in xrange(1, len(splitProjects)):
-            linksHtml += showPageLinkTemplate % (linkNumber, linkNumber, len(splitProjects), linkNumber)
-        linksHtml += showPageLinkTemplate[0:-9] % tuple([len(splitProjects)]*4)
+        links_html = ""
+        for link_number in xrange(1, len(split_projects)):
+            links_html += show_page_link_template % (link_number, link_number, len(split_projects), link_number)
+        links_html += show_page_link_template[0:-9] % tuple([len(split_projects)]*4)
 
         # Build the project content HTML
-        projectsContent = ""
-        pageNumber = 1
-        for projectGroup in splitProjects:
-            pageContent = "\n".join(projectGroup)
-            projectsContent += pageTemplate % (pageNumber, pageContent)
-            pageNumber += 1
+        projects_content = ""
+        page_number = 1
+        for project_group in split_projects:
+            page_content = "\n".join(project_group)
+            projects_content += page_template % (page_number, page_content)
+            page_number += 1
 
-        projectsPageContentTemplate = open('content/templates/projects.html').read()
-        projectsPageContent = projectsPageContentTemplate % (linksHtml, projectsContent, linksHtml)
+        projects_page_content_template = open('content/templates/projects.html').read()
+        projects_page_content = projects_page_content_template % (links_html, projects_content, links_html)
 
-        return projectsPageContent
+        return projects_page_content
     
 
     def __group(self, results, groupSize):
