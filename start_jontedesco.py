@@ -1,6 +1,5 @@
 import cherrypy
 from src.factory import PageFactory
-from src.page import Page
 
 __author__ = 'Jon Tedesco'
 

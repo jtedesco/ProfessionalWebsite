@@ -5,13 +5,14 @@ from whoosh.fields import Schema, TEXT
 from whoosh.highlight import ContextFragmenter, HtmlFormatter, highlight
 from whoosh.index import create_in, exists_in, open_dir
 from whoosh.qparser.default import QueryParser
+from whoosh.qparser import MultifieldPlugin
+from whoosh.qparser.syntax import OrGroup
 from whoosh.spelling import SpellChecker
 from common.common import get_server_root, get_root_directory, setup_error_handling, get_default_keywords
 from util.file_reader import read_file
 
 __author__ = 'Jon'
 
-thePage = None
 class Page(object):
     """
         Abstract class for a page on the website. This exposes the 'index' method, which returns the html
@@ -23,7 +24,6 @@ class Page(object):
         """
             Construct the shell of a page
         """
-        thePage = self
 
         # Build the HTMl content of this page
         self.build_content()
@@ -289,8 +289,12 @@ class Page(object):
         # Create a searcher object for this index
         searcher = self.index.searcher()
 
-        # Create a query parser, providing it with the schema of this index, and the default field to search, 'content'
-        query_parser = QueryParser('content', schema=self.index_schema)
+        # Create a query parser that will parse multiple fields of the documents
+        query_parser = QueryParser(None, schema=self.index_schema, group=OrGroup)
+        query_parser.add_plugin(MultifieldPlugin(['content', 'title'], {
+            'content': 1.0,
+            'title': 3.0
+        }))
 
         # Build a query object from the query string
         query_object = query_parser.parse(query)

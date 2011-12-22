@@ -18,9 +18,8 @@ class PageFactory(object):
         """
             Returns the generic top-level page
         """
-
         # Create a skeleton parent page
-        root_page = Page()
+        root_page = Home()
 
         # Create the subpages for this parent page. These subpages are the root pages of the site.
         root_page.home = Home()

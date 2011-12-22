@@ -1,5 +1,5 @@
 import cherrypy
-from common.common import get_server_root, get_default_keywords
+from common.common import  get_default_keywords
 from src.page import Page
 from util.file_reader import read_file
 

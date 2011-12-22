@@ -1,5 +1,4 @@
 import cherrypy
-from common.common import get_server_root
 from src.page import Page
 from util.file_reader import read_file
 
