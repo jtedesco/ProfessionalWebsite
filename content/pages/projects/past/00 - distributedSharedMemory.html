@@ -1,0 +1,28 @@
+<h2>DistributedSharedMemory</h2>
+<h4>A distributed shared memory system implementing release consistency</h4>
+<div style="padding-left:10px;">
+    <p>
+        This project consisted of two components: first, the coordinator, a process that uses an input and configuration
+        files to run simulations of real-world use cases, and second, the shared memory node.
+    </p>
+    <a class="distributed_shared_memory_link" href="javascript:toggleInfo('distributed_shared_memory')"> See more...</a>
+
+    <h4 class="distributed_shared_memory toHide"><br/>Coordinator</h4>
+    <p class="distributed_shared_memory toHide">
+        This node provides hooks for running simulations in the shared memory system, and handles
+        mutual exclusion in our implementation. It reads input files to run commands in the
+        memory system, and intermediates between the nodes of the memory system.
+    </p><br/>
+    <h4 class="distributed_shared_memory toHide">Shared Memory Node</h4>
+    <p class="distributed_shared_memory toHide">
+        Each node of the memory system implements <a href="http://en.wikipedia.org/wiki/Release_consistency">release consistency</a>
+        by locally caching data
+        as long as it knows that it is the only process in the critical section. Whenever it must
+        read some data, it contacts other nodes in the memory system, and itself holds only
+        a small portion of the total data of the system.
+    </p>
+    <a class="distributed_shared_memory_link" href="javascript:toggleInfo('distributed_shared_memory')" style="display:none;"> See less...</a>
+</div>
+<br/>
+<h3><a href="%snavigate_source/?path=code/DistributedSharedMemory&project=Distributed%%20Shared%%Memory">Source Code</a></h3>
+<br/>
