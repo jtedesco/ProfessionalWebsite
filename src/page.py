@@ -206,8 +206,8 @@ class Page(object):
         """
             Get the sidebar code (traditionally the contact information)
         """
-        return read_file("content/widgets/sidebar.html") % "home"
-
+        return read_file("content/sidebar.html") % (get_server_root(), get_server_root(), "home", get_server_root())
+    
 
     def create_index(self):
 

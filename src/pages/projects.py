@@ -11,6 +11,49 @@ class Projects(Page):
         The page object for the projects page.
     """
 
+    def __init__(self):
+        """
+          Build the projects page, which is a normal page, performing normal setup, but exposes each project to be viewed individually
+        """
+
+        # Get the list of current projects
+        current_projects_list = os.listdir('content/pages/projects/current')
+        current_projects_list.sort(reverse=True)
+        self.current_projects_list = []
+        for file_name in current_projects_list:
+            self.current_projects_list.append('content/pages/projects/current/' + file_name)
+        self.current_projects = self.__build_projects_from_file_list(self.current_projects_list)
+
+        # Get the list of past projects
+        past_projects_list = os.listdir('content/pages/projects/past')
+        past_projects_list.sort(reverse=True)
+        self.past_projects_list = []
+        for file_name in past_projects_list:
+            self.past_projects_list.append('content/pages/projects/past/' + file_name)
+        self.past_projects = self.__build_projects_from_file_list(self.past_projects_list)
+
+        super(Projects, self).__init__()
+
+
+    def __build_projects_from_file_list(self, projects_file_list):
+
+        projects = {}
+        for project_file in projects_file_list:
+            last_slash = project_file.rfind('/')
+            split_name = project_file[last_slash+1:].split(' - ')
+            id = int(split_name[0].strip())
+            name = split_name[1].strip().split('.')[0]
+            name = name[0].upper() + name[1:]
+            projects[project_file] = {
+                'id' : id,
+                'name' : name,
+                'content' : open(project_file).read(),
+                'file_name' : project_file
+            }
+
+        return projects
+
+
     def main_content(self):
         """
             Return the central HTML content of this page
@@ -34,14 +77,11 @@ class Projects(Page):
         projects = [current_projects_title]
 
         # Get the list of current projects
-        current_projects_list = os.listdir('content/pages/projects/current')
-        current_projects_list.sort(reverse=True)
-        for current_project in current_projects_list:
+        for current_project in self.current_projects_list:
 
             # Build the project HTML content
-            project_content = open('content/pages/projects/current/' + current_project).read()
-            if '%s' in project_content:
-                project_content.replace('%s', get_server_root())
+            project_content = open(current_project).read()
+            project_content = project_content.replace('%s', get_server_root())
 
             projects.append(project_content)
 
@@ -56,14 +96,11 @@ class Projects(Page):
         projects.append(past_projects_title)
 
         # Get the list of past projects
-        past_projects_list = os.listdir('content/pages/projects/past')
-        past_projects_list.sort(reverse=True)
-        for past_project in past_projects_list:
+        for past_project in self.past_projects_list:
 
             # Build the project HTML content
-            project_content = open('content/pages/projects/past/' + past_project).read()
-            if '%s' in project_content:
-                project_content.replace('%s', get_server_root())
+            project_content = open(past_project).read()
+            project_content = project_content.replace('%s', get_server_root())
 
             projects.append(project_content)
 
@@ -129,7 +166,7 @@ class Projects(Page):
         """
             Get the sidebar code (traditionally the contact information)
         """
-        return read_file("content/widgets/sidebar.html") % "projects"
+        return read_file("content/widgets/sidebar.html") % (get_server_root(), get_server_root(), get_server_root(), get_server_root(), get_server_root(), "projects")
 
     @cherrypy.expose
     def index(self):
@@ -138,4 +175,4 @@ class Projects(Page):
         """
         self.build_content()
         return self.content
-  
+    

@@ -1,6 +1,7 @@
 import cherrypy
 from src.page import Page
 from util.file_reader import read_file
+from common.common import get_server_root
 
 __author__ = 'Jon'
 
@@ -25,7 +26,7 @@ class Home(Page):
         """
             Get the sidebar code (traditionally the contact information)
         """
-        return read_file("content/widgets/sidebar.html") % "home"
+        return read_file("content/widgets/sidebar.html") % (get_server_root(), get_server_root(), get_server_root(), get_server_root(), get_server_root(), "home")
 
     @cherrypy.expose
     def index(self):

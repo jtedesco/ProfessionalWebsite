@@ -1,5 +1,5 @@
 import cherrypy
-from common.common import  get_default_keywords
+from common.common import get_default_keywords, get_server_root
 from src.page import Page
 from util.file_reader import read_file
 
@@ -29,7 +29,7 @@ class Blog(Page):
         """
             Get the sidebar code (traditionally the contact information)
         """
-        return read_file("content/widgets/sidebar.html") % "blog"
+        return read_file("content/widgets/sidebar.html") % (get_server_root(), get_server_root(), get_server_root(), get_server_root(), get_server_root(), "blog")
 
     @cherrypy.expose
     def index(self):

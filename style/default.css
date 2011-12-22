@@ -14,6 +14,13 @@ body {
 	letter-spacing: -0.75px;
 }
 
+.permalink {
+    font-size: 10px;
+    float: right;
+    padding-top: 5px;
+    font-weight: normal;
+}
+
 .syntaxhighlighter {
     margin-right: -20px;
     margin-left: -15px;
