@@ -29,7 +29,7 @@ class Research(Page):
         """
             Get the sidebar code (traditionally the contact information)
         """
-        return read_file("content/sidebar.html") % "research"
+        return read_file("content/widgets/sidebar.html") % "research"
 
     @cherrypy.expose
     def index(self):

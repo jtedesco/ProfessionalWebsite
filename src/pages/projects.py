@@ -30,7 +30,7 @@ class Projects(Page):
         """
             Get the sidebar code (traditionally the contact information)
         """
-        return read_file("content/sidebar.html") % "projects"
+        return read_file("content/widgets/sidebar.html") % "projects"
 
     @cherrypy.expose
     def index(self):

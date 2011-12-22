@@ -25,7 +25,7 @@ class Home(Page):
         """
             Get the sidebar code (traditionally the contact information)
         """
-        return read_file("content/sidebar.html") % "home"
+        return read_file("content/widgets/sidebar.html") % "home"
 
     @cherrypy.expose
     def index(self):

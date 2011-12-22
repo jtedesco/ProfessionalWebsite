@@ -29,7 +29,7 @@ class Resume(Page):
         """
             Get the sidebar code (traditionally the contact information)
         """
-        return read_file("content/sidebar.html") % "resume"
+        return read_file("content/widgets/sidebar.html") % "resume"
 
     @cherrypy.expose
     def index(self):

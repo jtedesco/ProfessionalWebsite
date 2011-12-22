@@ -28,11 +28,11 @@ function showPage(pageNumber, firstPage) {
             'color':'#B84820'
         });
 
-        $(".page_"+pageNumber).fadeIn('fast');
         $(".page_"+pageNumber+"_link").css({
             'text-decoration':'none',
             'color':'inherit'
         });
+        $(".page_"+pageNumber).fadeIn('fast');
     }
     
     lastPage = pageNumber;

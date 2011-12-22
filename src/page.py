@@ -54,7 +54,7 @@ class Page(object):
         footer = self.footer()
 
         # Build this page's content on creation
-        self.content = read_file("content/template.html") % (meta_header, page_header, content, menu, sidebar, footer)
+        self.content = read_file("content/templates/common.html") % (meta_header, page_header, content, menu, sidebar, footer)
 
 
     @cherrypy.expose
@@ -115,7 +115,7 @@ class Page(object):
         sidebar = self.sidebar()
         footer = self.footer()
 
-        return read_file("content/template.html") % (meta_header, page_header, content, menu, sidebar, footer)
+        return read_file("content/templates/common.html") % (meta_header, page_header, content, menu, sidebar, footer)
 
 
     @cherrypy.expose
@@ -153,7 +153,7 @@ class Page(object):
 
         # There are a lot of server root entries because there are many syntax highlighting brushes, and each
         #   brush is imported separately
-        return read_file("content/meta_header.html") % (title, " ".join(self.keywords()), self.description(), get_server_root(), get_server_root(),
+        return read_file("content/widgets/meta_header.html") % (title, " ".join(self.keywords()), self.description(), get_server_root(), get_server_root(),
                                                         get_server_root(), get_server_root(), get_server_root(), get_server_root(), get_server_root(),
                                                         get_server_root(), get_server_root(), get_server_root(), get_server_root(), get_server_root(),
                                                         get_server_root(), get_server_root(), get_server_root(), get_server_root())
@@ -183,30 +183,30 @@ class Page(object):
         """
         if query is not None:
             # Fill the query into the text box if a query was submitted
-            return read_file("content/header.html") % query
+            return read_file("content/widgets/header.html") % query
         else:
-            return read_file("content/header.html") % ""
+            return read_file("content/widgets/header.html") % ""
 
 
     def footer(self):
         """
             Gets the footer for the site, automatically updating the copyright to the current year
         """
-        return read_file("content/footer.html") % str(datetime.today().year)
+        return read_file("content/widgets/footer.html") % str(datetime.today().year)
 
     
     def menu(self):
         """
             Returns the code for the side menu (should be the same on every page)
         """
-        return read_file("content/menu.html") % (get_server_root(), get_server_root(), get_server_root(), get_server_root(), get_server_root())
+        return read_file("content/widgets/menu.html") % (get_server_root(), get_server_root(), get_server_root(), get_server_root(), get_server_root())
 
 
     def sidebar(self):
         """
             Get the sidebar code (traditionally the contact information)
         """
-        return read_file("content/sidebar.html") % "home"
+        return read_file("content/widgets/sidebar.html") % "home"
 
 
     def create_index(self):
@@ -415,24 +415,24 @@ class Page(object):
             # Form the page content
             path = path[path.find('/')+1:]
             path = path[path.find('/')+1:]
-            content = read_file("content/view_source.html") % (path, language, source_code.decode('utf-8', 'ignore'))
+            content = read_file("content/pages/view_source.html") % (path, language, source_code.decode('utf-8', 'ignore'))
 
         else:
 
             # Form the page content
             image_source = "<img width=600 src='%s'></img>" % (get_server_root() + path)
-            content = read_file("content/view_source.html").replace("<pre class=\"brush: %s\">%s</pre>", image_source)
+            content = read_file("content/pages/view_source.html").replace("<pre class=\"brush: %s\">%s</pre>", image_source)
             content = content % path.encode('ascii')
             
         # Build the components of the page
         meta_header = self.meta_header("View Source &#183; %s (%s)" % (path, language.title()))
         page_header = self.header()
         menu = self.menu()
-        sidebar = read_file("content/short_sidebar.html")
+        sidebar = read_file("content/widgets/short_sidebar.html")
         footer = self.footer()
 
         # Put the page together and return it
-        return read_file("content/template.html") % (meta_header, page_header, content, menu, sidebar, footer)
+        return read_file("content/templates/common.html") % (meta_header, page_header, content, menu, sidebar, footer)
 
 
     @cherrypy.expose
