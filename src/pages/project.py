@@ -35,7 +35,7 @@ class Project(Projects):
 
         # Remove the 'see more...' link and extra sections to hide
         project_content = project_content.replace('toHide', '')
-#        project_content = project_content.replace('permalink', '')
+        project_content = project_content.replace('permalink', '')
         project_content = project_content.replace('See more...', '')
 
         return project_content
