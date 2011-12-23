@@ -44,12 +44,15 @@ class Blog(Page):
             })
             current_id += 1
 
+        # Order them from oldest to newest
+        blog_entries = sorted(blog_entries, key=lambda k: k['date'], reverse=True)
+
         # Build the blog HTML content
         blog_template = read_file('content/templates/blog.html')
         blog_posts_content = '<div class="content">\n'
         for blog_entry in blog_entries:
             blog_post_content = open(blog_entry['path']).read()
-            blog_posts_content += blog_post_content + '<br/><br/>'
+            blog_posts_content += blog_post_content
         blog_posts_content += '</div>\n'
         blog_content = blog_template % blog_posts_content
 
