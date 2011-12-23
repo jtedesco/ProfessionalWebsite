@@ -41,7 +41,27 @@ class Page(object):
         raise cherrypy.HTTPRedirect("%shome/" % get_server_root(), 301)
 
 
-    def build_content(self):
+    @cherrypy.expose
+    def highlight(self, query):
+        """
+          Highlight the content of the page using the keywords of a query
+        """
+
+        # Find the keywords & content
+        keywords = query.split(',')
+        content = self.main_content()
+
+        # Highlight each keyword in all possible (sane) cases
+        for keyword in keywords:
+            whole_keyword = ' ' + keyword + ' '
+            for keyword in [whole_keyword.upper(), whole_keyword.title(), whole_keyword.lower()]:
+                content = content.replace(keyword, '<span style="color: #8FB600;">%s</span>' % keyword)
+        self.build_content(content)
+
+        return self.content
+
+
+    def build_content(self, content=None):
         """
                 Helper function to allow pages to dynamically update their HTML content
         """
@@ -49,7 +69,8 @@ class Page(object):
         # Get each individual component of the page
         meta_header = self.meta_header(self.title())
         page_header = self.header()
-        content = self.main_content()
+        if content is None:
+            content = self.main_content()
         menu = self.menu()
         sidebar = self.sidebar()
         footer = self.footer()
@@ -334,7 +355,6 @@ class Page(object):
 
         # Perform the query itself
         search_results = searcher.search(query_object)
-        print len(search_results)
 
         # Get an analyzer for analyzing the content of each page for highlighting
         analyzer = self.index_schema['content'].format.analyzer
@@ -377,13 +397,13 @@ class Page(object):
             suggestions.append(self.spell_checker.suggest(term))
 
         # Format the results into a nicer format
-        formatted_results = self.format_results(results)
+        formatted_results = self.format_results(results, search_terms)
 
         # Return the list of web pages along with the terms used in the search
         return formatted_results, search_terms, suggestions, result_count
 
 
-    def format_results(self, results):
+    def format_results(self, results, search_terms):
         """
             Formats the results from the Whoosh! query into something nicely formatted for a web page
         """
@@ -406,12 +426,13 @@ class Page(object):
         formatted_results = ""
 
         # Loop through each key in the results (a page), and group it that way
+        highlighting_url_suffix = '/highlight?query=' + ','.join(set(search_terms))
         for title in clean_results.keys():
             if len(clean_results[title]['excerpts']) > 0:
 
                 # Format the title of this section
                 url = clean_results[title]['url']
-                title_section = ("<h2><a href='%s'>" % url) + title.encode('ascii') + "</a></h2><p></p>"
+                title_section = ("<h2><a href='%s'>" % (url + highlighting_url_suffix)) + title.encode('ascii') + "</a></h2><p></p>"
                 formatted_results += title_section
 
                 for result in clean_results[title]['excerpts']:
