@@ -1,11 +1,12 @@
 import os, re, cherrypy, sys
 from datetime import datetime
+from whoosh.analysis import CharsetFilter, StemmingAnalyzer
+from whoosh.support.charset import accent_map
 from cherrypy.lib.static import serve_file
 from whoosh.fields import Schema, TEXT
 from whoosh.highlight import ContextFragmenter, HtmlFormatter, highlight
 from whoosh.index import create_in, exists_in, open_dir
-from whoosh.qparser.default import QueryParser
-from whoosh.qparser import MultifieldPlugin
+from whoosh.qparser.default import  MultifieldParser, QueryParser
 from whoosh.qparser.syntax import OrGroup
 from whoosh.spelling import SpellChecker
 from common.common import get_server_root, get_root_directory, setup_error_handling, get_default_keywords
@@ -214,7 +215,8 @@ class Page(object):
         # Create the schema for this index, which denotes the types of each field, and next try to build the index itself
         #   using this schema. Note that this schema treats the URL as the unique identifier for documents in the index,
         #   and scores documents based on the title and content alone
-        self.index_schema = Schema(content=TEXT(stored=True), title=TEXT(stored=True))
+        analyzer = StemmingAnalyzer() | CharsetFilter(accent_map)
+        self.index_schema = Schema(content=TEXT(analyzer=analyzer, stored=True), title=TEXT(analyzer=analyzer, stored=True), url=TEXT(stored=True))
         index_dir = ".index"
 
         try:
@@ -227,10 +229,29 @@ class Page(object):
             # Get a writer for the index
             index_writer = self.index.writer()
 
-            # Walk the pages folder for content
-            for root_path, sub_directories, files in os.walk("content/pages"):
-                for file in files:
-                    self.insert_document(root_path + "/" + file, index_writer, file)
+            # Add the main pages to the index
+            for main_page in {'home', 'research', 'resume'}:
+                self.insert_document('content/pages/' + main_page + '.html', index_writer, main_page, get_server_root() + main_page)
+
+            # Add the blog entries
+            blog_entry_root_path = 'content/pages/blog/'
+            for blog_entry in os.listdir(blog_entry_root_path):
+                title = blog_entry.split(':')[1].strip()[:-5]
+                self.insert_document(blog_entry_root_path + blog_entry, index_writer, title, get_server_root() + 'blog/' + title.replace(' ', ''))
+
+            # Add the current projects
+            projects_root_path = 'content/pages/projects/current/'
+            for project in os.listdir(projects_root_path):
+                title = project.split('-')[1].strip()[:-5]
+                title = title[0].upper() + title[1:]
+                self.insert_document(projects_root_path + project, index_writer, title, get_server_root() + 'projects/' + title)
+
+            # Add the past projects
+            projects_root_path = 'content/pages/projects/past/'
+            for project in os.listdir(projects_root_path):
+                title = project.split('-')[1].strip()[:-5]
+                title = title[0].upper() + title[1:]
+                self.insert_document(projects_root_path + project, index_writer, title, get_server_root() + 'projects/' + title)
 
             # Commit all the changes, so that every change is flushed to disk, and we can safely query the index
             index_writer.commit()
@@ -247,21 +268,20 @@ class Page(object):
         self.initialized = True
 
 
-    def insert_document(self, path, index_writer, title):
+    def insert_document(self, path, index_writer, title, url):
         """
             Insert a given document into the index.
 
                 @param  path            The path to the file to insert into the index (HTML format)
                 @param  index_writer    A writer to access the text index
                 @param  title           The title of this document
+                @param  url             The url of this page
         """
 
         # Grab the content of the file
-        content = ""
-        for line in open(path, 'r'):
-            content += line
+        content = open(path, 'r').read()
 
-        # Parse out the HTMl content of the file
+        # Remove all HTML tags from content
         parsed_content = content.replace("<br/>", "\n")
         closing_tag_re = re.compile("</.*?>")
         tag_re = re.compile("<.*?>")
@@ -272,10 +292,10 @@ class Page(object):
         parsed_content = unicode(parsed_content, 'utf-8')
 
         # Parse out the title
-        title = unicode(title.replace(".html", "").title(), 'utf-8')
+        title = unicode(title.replace(".html", ""), 'utf-8')
 
         # Put this content into index
-        index_writer.add_document(content=parsed_content, title=title)
+        index_writer.add_document(content=parsed_content, title=title, url=unicode(url))
 
 
     def run_query(self, query):
@@ -290,11 +310,11 @@ class Page(object):
         searcher = self.index.searcher()
 
         # Create a query parser that will parse multiple fields of the documents
-        query_parser = QueryParser(None, schema=self.index_schema, group=OrGroup)
-        query_parser.add_plugin(MultifieldPlugin(['content', 'title'], {
+        field_boosts = {
             'content': 1.0,
             'title': 3.0
-        }))
+        }
+        query_parser = MultifieldParser(['content', 'title'], schema=self.index_schema, fieldboosts=field_boosts, group=OrGroup)
 
         # Build a query object from the query string
         query_object = query_parser.parse(query)
@@ -314,6 +334,7 @@ class Page(object):
 
         # Perform the query itself
         search_results = searcher.search(query_object)
+        print len(search_results)
 
         # Get an analyzer for analyzing the content of each page for highlighting
         analyzer = self.index_schema['content'].format.analyzer
@@ -336,14 +357,18 @@ class Page(object):
             # Grab the fields from the document
             title = search_result['title']
             content = search_result['content']
+            url = search_result['url']
 
             # Build a list of HTML-highlighted excerpts
             excerpt = highlight(content, search_terms, analyzer, fragmenter, formatter)
 
             # Add this new snippet to <code>results</code> dictionary
             if title not in results.keys():
-                results[title] = []
-            results[title].append(excerpt)
+                results[title] = {
+                    'excerpts' : [],
+                    'url' : url
+                }
+            results[title]['excerpts'].append(excerpt)
             result_count += 1
 
         # Build a list of 'suggest' words using the spell checker
@@ -367,25 +392,32 @@ class Page(object):
         white_space_re = re.compile("\s+")
         clean_results = {}
 
+        # Clean the results
         for result in results.keys():
-            clean_results[result] = []
-            for entry in results[result]:
+            clean_results[result] = {
+                'excerpts' : [],
+                'url' : results[result]['url']
+            }
+            for entry in results[result]['excerpts']:
                 parsed_content = white_space_re.sub(" ", entry)
-                if parsed_content not in clean_results[result]:
-                    clean_results[result].append(parsed_content)
+                if parsed_content not in clean_results[result]['excerpts']:
+                    clean_results[result]['excerpts'].append(parsed_content)
 
         formatted_results = ""
 
         # Loop through each key in the results (a page), and group it that way
         for title in clean_results.keys():
-            if len(clean_results[title]) > 0:
+            if len(clean_results[title]['excerpts']) > 0:
 
                 # Format the title of this section
-                title_section = ("<h2><a href='../%s'>" % title.lower()) + title.encode('ascii') + "</a></h2><p></p>"
+                url = clean_results[title]['url']
+                title_section = ("<h2><a href='%s'>" % url) + title.encode('ascii') + "</a></h2><p></p>"
                 formatted_results += title_section
 
-                for result in clean_results[title]:
-                    formatted_results += "..." + result.encode('ascii') + "...<br>"
+                for result in clean_results[title]['excerpts']:
+                    excerpt = result.encode('ascii')
+                    if len(excerpt) > 0:
+                        formatted_results += "..." + excerpt + "...<br>"
                 formatted_results += "<br><br>"
 
         return formatted_results
