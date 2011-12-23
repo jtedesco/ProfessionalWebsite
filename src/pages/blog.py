@@ -1,5 +1,4 @@
 import os
-from pprint import pprint
 import cherrypy
 from common.common import get_default_keywords, get_server_root
 from src.page import Page
@@ -16,7 +15,8 @@ class Blog(Page):
         """
             Return the central HTML content of this page
         """
-        blog_content = self.__build_blog_content()
+        blog_content, blog_entries = self.__build_blog_content()
+        self.blog_entries = blog_entries
         return blog_content
 
     def __build_blog_content(self):
@@ -55,8 +55,9 @@ class Blog(Page):
             blog_posts_content += blog_post_content
         blog_posts_content += '</div>\n'
         blog_content = blog_template % blog_posts_content
+        blog_content = blog_content.replace('%s', get_server_root())
 
-        return blog_content
+        return blog_content, blog_entries
 
 
     def description(self):

@@ -1,5 +1,6 @@
 from src.page import Page
 from src.pages.blog import Blog
+from src.pages.blog_post import BlogPost
 from src.pages.home import Home
 from src.pages.project import Project
 from src.pages.projects import Projects
@@ -28,7 +29,7 @@ class PageFactory(object):
         root_page.projects = PageFactory.create_projects_page()
         root_page.resume = Resume()
         root_page.research = Research()
-        root_page.blog = Blog()
+        root_page.blog = PageFactory.create_blog_page()
 
         return root_page
 
@@ -50,3 +51,20 @@ class PageFactory(object):
                  (projects_page.past_projects[past_project_name]['name'], projects_page.past_projects[past_project_name]['id']))
 
         return projects_page
+
+
+    @staticmethod
+    def create_blog_page():
+        """
+          Builds the blog page, and all blog post subpages
+        """
+
+        blog_page = Blog()
+
+        # Expose each post as a subpage for this page
+        for blog_entry in blog_page.blog_entries:
+            content = open(blog_entry['path']).read()
+            url_name = blog_entry['title'].replace(' ', '')
+            exec("blog_page.%s = BlogPost(content, blog_entry['title'], blog_entry['id'], blog_entry['date'])" % url_name)
+
+        return blog_page
