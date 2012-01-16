@@ -1,0 +1,137 @@
+# Django settings for ProfessionalWebsite project.
+import os
+from professional_website.common import get_root_directory
+
+DEBUG = False
+TEMPLATE_DEBUG = DEBUG
+
+ADMINS = (
+    ('Jon Tedesco', 'jon@jontedesco.net'),
+)
+
+MANAGERS = ADMINS
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',   # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'professional_website',         # Or path to database file if using sqlite3.
+        'USER': 'root',                         # Not used with sqlite3.
+        'PASSWORD': 'root',                     # Not used with sqlite3.
+        'HOST': '',                             # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',                             # Set to empty string for default. Not used with sqlite3.
+    }
+}
+
+# Local time zone for this installation. Choices can be found here:
+# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
+# although not all choices may be available on all operating systems.
+# On Unix systems, a value of None will cause Django to use the same
+# timezone as the operating system.
+# If running in a Windows environment this must be set to the same as your
+# system time zone.
+TIME_ZONE = 'America/Chicago'
+
+# Language code for this installation. All choices can be found here:
+# http://www.i18nguy.com/unicode/language-identifiers.html
+LANGUAGE_CODE = 'en-us'
+
+SITE_ID = 1
+
+# If you set this to False, Django will make some optimizations so as not
+# to load the internationalization machinery.
+USE_I18N = True
+
+# If you set this to False, Django will not format dates, numbers and
+# calendars according to the current locale
+USE_L10N = True
+
+# Absolute filesystem path to the directory that will hold user-uploaded files.
+# Example: "/home/media/media.lawrence.com/media/"
+MEDIA_ROOT = ''
+
+# URL that handles the media served from MEDIA_ROOT. Make sure to use a
+# trailing slash.
+# Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
+MEDIA_URL = ''
+
+# Absolute path to the directory static files should be collected to.
+# Don't put anything in this directory yourself; store your static files
+# in apps' "static/" subdirectories and in STATICFILES_DIRS.
+# Example: "/home/media/media.lawrence.com/static/"
+STATIC_ROOT = '/home/jon/Projects/ProfessionalWebsite/'
+
+# URL prefix for static files.
+# Example: "http://media.lawrence.com/static/"
+STATIC_URL = '/static/'
+
+# URL prefix for admin static files -- CSS, JavaScript and images.
+# Make sure to use a trailing slash.
+# Examples: "http://foo.com/static/admin/", "/static/admin/".
+ADMIN_MEDIA_PREFIX = '/static/admin/'
+
+# Additional locations of static files
+STATICFILES_DIRS = (
+    os.path.join(get_root_directory(), 'content').replace('\\', '/'),
+    os.path.join(get_root_directory(), 'code').replace('\\', '/'),
+    os.path.join(get_root_directory(), 'images').replace('\\', '/'),
+    os.path.join(get_root_directory(), 'papers').replace('\\', '/'),
+    os.path.join(get_root_directory(), 'resume').replace('\\', '/'),
+    os.path.join(get_root_directory(), 'scripts').replace('\\', '/'),
+    os.path.join(get_root_directory(), 'style').replace('\\', '/'),
+)
+
+# List of finder classes that know how to find static files in
+# various locations.
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
+
+# Make this unique, and don't share it with anybody.
+SECRET_KEY = ')nej#ijfbm^lbt$1m2lcey6$5j9&1agtr^6irfad^iqwhc5sjx'
+
+# List of callables that know how to import templates from various sources.
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+)
+
+MIDDLEWARE_CLASSES = (
+    # Nothing needed here
+)
+
+ROOT_URLCONF = 'ProfessionalWebsite.urls'
+
+# Must be absolute paths
+TEMPLATE_DIRS = (
+    STATIC_ROOT + 'templates/',
+)
+
+INSTALLED_APPS = (
+    'django.contrib.staticfiles',
+    'django.contrib.admin',
+    'ProfessionalWebsite.professional_website',
+)
+
+# A sample logging configuration. The only tangible logging
+# performed by this configuration is to send an email to
+# the site admins on every HTTP 500 error.
+# See http://docs.djangoproject.com/en/dev/topics/logging for
+# more details on how to customize your logging configuration.
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler'
+        }
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    }
+}

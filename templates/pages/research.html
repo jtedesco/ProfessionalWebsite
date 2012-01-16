@@ -1,0 +1,153 @@
+{% extends "page.html" %}
+
+{% block content %}
+
+    <div id="content">
+        <div class="bgtop">
+            <div class="bgbtm">
+                <div id="bg1">
+                    <div id="bg2">
+                        <div id="bg3">
+                            <div id="box1" class="box-style1">
+                                <h1 class="title">
+                                    <span>research</span>
+                                </h1>
+                                <br/>
+                                <div class="content">
+                                    <p>
+                                        My current research interests lie in the areas of machine learning, data mining, and
+                                        applications such as vertical search engines, search engines that access the
+                                        <a href="http://en.wikipedia.org/wiki/Invisible_Web">deep web</a>.
+                                    </p>
+                                    <br/>
+
+                                    <h3>Master's Thesis</h3>
+                                    <p>
+                                        For my master's thesis, I will be working on applying machine learning to the collaboration
+                                        social graphs found in the CoMoTo project. I hope to study and apply how we can
+                                        learn to classify collaboration patterns programmatically to provide more effective
+                                        automated plagiarism detection.
+                                    </p>
+
+                                    <h3>Senior Thesis</h3>
+                                    <p>
+                                        I worked with Professor <a href="https://agora.cs.illinois.edu/display/~kcchang/Home">Kevin Chang</a>
+                                        and Nikita Spirin to help understand how we can search for structured information on
+                                        in the unstructured data of the world wide web.
+                                        <img style="float:right; padding:0 0 5px 10px; " width=220 src="/static/admin/images/research/senior_thesis_architecture.png"/>
+                                    </p>
+                                    <p>
+                                        Specifically, we investigated how to retrieve relevant pages given entities as queries.
+                                        We formalized the problem by creating a two step process, first iteratively querying
+                                        an existing keyword search engine in the <i>retrieval phase</i>, then aggregating these results and reranking them
+                                        to present a final set of results to the user in the <i>ranking phase</i>.
+                                        A basic diagram of this process is shown on the right.
+                                    </p>
+                                    <p>
+                                        During the retrieval phase, we investigated strategies for keyword selection, query operators, and query order.
+                                        Likewise, we used machine learning to develop an effective ranking strategy using various features for each
+                                        document output from the retrieval phase.
+                                    </p>
+                                    <p>
+                                        Ultimately, our results demonstrate that we can reduce the number of queries necessary
+                                        by carefully selecting keywords for each entity in domain-independent way, and that
+                                        using only a simple machine learning strategy, our initial implementation is able
+                                        to outperform the results provided by Google on our test entities.
+                                    </p>
+                                    <div style="float:right;">
+                                        <a href="/static/admin/papers/senior_thesis.pdf">download</a>
+                                        &nbsp;&nbsp;
+                                        <img src="/static/admin/images/adobe_logo.gif" width=17> &nbsp;
+                                    </div>
+                                    <p>
+                                        The full thesis is available to download to the right.
+                                    </p>
+                                    <br/>
+
+                                    <h3>CoMoTo &#183; The Collaboration Modeling Toolkit</h3>
+                                    <p>
+                                        Since Fall 2010, I have been working with <a href="http://mias.illinois.edu/index.php?q=page/profile&id=6">Cinda Heeren</a>,
+                                        <a href="http://charliemeyer.net">Charlie Meyer</a>, and <a href="http://www.cse.illinois.edu/~shaffer1/">Eric Shaffer</a>
+                                        to help develop software for <a href="http://comoto.cs.illinois.edu">CoMoTo</a>.
+                                        This software uses advanced software similarity analysis tools such as
+                                        <a href="http://theory.stanford.edu/~aiken/moss/">MOSS</a>
+                                        to help instructors detect cheating in several mainstream undergraduate classes.
+                                        However, our team likewise uses the tool to study how students collaborate
+                                        and how students learn in these classes.
+                                    </p>
+                                    <p>
+                                        Through our efforts to analyze collaboration in undergraduate classes,
+                                        we have provided a useful tool to the department, and have gained a better
+                                        understanding of how students learn and understand the concepts and projects
+                                        at hand.
+                                    </p>
+                                    <br/>
+
+                                    <h3>Deep Web Search Interfaces</h3>
+                                    <p>
+                                        Through Spring 2010, I studied deep web search interfaces, and developed
+                                         a set of design principles for interfaces for any deep search engine. I
+                                         compared the interfaces of several existing seep web search engines and
+                                         used a bottom-up analysis of these interfaces to construct a set of generalized
+                                         principles for deep web search interfaces.
+                                    </p>
+                                    <br/>
+
+                                    <h3>P.U.R.E. &#183; Promoting Undergraduate Research in Engineering</h3>
+                                    <p>
+                                        I actively promote research through my work with P.U.R.E.,
+                                         <strong>P</strong>romoting <strong>U</strong>ndergraduate <strong>R</strong>esearch
+                                          in <strong>E</strong>ngineering, as the liason for the computer science department.
+                                          We strive to involve undergraduates, particularly underclassmen, in undergraduate
+                                          research by acting as an intermediary between undergraduate students, and
+                                          graduate students and faculty, placing new researchers into active research
+                                          projects each semester. Many of these students continue long term research
+                                          with their mentors, and we believe this experience is a critical component
+                                          of an undergraduate education.
+                                    </p>
+                                    <br/>
+
+                                    <h3>Publications</h3><br/>
+                                    <div style="padding-left:10px;">
+                                        <h4>
+                                            <i>CoMoTo - The Collaboration Modeling Toolkit</i>
+                                            <div style="float:right; padding-right:10px;"><i>ITICSE '11</i></div>
+                                        </h4>
+                                        <div style="padding-left:10px;">
+                                            <div style="float:right; font-size:16px;">
+                                                <a style="padding-bottom:5px;" href="http://dl.acm.org/citation.cfm?id=1999789">download</a>
+                                                &nbsp;&nbsp;
+                                                <img src="/static/admin/images/adobe_logo.gif" width=17> &nbsp;
+                                            </div>
+                                               <p>
+                                                   By Charlie Meyer, Cinda Heeren, Eric Shaffer, and Jon Tedesco
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                    <div style="padding-left:10px;">
+                                        <h4>
+                                            <i>Developing Generalizable Principles for Object- <br/> Oriented Search Engine Interface Design</i>
+                                            <div style="float:right; padding-right:10px;"><i>UIUC URJ Spring 2010</i></div>
+                                        </h4>
+                                        <div style="padding-left:10px;">
+                                            <div style="float:right; font-size:16px;">
+                                                <a style="padding-bottom:5px;" href="/static/admin/papers/principles_of_oo_search_interface_design.pdf">download</a>
+                                                &nbsp;&nbsp;
+                                                <img src="/static/admin/images/adobe_logo.gif" width=17> &nbsp;
+                                            </div>
+                                            <p>
+                                                   By Jon Tedesco and Kim Cuong Pham
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

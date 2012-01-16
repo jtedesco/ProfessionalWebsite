@@ -1,0 +1,99 @@
+table.stats {
+    text-align: center;
+    font-family: Verdana, Geneva, Arial, Helvetica, sans-serif ;
+    font-weight: normal;
+    font-size: 11px;
+    color: #fff;
+    width: 900px;
+    background-color: #666;
+    border: 0px;
+    border-collapse: collapse;
+    border-spacing: 0px;
+}
+
+table.stats thead td, table.stats thead a{
+    background-color: #666;
+    color: #fff;
+    padding: 4px;
+    text-align: left;
+    border-bottom: 2px #fff solid;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+table.stats thead a:hover{
+    background-color: #666;
+    color: #cccccc;
+    padding: 4px;
+    text-decoration: underline;
+    text-align: left;
+    border-bottom: 2px #fff solid;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+table.stats td {
+    background-color: #CCC;
+    color: #000;
+    padding: 4px;
+    text-align: left;
+    border: 1px #fff solid;
+}
+
+table.stats tr.special_stat td {
+    background-color: #336600;
+    color: #f5f6f7;
+    padding: 4px;
+    text-align: left;
+    border: 1px #fff solid;
+}
+
+table.smallstats {
+    text-align: center;
+    font-family: Verdana, Geneva, Arial, Helvetica, sans-serif ;
+    font-weight: normal;
+    font-size: 11px;
+    color: #fff;
+    width: 675px;
+    background-color: #666;
+    border: 0px;
+    border-collapse: collapse;
+    border-spacing: 0px;
+}
+
+table.smallstats thead td, table.smallstats thead a{
+    background-color: #666;
+    color: #fff;
+    padding: 4px;
+    text-align: left;
+    border-bottom: 2px #fff solid;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+table.smallstats thead a:hover{
+    background-color: #666;
+    color: #cccccc;
+    padding: 4px;
+    text-decoration: underline;
+    text-align: left;
+    border-bottom: 2px #fff solid;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+table.smallstats td {
+    background-color: #CCC;
+    color: #000;
+    padding: 4px;
+    text-align: left;
+    border: 1px #fff solid;
+}
+
+table.smallstats tr.special_stat td {
+    background-color: #336600;
+    color: #f5f6f7;
+    padding: 4px;
+    text-align: left;
+    border: 1px #fff solid;
+}

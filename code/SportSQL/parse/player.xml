@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<query xmlns:yahoo="http://www.yahooapis.com/v1/base.rng"
+    yahoo:count="1" yahoo:created="2010-10-28T21:07:59Z" yahoo:lang="en-US">
+    <diagnostics>
+        <publiclyCallable>false</publiclyCallable>
+        <url execution-time="130"><![CDATA[http://fantasysports.yahooapis.com/fantasy/v2/players;player_keys=238.p.6619]]></url>
+        <user-time>131</user-time>
+        <service-time>130</service-time>
+        <build-version>9597</build-version>
+    </diagnostics> 
+    <results>
+        <player xmlns="http://fantasysports.yahooapis.com/fantasy/v2/base.rng">
+            <player_key>238.p.6619</player_key>
+            <player_id>6619</player_id>
+            <name>
+                <full>Albert Pujols</full>
+                <first>Albert</first>
+                <last>Pujols</last>
+                <ascii_first>Albert</ascii_first>
+                <ascii_last>Pujols</ascii_last>
+            </name>
+            <editorial_player_key>mlb.p.6619</editorial_player_key>
+            <editorial_team_key>mlb.t.24</editorial_team_key>
+            <editorial_team_full_name>St. Louis Cardinals</editorial_team_full_name>
+            <editorial_team_abbr>StL</editorial_team_abbr>
+            <uniform_number>5</uniform_number>
+            <display_position>1B</display_position>
+            <image_url>http://l.yimg.com/a/i/us/sp/v/mlb/players_l/20100429/6619.jpg?x=46&amp;y=60&amp;xc=1&amp;yc=1&amp;wc=165&amp;hc=215&amp;q=100&amp;sig=gOS50NoGQMMDd6Uoq_.S4w--</image_url>
+            <is_undroppable>0</is_undroppable>
+            <eligible_positions>
+                <position>1B</position>
+                <position>CI</position>
+                <position>IF</position>
+            </eligible_positions>
+        </player>
+    </results>
+</query>

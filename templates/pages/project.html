@@ -1,0 +1,50 @@
+{% extends "page.html" %}
+
+{% block content %}
+
+    <div id="content">
+        <div class="bgtop">
+            <div class="bgbtm">
+                <div id="bg1">
+                    <div id="bg2">
+                        <div id="bg3">
+                            <div id="box1" class="box-style1">
+
+                                {# The project title and subtitle #}
+                                <h2>{{ project.title }}</h2>
+                                {% if project.subtitle %}
+                                    <h4>{{ project.subtitle }}</h4>
+                                {% endif %}
+
+                                {# The project content itself #}
+                                <div style="padding-left:10px;">
+                                    {{ project.shortDescription|safe }}
+
+                                    {# The detailed description you can show/hide #}
+                                    {{ project.longDescription|safe }}
+                                </div>
+
+                                {# Show the homepage & source code links if they exist #}
+                                {% if project.liveUrl %}
+                                    <h3><a href="{{ project.liveUrl }}">Homepage</a>
+                                {% endif %}
+                                {% if project.liveUrl and project.sourceUrl %}
+                                    &#183;
+                                {% else %}
+                                    </h3>
+                                {% endif %}
+                                {% if project.sourceUrl %}
+                                    {% if not project.liveUrl %}<h3>{% endif %}
+                                    <a href="{{ project.sourceUrl }}">Source Code</a></h3>
+                                {% endif %}
+                                <br/>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}

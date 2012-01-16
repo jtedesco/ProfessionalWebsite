@@ -1,0 +1,21 @@
+{% if static %}
+    <div id="menu">
+        <ul>
+            <li class="menu" id="menu1"><a href="{{ server_root }}home/" accesskey="1" title="homepage">Home</a></li>
+            <li class="menu" id="menu2"><a href="{{ server_root }}projects/" accesskey="2" title="projects">Projects</a></li>
+            <li class="menu" id="menu3"><a href="{{ server_root }}resume/" accesskey="3" title="r&eacute;sum&eacute; (resume)">R&eacute;sum&eacute;</a></li>
+            <li class="menu" id="menu4"><a href="{{ server_root }}research/" accesskey="4" title="research">Research</a></li>
+            <li class="menu" id="menu5"><a href="{{ server_root }}blog/" accesskey="5" title="blog">Blog</a></li>
+        </ul>
+    </div>
+{% else %}
+    <div id="menu">
+        <ul>
+            <li class="menu" id="menu1"><a href="javascript:asyncLoad('{{ server_root }}home/')" accesskey="1" title="homepage">Home</a></li>
+            <li class="menu" id="menu2"><a href="javascript:asyncLoad('{{ server_root }}projects/')" accesskey="2" title="projects">Projects</a></li>
+            <li class="menu" id="menu3"><a href="javascript:asyncLoad('{{ server_root }}resume/')" accesskey="3" title="r&eacute;sum&eacute; (resume)">R&eacute;sum&eacute;</a></li>
+            <li class="menu" id="menu4"><a href="javascript:asyncLoad('{{ server_root }}research/')" accesskey="4" title="research">Research</a></li>
+            <li class="menu" id="menu5"><a href="javascript:asyncLoad('{{ server_root }}blog/')" accesskey="5" title="blog">Blog</a></li>
+        </ul>
+    </div>
+{% endif %}

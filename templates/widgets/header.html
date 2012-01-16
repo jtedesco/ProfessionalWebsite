@@ -1,0 +1,23 @@
+<div id="header" class="container">
+    <div id="logo">
+        <img
+            style="padding-top:70px; margin-left:-10px;"
+            src="/static/admin/images/title.png"
+            width=400
+            alt="Jon Tedesco"
+        />
+        <img
+            style="margin-left:20px; margin-top:-15px;"
+            src="/static/admin/images/subtitle.png"
+            width=450
+            alt="Student, researcher, developer"
+        />
+    </div>
+    <div id="search">
+        <form method="post" action="javascript:submitQuery('{{ server_root }}');">
+            <fieldset>
+                <input type="text" id="query" name="query" value="{{ query }}" class="input-text" />
+            </fieldset>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<!--
+BEGIN JAVASCRIPT PLAYER EMBED CODE 
+More players and documentation at: www.premiumbeat.com/flash_media_players
+-->
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+<div id="player-holder"></div>
+
+<script type="text/javascript">
+	var options = {};
+	options.playlistXmlPath = "playlist.xml";
+	
+	var params = {};
+	params.allowScriptAccess = "always";
+		
+	swfobject.embedSWF("OriginalMusicPlayerPlaylist.swf", "player-holder", "250", "250", "9.0.0",false, options, params, {});
+</script>
+
+<!-- END PLAYER EMBED CODE -->

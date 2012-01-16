@@ -1,0 +1,814 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+    <title>PyGoogle</title>
+    <link href="../Style/google_home_styling.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="../Style/default.css" rel="stylesheet" type="text/css" media="screen"/>
+
+    <style>
+    @media screen, projection, print {
+        html, input, textarea {
+            font-family: arial, sans-serif
+        }
+
+        html {
+            line-height: 1.5
+        }
+
+        h4, h5, h6, pre, table, input, textarea, code {
+            font-size: 1em
+        }
+
+        address, abbr, cite {
+            font-style: normal
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0
+        }
+
+        th, td {
+            padding-right: 1em;
+            vertical-align: top
+        }
+
+        th, #aux #about {
+            text-align: left
+        }
+
+        fieldset, img {
+            border: 0
+        }
+
+        label {
+            display: block;
+            margin: 1em 0 .3em
+        }
+
+        q {
+            quotes: none
+        }
+    }
+
+    @media screen, projection {
+        *+html {
+            direction: ltr
+        }
+
+        * html {
+            direction: ltr
+        }
+
+        html, h1 img {
+            background: #fff
+        }
+
+        html {
+            font-size: .81em
+        }
+
+        body {
+            padding: 15px
+        }
+
+        body.rtl h1 img, body.rtl #nav {
+            float: right
+        }
+
+        body.rtl h1 img {
+            margin: -13px -2px 0 0;
+            padding: 0 0 0 12px
+        }
+
+        body.rtl #nav ul, body.rtl #nav ol {
+            margin: .7em 1em 0 0
+        }
+
+        body.rtl #aux {
+            margin: 0 160px 0 0
+        }
+
+        body.compact {
+            margin: auto;
+            width: 740px
+        }
+
+        *>body.compact {
+            max-width: 740px;
+            width: auto
+        }
+
+        body.product h1 {
+            color: #000;
+            font-size: 1em;
+            height: 1.93em;
+            line-height: 1.5;
+            margin: 0 0 .54em;
+            padding: 15px 0 0
+        }
+
+        body.product #about, fieldset, #nav, #nav ul, #nav ol {
+            padding: 0
+        }
+
+        body.product #about {
+            border: 0;
+            margin: 50px 0 0
+        }
+
+        body.product #nav {
+            width: 140px
+        }
+
+        h1, h2 {
+            line-height: 1.25
+        }
+
+        h1, h5, h6, label input, #nav li a {
+            font-weight: normal
+        }
+
+        h1 {
+            color: #333;
+            font-size: 1.85em;
+            margin: 0 0 1em;
+            padding: 13px 0 0
+        }
+
+        h1 img, #nav {
+            float: left
+        }
+
+        h1 img {
+            margin: -13px 0 0 -2px;
+            padding: 0 12px 0 0;
+            position: relative
+        }
+
+        h2 {
+            font-size: 1.23em;
+            margin: 0 0 .81em
+        }
+
+        h3 {
+            font-size: 1.08em;
+            line-height: 1.2;
+            margin: 1.4em 0 .93em
+        }
+
+        h4, h6 {
+            margin: 1em 0 -1em
+        }
+
+        h5, p, pre, table, form {
+            margin: 1em 0
+        }
+
+        p+table, table+p {
+            margin-top: 0
+        }
+
+        blockquote, ul, ol {
+            margin-bottom: 1em;
+            margin-top: 1em
+        }
+
+        pre, code {
+            font: 13px/1.38 monospace
+        }
+
+        pre {
+            background: #eee;
+            border: 1px solid #ccc;
+            padding: .8em 1em
+        }
+
+        legend {
+            display: none
+        }
+
+        label, #nav li {
+            font-weight: bold
+        }
+
+        a:link {
+            color: #11c
+        }
+
+        a:visited {
+            color: #551a8b
+        }
+
+        a:focus, a:active {
+            color: #c11
+        }
+
+        #about {
+            border-top: 1px solid #ccc;
+            clear: both;
+            color: #777;
+            margin: 2em 0 0;
+            padding: .3em 0 0;
+            text-align: center
+        }
+
+        #nav, #nav * {
+            list-style: none
+        }
+
+        #nav {
+            width: 142px
+        }
+
+        #nav ul, #nav ol {
+            margin: .7em 0 0 1em
+        }
+
+        #nav li {
+            margin: 0 0 .7em
+        }
+
+        #aux {
+            margin: 0 0 0 160px
+        }
+
+        #ja, #ko, #zh-CN, #zh-TW {
+            line-height: 1.6
+        }
+
+        #zh-CN, #zh-TW {
+            font-size: .75em
+        }
+
+        #zh-CN body.product h1, #zh-TW body.product h1 {
+            font-size: 1.08em
+        }
+
+        #zh-CN h1, #zh-TW h1 {
+            font-size: 2em
+        }
+
+        #zh-CN h2, #zh-TW h2 {
+            font-size: 1.33em
+        }
+
+        #zh-CN h3, #zh-TW h3 {
+            font-size: 1.17em
+        }
+    }
+
+    @media print {
+        h1 img {
+            display: block
+        }
+
+        #nav {
+            display: none
+        }
+    }
+
+    @media all {
+        .x-form ul, .x-form li {
+            margin: 1em 0
+        }
+
+        .x-form ul {
+            list-style: none;
+            padding: 0
+        }
+
+        .x-form ins {
+            font-weight: bold;
+            text-decoration: none
+        }
+    }
+
+    @media screen, projection {
+        body.rtl .x-box {
+            float: left;
+            margin: 0 1em 1em 0
+        }
+
+        .x-box {
+            background: #eee;
+            border: 1px solid #ccc;
+            float: right;
+            margin: 0 0 1em 1em;
+            padding: 1em;
+            width: 250px
+        }
+
+        .x-box img {
+            display: block;
+            margin: auto
+        }
+
+        body {
+            position: relative
+        }
+
+        body.rtl #x-breadcrumb {
+            left: auto;
+            right: 175px
+        }
+
+        body.product #x-breadcrumb {
+            margin: 1em 0;
+            position: static
+        }
+
+        #x-breadcrumb {
+            color: #333;
+            left: 175px;
+            line-height: 1.2;
+            margin: 0;
+            position: absolute;
+            top: 4.15em
+        }
+
+        #zh-CN #x-breadcrumb, #zh-TW #x-breadcrumb {
+            top: 4.46em
+        }
+
+        .x-button *, .x-button-basic * {
+            margin: 0;
+            padding: 0
+        }
+
+        .x-button, .x-button-basic {
+            background: #cadef4;
+            border: 1px solid #ccc;
+            direction: ltr;
+            line-height: 1.2;
+            max-width: 795px;
+            overflow: visible;
+            padding: 15px;
+            text-align: center;
+            width: 20em
+        }
+
+        .x-button p, .x-button-basic p {
+            margin: 10px 0 0;
+            text-align: center
+        }
+
+        .x-button div, .x-button-basic div {
+            background: url(//www.google.com/images/modules/buttons/g-button-1.gif) no-repeat;
+            background-color: #5679a5;
+            font-size: 1.3em
+        }
+
+        .x-button div span, .x-button-basic div span {
+            background: url(//www.google.com/images/modules/buttons/g-button-1.gif) right -400px no-repeat;
+            display: block;
+            height: 1%;
+            width: 100%
+        }
+
+        .x-button div span span {
+            background: url(//www.google.com/images/modules/buttons/g-button-1.gif) left bottom no-repeat
+        }
+
+        .x-button div span span a, .x-button-basic div span span a {
+            background: url(//www.google.com/images/modules/buttons/g-button-2.gif) right bottom no-repeat;
+            color: #fff !important;
+            display: block;
+            font-weight: bold;
+            height: 1%;
+            padding: 8px 18px 10px 13px;
+            text-decoration: none
+        }
+
+        .x-button-basic {
+            background: none;
+            border: 0;
+            padding: 0
+        }
+
+        .x-button-basic div {
+            background: url(//www.google.com/images/modules/buttons/g-button-basic-1.gif) no-repeat
+        }
+
+        .x-button-basic div span {
+            background: url(//www.google.com/images/modules/buttons/g-button-basic-1.gif) right -400px no-repeat
+        }
+
+        .x-button-basic div span span {
+            background: url(//www.google.com/images/modules/buttons/g-button-basic-1.gif) left bottom no-repeat
+        }
+
+        .x-button-basic div span span a {
+            background: url(//www.google.com/images/modules/buttons/g-button-basic-2.gif) right bottom no-repeat
+        }
+
+        body.rtl .x-form .f-c1 li, body.rtl .x-form .f-c2 li, body.rtl .x-form .f-c3 li, body.rtl .x-form .f-c4 li {
+            float: right
+        }
+
+        .x-form li p {
+            color: #777;
+            margin: .3em 0 0
+        }
+
+        .x-form li ul {
+            height: 1%;
+            margin: .5em 0 1em
+        }
+
+        .x-form li li label, .x-form .f-c1 li, .x-form .f-c2 li, .x-form .f-c3 li, .x-form .f-c4 li {
+            margin: 0
+        }
+
+        .x-form li li, .x-form li li label {
+            display: inline
+        }
+
+        .x-form li li {
+            margin: 0 1em 0 0
+        }
+
+        .x-form li li label {
+            font-weight: normal
+        }
+
+        .x-form li li input, .x-form .button, .x-form .f-min {
+            width: auto
+        }
+
+        .x-form li li input {
+            bottom: -.1em;
+            position: relative
+        }
+
+        .x-form label {
+            margin: 0 0 .3em
+        }
+
+        .x-form input {
+            width: 250px
+        }
+
+        .x-form ins {
+            color: #c00
+        }
+
+        .x-form .f-c1, .x-form .f-c2, .x-form .f-c3, .x-form .f-c4 {
+            overflow: hidden
+        }
+
+        .x-form .f-c1 li, .x-form .f-c2 li, .x-form .f-c3 li, .x-form .f-c4 li {
+            display: block;
+            float: left
+        }
+
+        .x-form .f-c1 li {
+            width: 100%
+        }
+
+        .x-form .f-c2 li {
+            width: 50%
+        }
+
+        .x-form .f-c3 li {
+            width: 33%
+        }
+
+        .x-form .f-c4 li {
+            width: 25%
+        }
+
+        .x-form .f-compact {
+            width: 50px
+        }
+
+        .x-note {
+            color: #777
+        }
+
+        body.rtl #x-promo {
+            left: 15px;
+            padding: 0 5px 0 0;
+            right: auto
+        }
+
+        #x-promo {
+            margin: 0;
+            padding: 0 0 0 5px;
+            position: absolute;
+            right: 15px;
+            top: 15px
+        }
+
+        body.rtl #x-search, body.rtl #x-lang {
+            margin: -4.72em 175px 2.92em 0;
+            text-align: left
+        }
+
+        body.product #x-search, body.product #x-lang {
+            margin-bottom: 1.7em;
+            margin-top: -3.5em
+        }
+
+        #x-search, #x-lang {
+            margin: -4.72em 0 2.92em 175px;
+            position: relative;
+            text-align: right
+        }
+
+        #x-search #q {
+            width: 150px
+        }
+
+        #zh-CN #x-search, #zh-CN #x-lang, #zh-TW #x-search, #zh-TW #x-lang {
+            margin-bottom: 3.17em;
+            margin-top: -5.08em
+        }
+
+        #zh-CN body.product #x-search, #zh-CN body.product #x-lang, #zh-TW body.product #x-search, #zh-TW body.product #x-lang {
+            margin-bottom: 1.84em;
+            margin-top: -3.79em
+        }
+    }
+
+    @media print {
+        #x-breadcrumb, #x-promo, #x-search, #x-lang {
+            display: none
+        }
+    }
+
+    @media screen, projection {
+        body.rtl #policies ul, #promo, .x-button {
+            float: right
+        }
+
+        body.rtl #policies ul, #videos, #toc-faq {
+            clear: left
+        }
+
+        body.rtl #privacy-tools li {
+            background-position: right top
+        }
+
+        body.rtl .x-button, #policies ul, #videos li {
+            float: left
+        }
+
+        body.rtl .x-button {
+            margin: 0 1em 1em 0
+        }
+
+        h2 strong, h3 strong {
+            color: #900
+        }
+
+        ol ol {
+            margin-top: 0
+        }
+
+        ins {
+            background: #ff0;
+            text-decoration: none
+        }
+
+        #nav #tools, #intro h2 {
+            font-weight: normal
+        }
+
+        #intro h2 {
+            font-size: 1.85em;
+            margin: 0 0 .5em
+        }
+
+        #intro span, #blog-feed .date {
+            color: #777
+        }
+
+        #intro.alt, #policies.alt p {
+            margin-right: 331px
+        }
+
+        #promo, #promo p, #promo ul, #video, #videos, #videos ul, #videos p, #blog-feed p {
+            margin: 0
+        }
+
+        #promo {
+            width: 305px
+        }
+
+        #promo ul, #policies ul, #videos ul {
+            list-style: none;
+            padding: 0
+        }
+
+        #promo li {
+            display: inline-block;
+            margin: 0 3% .3em 0;
+            vertical-align: top
+        }
+
+        *+html #promo li {
+            float: left
+        }
+
+        #promo ul>li {
+            width: 30%
+        }
+
+        #promo li p, #videos p {
+            font-size: .85em
+        }
+
+        #promo li p {
+            color: #999;
+            line-height: 1.3
+        }
+
+        #promo div {
+            margin: .5em 0
+        }
+
+        #promo img {
+            height: 60px;
+            width: 80px
+        }
+
+        #policies ul {
+            clear: right;
+            margin: 0 0 1.5em;
+            width: 25%
+        }
+
+        #policies .update {
+            background: #ffb;
+            padding: .5em 1em
+        }
+
+        #policies .update a {
+            white-space: nowrap
+        }
+
+        #privacy-tools {
+            list-style: none;
+            margin: 0;
+            padding: 0
+        }
+
+        #privacy-tools li {
+            background-position: left top;
+            background-repeat: no-repeat;
+            padding: 0 42px
+        }
+
+        #privacy-tools li h3 {
+            line-height: 32px
+        }
+
+        #privacy-tools .privacy-tools-adsprefs {
+            background-image: url(//www.google.com/images/icons/feature/assorted_ads-y32.png)
+        }
+
+        #privacy-tools .privacy-tools-analytics {
+            background-image: url(//www.google.com/images/icons/product/analytics-32.png)
+        }
+
+        #privacy-tools .privacy-tools-chat {
+            background-image: url(//www.google.com/images/icons/feature/chat-b32.png)
+        }
+
+        #privacy-tools .privacy-tools-chrome {
+            background-image: url(//www.google.com/images/icons/product/chrome-32.png)
+        }
+
+        #privacy-tools .privacy-tools-dashboard {
+            background-image: url(//www.google.com/images/icons/feature/controlpanel-b32.png)
+        }
+
+        #privacy-tools .privacy-tools-dataliberation {
+            background-image: url(//www.google.com/press/images/dataliberation-35.gif)
+        }
+
+        #privacy-tools .privacy-tools-encrypted {
+            background-image: url(//www.google.com/images/icons/feature/padlock-g32.png)
+        }
+
+        #privacy-tools .privacy-tools-history {
+            background-image: url(//www.google.com/images/icons/feature/filing_cabinet_search-g32.png)
+        }
+
+        #privacy-tools .privacy-tools-latitude {
+            background-image: url(//www.google.com/images/icons/feature/map_with_pin-g32.png)
+        }
+
+        #privacy-tools .privacy-tools-personalization {
+            background-image: url(//www.google.com/images/icons/feature/personalization-y32.png)
+        }
+
+        #privacy-tools .privacy-tools-streetview {
+            background-image: url(//www.google.com/images/icons/product/maps-32.gif)
+        }
+
+        #privacy-tools .privacy-tools-youtube {
+            background-image: url(//www.google.com/images/icons/feature/clapper-b32.png)
+        }
+
+        #video, #video object {
+            height: 192px;
+            width: 297px
+        }
+
+        #video {
+            border: 1px solid #ccc;
+            padding: 3px
+        }
+
+        #videos {
+            overflow: hidden
+        }
+
+        #videos h3 {
+            margin-top: -.67em;
+            padding-top: 1.33em
+        }
+
+        #videos li {
+            margin: 0 2em 1em 0;
+            width: 142px
+        }
+
+        #videos li a {
+            display: block
+        }
+
+        #videos li .video img {
+            border: 1px solid
+        }
+
+        #blog-feed p * {
+            font-size: 1em !important;
+            font-style: normal !important
+        }
+
+        #blog-feed .date {
+            margin-top: -.9em
+        }
+
+        #products {
+            font-weight: normal !important
+        }
+
+        .x-button {
+            margin: 0 0 1em 1em
+        }
+    }
+</style>
+
+</head>
+
+<body>
+<center>
+<span id=main><div id=ghead>
+
+    <div id=lga style="padding-top:22px"><img alt="PyGoogle" height=175 src="../images/pygoogle_logo.jpg" width=600 id=hplogo style="padding-top:26px"><br><br></div>
+    <div style="width:600px; text-align: justify;">
+        <p>&nbsp; &nbsp; &nbsp; This project aims to create a (relatively) simple search engine in Python. Essentially, the project will include a
+        multi-threaded web crawler, which will store data both in a text indexing system and graph structure, and provide
+        a simple web interface to query the data. The focus on this project will not be scale or full-featured software,
+        but rather on fitting each component together to form an interesting, purely python-based search engine.
+        <p>&nbsp; &nbsp; &nbsp; Specifically, this project will use external python wrappers and libraries for text indexing, pagerank
+            algorithm and graph representation, and web crawling. Rather than the implementation of each of these
+            pieces, the focus for this project will be on fitting these pre-existing pieces together, in an interesting
+            way, and present the data via a web interface.
+            Although this project will be compiled and run as one unit, there will be several conceptual parts of the
+            project. The project will consist of:
+            <ol style="margin-left:50px;">
+                <li>
+                    A multi-threaded web crawler
+                </li>
+                <li>
+                    A multi-threaded indexer
+                </li>
+                <li>
+                    A python-driven web interface for querying the data
+                </li>
+            </ol>
+            <p>&nbsp; &nbsp; &nbsp; Primarily, the GUI for this project will not be a high priority. The majority of time and effort will be
+            spent on the data structures and algorithms behind the searching and indexing, and the GUI will simply
+            be a finishing touch to the project.
+    </div>
+
+    <div style="font-size:83%;min-height:3.5em"><br><br></div>
+    <div style="font-size:10pt">
+        <div id=fll>
+            <a href="/visualize">Data&nbsp;Visualization</a>
+            <a href="/about">About PyGoogle</a>
+            <a href="/privacy">Privacy Policy</a>
+        </div>
+    </div>
+    <p style="color:#767676;font-size:8pt">&copy; 2010 - Jon Tedesco</p>
+</div> </span>
+</center>
+</body>
+</html>

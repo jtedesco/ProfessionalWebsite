@@ -1,0 +1,54 @@
+{% extends "page.html" %}
+
+{% block content %}
+    <div id="content">
+        <div class="bgtop">
+            <div class="bgbtm">
+                <div id="bg1">
+                    <div id="bg2">
+                        <div id="bg3">
+                            <div id="box1" class="box-style1">
+                                <h1 class="title">
+                                    <span>Navigate</span> Source
+                                </h1>
+                                <br/><br/>
+                                <p>{{ path }}</p><br/>
+                                <div class="content">
+                                    <div class='source_navigation'>
+
+                                        {# Output directories navigation #}
+                                        {% if directories.0 %}
+                                            Directories:<br/><br/>
+                                            <div style='margin-left: 20px;'>
+                                                {% for directory in directories %}
+                                                    <a href="javascript:asyncLoad('{{ server_root }}navigate_source/{{ directory.0 }},{{ project }}')">{{ directory.1 }}</a><span style="font-size: 8px;"><br/><br/></span>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+
+                                        {# Output files navigation #}
+                                        {% if files.0 %}
+                                            <br/>Files:<br/><br/>
+                                            <div style='margin-left: 20px;'>
+                                                {% for file in files %}
+                                                    <a href="javascript:asyncLoad('{{ server_root }}view_source/{{ file.0 }}')">{{ file.1 }}</a><span style="font-size: 8px;"><br/><br/></span>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block after_load %}
+    {% if not image %}
+        SyntaxHighlighter.all();
+    {% endif %}
+{% endblock %}

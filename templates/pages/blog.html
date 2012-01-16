@@ -1,0 +1,68 @@
+{% extends 'page.html' %}
+
+{% block onload %} onload="showPage(1, 10, true);" SyntaxHighlighter.highlight(); {% endblock %}
+
+{% block content %}
+    <div id="content">
+        <div class="bgtop">
+            <div class="bgbtm">
+                <div id="bg1">
+                    <div id="bg2">
+                        <div id="bg3">
+                            <div id="box1" class="box-style1">
+
+                                {# Create the Javascript pagination code #}
+                                <div style="float:right; padding-top: 15px;">
+                                    {% for page in pages %}
+                                        {% if page.number > 1 %}
+                                            &#183;
+                                        {% endif %}
+                                        <a class='page_{{ page.number }}_link' href='javascript:showPage({{ page.number }}, {{ number_of_pages }});'>{{ page.number }}</a>
+                                    {% endfor %}
+                                    <br/><br/>
+                                </div>
+
+                                <h1 class="title">
+                                    <span>blog</span>
+                                </h1>
+                                <p class="byline">Collection of thoughts and experiences of my geeky endeavors.</p>
+
+                                {# Generate the actual projects HTML #}
+                                {% for page in pages %}
+                                    <div class="page_{{ page.number }}">
+                                        <div class="content">
+
+                                        {% for post in page.posts_list %}
+
+                                            {# The blog post content itself #}
+                                            <div class="post">
+                                                <h3>{{ post.title|safe }}<a class="permalink" href="{{ server_root }}blog/{{ post.name }}">permalink</a></h3>
+                                                <i>{{ post.subtitle|safe }}</i> &nbsp; &#183; &nbsp; {{ post.timestamp|date:"F j Y" }} <br/><br/>
+                                                {{ post.content|safe }}
+                                            </div>
+
+                                        {% endfor %}
+
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+                                {# Create the Javascript pagination code #}
+                                <center>
+                                    {% for page in pages %}
+                                        {% if page.number > 1 %}
+                                            &#183;
+                                        {% endif %}
+                                        <a class='page_{{ page.number }}_link' href='javascript:showPage({{ page.number }}, {{ number_of_pages }});'>{{ page.number }}</a>
+                                    {% endfor %}
+                                    <br/><br/>
+                                </center>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

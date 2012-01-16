@@ -1,0 +1,238 @@
+
+/*
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+*/
+
+body {
+	margin-top: 50px;
+	padding: 0;
+	background: #EEEEEE url(../images/background.jpg) repeat-x left top;
+	text-align: justify;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #454545;
+}
+
+
+h1, h2, h3 {
+text-align: justify;
+margin-top: 0;
+color: #8C0209;
+}
+
+h1 {
+font-size: 1.6em;
+font-weight: normal;
+}
+
+h2 {
+font-size: 1.6em;
+}
+
+h3 {
+font-size: 1em;
+}
+
+ul {
+}
+
+input{
+margin: 2px;
+width: 90%;
+}
+
+textarea{
+margin: 2px;
+height: 200px;
+width: 90%;
+}
+
+a {
+text-decoration: none;
+color: #3F5C10;
+}
+
+a:hover {
+border-bottom: none;
+color: #678967;
+}
+
+h2 a {
+border-bottom: none;
+color: #cccccc;
+}
+
+h2 a:hover {
+border-bottom: none;
+color: #eeeeee;
+}
+
+a img {
+border: none;
+}
+
+img.left {
+float: left;
+margin: 0 20px 0 0;
+}
+
+img.right {
+float: right;
+	margin: 0 0 0 20px;
+}
+
+/* Page */
+
+#page {
+	width: 960px;
+	margin: 0 auto;
+	padding: 5px 0px;
+}
+
+/* Content */
+
+#today {
+    font-weight: bold;
+}
+
+#content {
+	float: left;
+	width: 460px;
+	padding: 30px 30px 0px 30px;
+}
+
+.post {
+	padding-bottom: 45px;
+	line-height: 200%;
+}
+
+.post h1 {
+	font-weight: normal;
+}
+
+.title {
+	margin: 0px;
+	padding: 0px;
+	letter-spacing: -1px;
+	font-size: 3em;
+	font-weight: normal;
+}
+
+.title a {
+	border-bottom: none;
+	color: #454545;
+}
+
+.title a:hover {
+    color: #777777;
+}
+
+.byline {
+	background: url(../images/img02.jpg) repeat-x left bottom;
+	padding-bottom: 20px;
+}
+
+.tag {
+	padding: 0 15px;
+}
+
+.entry {
+    border: 1px;
+}
+
+.links {
+	padding: 4px 0px;
+	text-align: right;
+	font-weight: bold;
+}
+
+.links a {
+	border: none;
+}
+
+.links a:hover {
+    color: #DDDDDD;
+}
+
+/* Sidebars */
+
+#sidebar1 {
+	float: left;
+}
+
+#sidebar2 {
+	float: right;
+}
+
+.sidebar div {
+    margin: 2px;
+}
+
+.sidebar {
+	width: 220px;
+	padding: 0;
+	font-size: 12px;
+}
+
+.sidebar ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.sidebar li {
+	padding: 0 0 20px 0;
+}
+
+.sidebar li ul {
+	padding: 10px 0px;
+}
+
+.sidebar li li {
+	margin: 0 20px 0 15px;
+	padding: 8px 0px;
+	background: url(../images/img02.jpg) repeat-x left bottom;
+}
+
+
+.sidebar li h2 {
+	height: 34px;
+	margin: 0 0 0 0;
+	padding: 12px 15px 0px 20px;
+	background: url(../images/green_panel.jpg) no-repeat left top;
+	font-size: 16px;
+    text-shadow: black 1px 1px 2px;
+	color: #FFFFFF;
+}
+
+.wide-content h2 {
+	height: 34px;
+	margin: 0 0 0 0;
+	padding: 12px 15px 0px 20px;
+	background: url(../images/green_panel_wide.jpg) no-repeat left top;
+	font-size: 16px;
+    text-shadow: black 1px 1px 2px;
+	color: #FFFFFF;
+}
+
+.wider-content h2 {
+	height: 34px;
+	margin: 0 0 0 0;
+	padding: 12px 15px 0px 20px;
+	background: url(../images/green_panel_wider.jpg) no-repeat left top;
+	font-size: 16px;
+    text-shadow: black 1px 1px 2px;
+	color: #FFFFFF;
+}
+
+.full-content h2 {
+	height: 34px;
+	margin: 0 0 0 0;
+	padding: 12px 15px 0px 20px;
+	background: url(../images/green_panel_full.jpg) no-repeat left top;
+	font-size: 16px;
+    text-shadow: black 1px 1px 2px;
+	color: #FFFFFF;
+}

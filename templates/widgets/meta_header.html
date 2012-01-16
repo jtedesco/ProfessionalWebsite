@@ -1,0 +1,69 @@
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="copyright" content="&copy; 2011 Jon Tedesco">
+    <meta name="robots" content dir="noindex,follow">
+
+    {# The title of the page #}
+    <title> {{ page_title|safe }} </title>
+
+    {# The meta keywords and description for search engine optimization #}
+    <meta name="keywords" content="{{ meta_keywords }}" />
+    <meta name="description" content="{{ meta_description }}" />
+
+    {# Global style files #}
+    <link href="/static/admin/style/default.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/static/admin/style/layout.css" rel="stylesheet" type="text/css" media="all" />
+    <link rel='icon' href='/static/admin/images/illinois.png' type='image/vnd.microsoft.icon'>
+    <!--[if IE 6]><link href="/static/ie6fix.css" rel="stylesheet" type="text/css" /><![endif]-->
+    <!--[if IE 7]><link href="/static/style/ie6fix.css" rel="stylesheet" type="text/css" /><![endif]-->
+
+    {# Core scripts for syntax highlighting #}
+    <script type="text/javascript" src="/static/admin/scripts/syntaxhighlighter/scripts/shCore.js"></script>
+
+    {# Use the default syntax highlighting style #}
+    <link href="/static/admin/scripts/syntaxhighlighter/styles/shCore.css" rel="stylesheet" type="text/css" />
+    <link href="/static/admin/scripts/syntaxhighlighter/styles/shThemeDefault.css" rel="stylesheet" type="text/css" />
+
+    {# Include the brushes for each language displayed on the site #}
+    <script type="text/javascript" src="/static/admin/scripts/syntaxhighlighter/scripts/shBrushBash.js"></script>
+    <script type="text/javascript" src="/static/admin/scripts/syntaxhighlighter/scripts/shBrushCpp.js"></script>
+    <script type="text/javascript" src="/static/admin/scripts/syntaxhighlighter/scripts/shBrushCss.js"></script>
+    <script type="text/javascript" src="/static/admin/scripts/syntaxhighlighter/scripts/shBrushJava.js"></script>
+    <script type="text/javascript" src="/static/admin/scripts/syntaxhighlighter/scripts/shBrushJScript.js"></script>
+    <script type="text/javascript" src="/static/admin/scripts/syntaxhighlighter/scripts/shBrushPhp.js"></script>
+    <script type="text/javascript" src="/static/admin/scripts/syntaxhighlighter/scripts/shBrushPlain.js"></script>
+    <script type="text/javascript" src="/static/admin/scripts/syntaxhighlighter/scripts/shBrushPython.js"></script>
+    <script type="text/javascript" src="/static/admin/scripts/syntaxhighlighter/scripts/shBrushRuby.js"></script>
+    <script type="text/javascript" src="/static/admin/scripts/syntaxhighlighter/scripts/shBrushSql.js"></script>
+    <script type="text/javascript" src="/static/admin/scripts/syntaxhighlighter/scripts/shBrushXml.js"></script>
+
+    {# JQuery #}
+    <script type="text/javascript" src="/static/admin/scripts/jquery-min.js"></script>
+
+    {# Pagination, async, search, and popup scripts #}
+    <script type="text/javascript" src='/static/admin/scripts/popup.js'></script>
+    <script type="text/javascript" src='/static/admin/scripts/pagination.js'></script>
+    <script type="text/javascript" src='/static/admin/scripts/async.js'></script>
+    <script type="text/javascript" src='/static/admin/scripts/query.js'></script>
+
+    {# Script for hiding/showing elements using JQuery #}
+    <script type="text/javascript">
+        function toggleInfo(className) {
+            linkClassName = className + "_link";
+            $("."+className).toggle(150);
+            $("."+linkClassName).toggle();
+        }
+    </script>
+
+    {# Google analytics script #}
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-25395769-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+</head>

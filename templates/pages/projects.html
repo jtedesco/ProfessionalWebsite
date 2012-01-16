@@ -1,0 +1,131 @@
+{% extends "page.html" %}
+
+{% block onload %} onload="showPage(1, 10, true);" {% endblock %}
+
+{% block content %}
+
+    <div id="content">
+        <div class="bgtop">
+            <div class="bgbtm">
+                <div id="bg1">
+                    <div id="bg2">
+                        <div id="bg3">
+                            <div id="box1" class="box-style1">
+
+                                {# Create the Javascript pagination code #}
+                                <div style="float:right; padding-top: 12px;">
+                                    {% for page in pages %}
+                                        {% if page.number > 1 %}
+                                            &#183; 
+                                        {% endif %}
+                                        <a class='page_{{ page.number }}_link' href='javascript:showPage({{ page.number }}, {{ number_of_pages }});'>{{ page.number }}</a>
+                                    {% endfor %}
+                                    <br/><br/>
+                                </div>
+
+                                {# Generate the actual projects HTML #}
+                                {% for page in pages %}
+                                    <div class="page_{{ page.number }}">
+                                        <div class="content">
+
+                                            {# Insert the 'current projects' header if there are any current projects , or the past#}
+                                            {% if page.projects_list.0.active %}
+
+                                                {# Current projects header #}
+                                                <h1 class="title">
+                                                    <span>current</span> projects
+                                                </h1>
+                                                <br/>
+                                                <p>
+                                                    A variety of current and past projects that I pursue in my free time, and find
+                                                    interesting. I hope you find them interesting too.
+                                                </p>
+                                                <br/>
+
+                                            {% else %}
+
+                                                {# Past projects header #}
+                                                <h1 class="title">
+                                                    <span>past</span> projects
+                                                </h1>
+                                                <br/>
+                                                
+                                            {% endif %}
+
+
+                                            {% for project in page.projects_list %}
+
+                                                {# The project title and subtitle #}
+                                                <h2>{{ project.title }} <a class='permalink' href="{{ server_root }}projects/{{ project.name }}">permalink</a></h2>
+                                                {% if project.subtitle %}
+                                                    <h4>{{ project.title }}</h4>
+                                                {% endif %}
+
+                                                {# The project content itself #}
+                                                <div style="padding-left:10px;">
+                                                    {{ project.shortDescription|safe }}
+
+                                                    {# The detailed description you can show/hide #}
+                                                    {% if project.longDescription %}
+                                                        <a class="{{ project.name }}_link" href="javascript:toggleInfo('{{ project.name }}')"> See more...</a>
+                                                        <div class="{{ project.name }} toHide">
+                                                            {{ project.longDescription|safe }}
+                                                        </div>
+                                                        <a class="{{ project.name }}_link" href="javascript:toggleInfo('{{ project.name }}')" style="display:none;"> See less...</a>
+                                                        <br/><br/>
+                                                    {% endif %}
+                                                </div>
+
+                                                {# Show the homepage & source code links if they exist #}
+                                                {% if project.liveUrl %}
+                                                    <h3><a href="{{ project.liveUrl }}">Homepage</a>
+                                                {% endif %}
+                                                {% if project.liveUrl and project.sourceUrl %}
+                                                    &#183;
+                                                {% else %}
+                                                    </h3>
+                                                {% endif %}
+                                                {% if project.sourceUrl %}
+                                                    {% if not project.liveUrl %}<h3>{% endif %}
+                                                        <a href="{{ project.sourceUrl }}">Source Code</a></h3>
+                                                {% endif %}
+                                                <br/>
+
+                                                {# Handle the past projects header, wherever it occurs#}
+                                                {% if project.next and project.active and not project.next.active %}
+                                                    <h1 class="title">
+                                                        <span>past</span> projects
+                                                    </h1>
+                                                    <br/>
+                                                {% endif %}
+
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+
+                                {# Create the Javascript pagination code #}
+                                <center>
+                                    {% for page in pages %}
+                                        {% if page.number > 1 %}
+                                            &#183;
+                                        {% endif %}
+                                        <a class='page_{{ page.number }}_link' href='javascript:showPage({{ page.number }}, {{ number_of_pages }});'>{{ page.number }}</a>
+                                    {% endfor %}
+                                    <br/><br/>
+                                </center>
+                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block after_load %}
+    $(".toHide").hide();
+{% endblock %}

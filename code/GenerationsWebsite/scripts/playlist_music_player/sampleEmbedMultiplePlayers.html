@@ -1,0 +1,50 @@
+<!--
+More players and documentation at: www.premiumbeat.com/flash_media_players
+-->
+
+<!-- You only need to add this line once per page  -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+
+<!-- PLAYER 1 
+Notice how we set the id of the div below to a unique ID: player-holder1. Also notice how it is reflected below in the javascript code.
+You can add as many players as you wish by making sure all you increment the player ID, ie:  player-holder1, player-holder2, player-holder3 etc.
+-->
+
+<div>
+	<h2>First Player</h2>
+    <div id="player-holder1"></div>
+
+	<script type="text/javascript">
+        var options = {};
+        options.playlistXmlPath = "playlist.xml";
+		
+		var params = {};
+		params.allowScriptAccess = "always";
+        
+		swfobject.embedSWF("OriginalMusicPlayerPlaylist.swf", "player-holder1", "250", "250", "9.0.0",false, options, params, {});
+    </script>
+
+</div>
+
+<!-- END PLAYER 1 -->
+
+
+<!-- PLAYER 2 -->
+
+<div>
+	<h2>Second Player</h2>
+    <div id="player-holder2"></div>
+
+	<script type="text/javascript">
+        var options = {};
+        options.playlistXmlPath = "playlist.xml";
+		
+		var params = {};
+		params.allowScriptAccess = "always";
+		
+        swfobject.embedSWF("OriginalMusicPlayerPlaylist.swf", "player-holder2", "250", "250", "9.0.0",false, options, params, {});
+    </script>
+
+</div>
+
+<!-- END PLAYER 2 -->

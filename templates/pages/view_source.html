@@ -1,0 +1,39 @@
+{% extends "page.html" %}
+
+{% block content %}
+    <div id="content">
+        <div class="bgtop">
+            <div class="bgbtm">
+                <div id="bg1">
+                    <div id="bg2">
+                        <div id="bg3">
+                            <div id="box1" class="box-style1">
+                                <h1 class="title">
+                                    <span>View</span> Source
+                                </h1>
+                                {{ project }}
+                                <br/>
+                                <p>{{ path }}</p><br/>
+                                <div class="content">
+
+                                    {% if not image %}
+                                        <pre class="brush: {{ language }}">{{ content }}</pre>
+                                    {% else %}
+                                        <img width=600 src='/static/admin/code/{{ path }}'/>
+                                    {% endif %}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block after_load %}
+    {% if not image %}
+        SyntaxHighlighter.all();
+    {% endif %}
+{% endblock %}
