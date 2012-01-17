@@ -10,7 +10,7 @@ var lastHTML = null;
  * @param url The URL to laod
  */
 function asyncLoad(url) {
-    $.get(url, function(data) {
+    $.get(url, function (data) {
 
         // Parse the return information
         var parsedData = $(data);
@@ -40,24 +40,23 @@ function preparePage() {
 function asyncLoadCallback(content, title) {
 
     // Check that we're not reloading data
-    if(content != lastHTML) {
+    if (content != lastHTML) {
 
         lastHTML = content;
 
         // Get the content to be reloaded & fade it in
-        $("#content").find(".bgbtm").fadeOut('fast', function() {
+        $("#content").find(".bgbtm").fadeOut('fast', function () {
             $("#content").find(".bgbtm").html(content);
             preparePage();
             $("#content").find(".bgbtm").fadeIn('fast');
 
             // Change the page title
-            console.log(title);
             document.title = unescape(title);
         });
     }
 
     // Close the popup
-    if(popupStatus == 1) {
+    if (popupStatus == 1) {
         hideProgress();
     }
 }

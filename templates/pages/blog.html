@@ -1,6 +1,6 @@
 {% extends 'page.html' %}
 
-{% block onload %} onload="showPage(1, 10, true);" SyntaxHighlighter.highlight(); {% endblock %}
+{% block onload %} onload="showPage(1, 10, true);" {% endblock %}
 
 {% block content %}
     <div id="content">
@@ -17,7 +17,8 @@
                                         {% if page.number > 1 %}
                                             &#183;
                                         {% endif %}
-                                        <a class='page_{{ page.number }}_link' href='javascript:showPage({{ page.number }}, {{ number_of_pages }});'>{{ page.number }}</a>
+                                        <a class='page_{{ page.number }}_link'
+                                           href='javascript:showPage({{ page.number }}, {{ number_of_pages }});'>{{ page.number }}</a>
                                     {% endfor %}
                                     <br/><br/>
                                 </div>
@@ -25,6 +26,7 @@
                                 <h1 class="title">
                                     <span>blog</span>
                                 </h1>
+
                                 <p class="byline">Collection of thoughts and experiences of my geeky endeavors.</p>
 
                                 {# Generate the actual projects HTML #}
@@ -32,16 +34,19 @@
                                     <div class="page_{{ page.number }}">
                                         <div class="content">
 
-                                        {% for post in page.posts_list %}
+                                            {% for post in page.posts_list %}
 
-                                            {# The blog post content itself #}
-                                            <div class="post">
-                                                <h3>{{ post.title|safe }}<a class="permalink" href="{{ server_root }}blog/{{ post.name }}">permalink</a></h3>
-                                                <i>{{ post.subtitle|safe }}</i> &nbsp; &#183; &nbsp; {{ post.timestamp|date:"F j Y" }} <br/><br/>
-                                                {{ post.content|safe }}
-                                            </div>
+                                                {# The blog post content itself #}
+                                                <div class="post">
+                                                    <h3>{{ post.title|safe }}<a class="permalink"
+                                                                                href="{{ server_root }}blog/{{ post.name }}">permalink</a>
+                                                    </h3>
+                                                    <i>{{ post.subtitle|safe }}</i> &nbsp; &#183;
+                                                    &nbsp; {{ post.timestamp|date:"F j Y" }} <br/><br/>
+                                                    {{ post.content|safe }}
+                                                </div>
 
-                                        {% endfor %}
+                                            {% endfor %}
 
                                         </div>
                                     </div>
@@ -53,7 +58,8 @@
                                         {% if page.number > 1 %}
                                             &#183;
                                         {% endif %}
-                                        <a class='page_{{ page.number }}_link' href='javascript:showPage({{ page.number }}, {{ number_of_pages }});'>{{ page.number }}</a>
+                                        <a class='page_{{ page.number }}_link'
+                                           href='javascript:showPage({{ page.number }}, {{ number_of_pages }});'>{{ page.number }}</a>
                                     {% endfor %}
                                     <br/><br/>
                                 </center>
@@ -65,4 +71,9 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{# Load syntax highlighter #}
+{% block after_load %}
+    SyntaxHighlighter.all();
 {% endblock %}

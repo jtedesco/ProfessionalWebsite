@@ -15,12 +15,15 @@
                                     {# If there was a spelling suggestion, show it as a link to re-query #}
                                     {% if spelling_suggestion and number_of_results < 1 %}
                                         Did you mean <a
-                                            href='/search/{{ spelling_suggestion }}'><i>spelling_suggestion</i></a>?"
+                                            href='javascript:query("{{ spelling_suggestion }}", "{{ server_root }}")'><i>{{ spelling_suggestion }}</i></a>
+                                        ?"
                                     {% endif %}
 
                                     {# Show the stats for the query#}
-                                    Searched for <i>{{ query }}</i>, found {{ number_of_results }} hits in {{ time }}
-                                    seconds<br>
+                                    {% if number_of_results > 0 %}
+                                        Searched for <i>{{ query }}</i>, found {{ number_of_results }} hits
+                                        in {{ time }} seconds<br>
+                                    {% endif %}
 
                                 </p><br>
 
@@ -45,7 +48,7 @@
 
                                     {% else %}
 
-                                        Please enter a query...
+                                        Sorry, no results found for your query.
 
                                     {% endif %}
 

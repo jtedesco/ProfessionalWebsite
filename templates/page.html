@@ -1,62 +1,56 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 
-    {# The meta header content of the page#}
-    {% include 'widgets/meta_header.html' %}
+{# The meta header content of the page#}
+{% include 'widgets/meta_header.html' %}
 
-    {# Any javascript to be executed when the page is loaded #}
-    <body {% block onload %} {% endblock %}>
-        <noscript>
-            <center><h1><br/><br/>Please enable JavaScript!</h1></center>
-        </noscript>
-        <div id="wrapper">
-            <div id="wrapper-bottom">
+{# Any javascript to be executed when the page is loaded #}
+<body {% block onload %} {% endblock %}>
+<noscript>
+    <center><h1><br/><br/>Please enable JavaScript!</h1></center>
+</noscript>
+<div id="wrapper">
+    <div id="wrapper-bottom">
 
-                    {# The visible header section of the page #}
-                    {% include 'widgets/header.html' %}
+        {# The visible header section of the page #}
+        {% include 'widgets/header.html' %}
 
-                <div id="page" class="container">
+        <div id="page" class="container">
 
-                    {# The main content of the page #}
-                    {%  block content %} {% endblock %}
+            {# The main content of the page #}
+            {% block content %} {% endblock %}
 
-                <div id="sidebar">
+            <div id="sidebar">
 
-                    {# The navigation of the page #}
-                    {% include 'widgets/menu.html' %}
+                {# The navigation of the page #}
+                {% include 'widgets/menu.html' %}
 
-                    {# The sidebar common to each page #}
-                    {% block sidebar %}
-                        {% include 'widgets/sidebar.html' %}
-                    {% endblock %}
+                {# The sidebar common to each page #}
+                {% block sidebar %}
+                    {% include 'widgets/sidebar.html' %}
+                {% endblock %}
 
-                    </div>
-                </div>
             </div>
         </div>
-
-    <!-- The popup to display for searching progress, hidden by default -->
-    <div id="popup">
-        <table>
-            <tr>
-                <td><img src="/static/admin/style/images/busy.gif"></td><td><div id="popupText"></div></td>
-            </tr>
-        </table>
     </div>
-    <div id="backgroundPopup"></div>
+</div>
 
+{# The progress indicator popup for searching with AJAX #}
+{% include 'widgets/popup.html' %}
 
-    {% include 'widgets/footer.html' %}
+{# Copyright footer #}
+{% include 'widgets/footer.html' %}
 
-    </body>
-    <script>
+</body>
+<script>
 
-        {# Javascript code executed after the page is loaded #}
-        {% block after_load %} {% endblock %}
+    {# Javascript code executed after the page is loaded #}
+    {% block after_load %} {% endblock %}
 
-        {# Hide the loading popup #}
-        $("#popup").hide();
-        $("#backgroundPopup").hide();
+    {# Hide the loading popup #}
+    {#        $("#popup").hide();#}
+    {#        $("#backgroundPopup").hide();#}
 
-    </script>
+</script>
 </html>
