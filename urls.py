@@ -1,14 +1,14 @@
 from django.conf import settings
 from professional_website.search import search
 from professional_website.source_navigation import navigate_source, view_source
-from professional_website.views import home, download, research, resume, projects, project, blog, blog_post
+from professional_website.views import about_me, download, research, resume, projects, project, blog, blog_post
 from django.conf.urls.defaults import patterns, url
 
 urlpatterns = patterns('',
 
     # URLs for the simple pages
-    url(r'^/?$', home),
-    url(r'^home/?$', home),
+    url(r'^/?$', blog),
+    url(r'^about_me/?$', about_me),
     url(r'^research/?$', research),
     url(r'^resume/?$', resume),
 

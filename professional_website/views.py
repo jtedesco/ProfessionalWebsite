@@ -1,26 +1,27 @@
 from django.http import HttpResponse
 from django.template.context import Context
 from django.template.loader import get_template
-from professional_website.common import get_server_root, get_generic_keywords, chunks, get_root_directory
+from professional_website.common import get_server_root, get_generic_keywords, chunks
 from professional_website.models import Project, Post
 
 
-def home(request):
+def about_me(request):
     """
       Builds and returns the homepage of the site
     """
 
     # The HTML template
-    template = get_template('pages/home.html')
+    template = get_template('pages/about_me.html')
 
     # HTML Data for this page
     html = template.render(Context({
-        'meta_description' : 'Homepage of Jon Tedesco, a dedicated student and avid software developer at University' +
-                             'of Illinois at Urbana-Champaign',
-        'meta_keywords' : ' '.join(get_generic_keywords()),
-        'page_title' : 'Jon Tedesco &#183; Home',
-        'word_cloud_name' : 'home',
-        'server_root' : get_server_root()
+        'meta_description': 'Information for Jon Tedesco, a dedicated student and avid software developer at University' +
+                            'of Illinois at Urbana-Champaign',
+        'meta_keywords': ' '.join(get_generic_keywords()),
+        'page_title': 'About Me &#183; Jon Tedesco',
+        'word_cloud_name': 'about_me',
+        'static': True,
+        'server_root': get_server_root()
     }))
 
     return HttpResponse(html)
@@ -36,11 +37,11 @@ def research(request):
 
     # HTML Data for this page
     html = template.render(Context({
-        'meta_description' : 'Jon Tedesco\'s research &#183; Research interests, projects, and papers',
-        'meta_keywords' : ' '.join(["research", "papers", "interests", "projects"] + get_generic_keywords()),
-        'page_title' : 'Jon Tedesco &#183; Research',
-        'word_cloud_name' : 'research',
-        'server_root' : get_server_root()
+        'meta_description': 'Jon Tedesco\'s research &#183; Research interests, projects, and papers',
+        'meta_keywords': ' '.join(["research", "papers", "interests", "projects"] + get_generic_keywords()),
+        'page_title': 'Research &#183; Jon Tedesco',
+        'word_cloud_name': 'research',
+        'server_root': get_server_root()
     }))
 
     return HttpResponse(html)
@@ -56,11 +57,13 @@ def resume(request):
 
     # HTML Data for this page
     html = template.render(Context({
-        'meta_description' : "Jon Tedesco's r&eacute;sum&eacute; (resume) &#183; My education, experience,skills, coursework, papers, and awards",
-        'meta_keywords' : ' '.join(["resume", "education", "experience", "skills", "coursework", "papers", "awards"] + get_generic_keywords()),
-        'page_title' : 'Jon Tedesco &#183; R&eacute;sum&eacute;',
-        'word_cloud_name' : 'resume',
-        'server_root' : get_server_root()
+        'meta_description': "Jon Tedesco's r&eacute;sum&eacute; (resume) &#183; My education, experience,skills, coursework, papers, and awards"
+        ,
+        'meta_keywords': ' '.join(
+            ["resume", "education", "experience", "skills", "coursework", "papers", "awards"] + get_generic_keywords()),
+        'page_title': 'R&eacute;sum&eacute; &#183; Jon Tedesco',
+        'word_cloud_name': 'resume',
+        'server_root': get_server_root()
     }))
 
     return HttpResponse(html)
@@ -81,8 +84,8 @@ def projects(request):
     num = 1
     for projectChunk in chunkedProjects:
         pages.append({
-            'projects_list' : projectChunk,
-            'number' : num
+            'projects_list': projectChunk,
+            'number': num
         })
         num += 1
 
@@ -91,17 +94,18 @@ def projects(request):
 
     # HTML Data for this page
     html = template.render(Context({
-        'meta_description' : 'Jon Tedesco\'s projects &#183; Description, demos, and source code of Jon Tedesco\'s geeky projects',
-        'meta_keywords' : ' '.join(["projects", "experience", "technology", "current", "past", "github", "sockit", "skills"] + get_generic_keywords()),
-        'page_title' : 'Jon Tedesco &#183; Projects',
-        'word_cloud_name' : 'projects',
-        'server_root' : get_server_root(),
-        'pages' : pages,
-        'number_of_pages' : len(list(pages))
+        'meta_description': 'Jon Tedesco\'s projects &#183; Description, demos, and source code of Jon Tedesco\'s geeky projects'
+        ,
+        'meta_keywords': ' '.join(["projects", "experience", "technology", "current", "past", "github", "sockit",
+                                   "skills"] + get_generic_keywords()),
+        'page_title': 'Projects &#183; Jon Tedesco',
+        'word_cloud_name': 'projects',
+        'server_root': get_server_root(),
+        'pages': pages,
+        'number_of_pages': len(list(pages))
     }))
 
     return HttpResponse(html)
-    
 
 
 def project(request, name):
@@ -118,13 +122,15 @@ def project(request, name):
 
     # HTML Data for this page
     html = template.render(Context({
-        'meta_description' : 'Jon Tedesco\'s "%s" project &#183; Description, demos, and source code of Jon Tedesco\'s geeky projects' % project.title,
-        'meta_keywords' : ' '.join(["projects", "experience", "technology", "current", "past", "github", "sockit", "skills"] + get_generic_keywords()),
-        'page_title' : 'Jon Tedesco &#183; Projects &#183; ' + project.title,
-        'word_cloud_name' : 'projects',
-        'server_root' : get_server_root(),
-        'static' : True,
-        'project' : project
+        'meta_description': 'Jon Tedesco\'s "%s" project &#183; Description, demos, and source code of Jon Tedesco\'s geeky projects' % project.title
+        ,
+        'meta_keywords': ' '.join(["projects", "experience", "technology", "current", "past", "github", "sockit",
+                                   "skills"] + get_generic_keywords()),
+        'page_title': 'Projects &#183; Jon Tedesco &#183;' + project.title,
+        'word_cloud_name': 'projects',
+        'server_root': get_server_root(),
+        'static': True,
+        'project': project
     }))
 
     return HttpResponse(html)
@@ -145,8 +151,8 @@ def blog(request):
     num = 1
     for postChunk in chunkedPosts:
         pages.append({
-            'posts_list' : postChunk,
-            'number' : num
+            'posts_list': postChunk,
+            'number': num
         })
         num += 1
 
@@ -155,14 +161,15 @@ def blog(request):
 
     # HTML Data for this page
     html = template.render(Context({
-        'meta_description' : 'Jon Tedesco\'s blog &#183; Jon Tedesco\'s collection of thoughts and experiences of his geeky endeavors.',
-        'meta_keywords' : ' '.join(["blog", "discussion", "geek", "projects", "software", "projects"] + get_generic_keywords()),
-        'page_title' : 'Jon Tedesco &#183; Blog',
-        'word_cloud_name' : 'blog',
-        'server_root' : get_server_root(),
-        'pages' : pages,
-        'static' : True,
-        'number_of_pages' : len(list(pages))
+        'meta_description': 'Jon Tedesco\'s blog &#183; Jon Tedesco\'s collection of thoughts and experiences of his geeky endeavors.'
+        ,
+        'meta_keywords': ' '.join(
+            ["blog", "discussion", "geek", "projects", "software", "projects"] + get_generic_keywords()),
+        'page_title': 'Blog &#183; Jon Tedesco',
+        'word_cloud_name': 'blog',
+        'server_root': get_server_root(),
+        'pages': pages,
+        'number_of_pages': len(list(pages))
     }))
 
     return HttpResponse(html)
@@ -183,12 +190,14 @@ def blog_post(request, name):
 
     # HTML Data for this page
     html = template.render(Context({
-        'meta_description' : 'Jon Tedesco\'s blog &#183; Jon Tedesco\'s collection of thoughts and experiences of his geeky endeavors.',
-        'meta_keywords' : ' '.join(["blog", "discussion", "geek", "projects", "software", "projects"] + get_generic_keywords()),
-        'page_title' : 'Jon Tedesco &#183; Blog &#183; ' + post.title,
-        'word_cloud_name' : 'blog',
-        'server_root' : get_server_root(),
-        'post' : post
+        'meta_description': 'Jon Tedesco\'s blog &#183; Jon Tedesco\'s collection of thoughts and experiences of his geeky endeavors.'
+        ,
+        'meta_keywords': ' '.join(
+            ["blog", "discussion", "geek", "projects", "software", "projects"] + get_generic_keywords()),
+        'page_title': 'Blog &#183; Jon Tedesco &#183; ' + post.title,
+        'word_cloud_name': 'blog',
+        'server_root': get_server_root(),
+        'post': post
     }))
 
     return HttpResponse(html)

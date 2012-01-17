@@ -15,17 +15,17 @@ def view_source(request, path):
     """
 
     languages = {
-        "py"    : "python",
-        "rb"    : "ruby",
-        "js"    : "javascript",
-        "html"  : "html",
-        "htm"   : "html",
-        "cpp"   : "cpp",
-        "c"     : "c",
-        "cc"    : "cpp",
-        "php"   : "php",
-        "java"  : "java",
-        "xml"   : "xml"
+        "py": "python",
+        "rb": "ruby",
+        "js": "javascript",
+        "html": "html",
+        "htm": "html",
+        "cpp": "cpp",
+        "c": "c",
+        "cc": "cpp",
+        "php": "php",
+        "java": "java",
+        "xml": "xml"
     }
 
     # Read the source code file
@@ -35,23 +35,22 @@ def view_source(request, path):
 
     # Data structure to hold information for this page
     data = {
-        'meta_description' : 'Homepage of Jon Tedesco, a dedicated student and avid software developer at University' +
-                             'of Illinois at Urbana-Champaign',
-        'meta_keywords' : ' '.join(get_generic_keywords()),
-        'page_title' : 'View Source &#183; %s (%s)',
-        'word_cloud_name' : 'home',
-        'server_root' : get_server_root(),
-        'static' : True,
-        'path' : None,
-        'language' : None,
-        'content' : None
+        'meta_description': 'Homepage of Jon Tedesco, a dedicated student and avid software developer at University' +
+                            'of Illinois at Urbana-Champaign',
+        'meta_keywords': ' '.join(get_generic_keywords()),
+        'page_title': 'View Source &#183; %s (%s)',
+        'word_cloud_name': 'about_me',
+        'server_root': get_server_root(),
+        'static': True,
+        'path': None,
+        'language': None,
+        'content': None
     }
 
     # Check if this is a binary file
     binary_file_extensions = ['jpg', 'png', 'bmp', 'jpeg']
-    file_extension = path[path.rfind('.')+1:]
+    file_extension = path[path.rfind('.') + 1:]
     if file_extension not in binary_file_extensions:
-
         # Update data
         data['content'] = source_code
         if file_extension in languages:
@@ -62,7 +61,6 @@ def view_source(request, path):
         data['page_title'] = data['page_title'] % (path, data['language'].title())
 
     else:
-
         data['path'] = path
         data['page_title'] = 'View Source &#183; ' + path
         data['image'] = True
@@ -71,6 +69,7 @@ def view_source(request, path):
     template = get_template('pages/view_source.html')
     html = template.render(Context(data))
     return HttpResponse(html)
+
 
 def navigate_source(request, path, project):
     """
@@ -88,7 +87,6 @@ def navigate_source(request, path, project):
 
     # Collect the files & directories separately
     for file in os.listdir(root + path):
-
         # Add directories and files to separate lists
         if os.path.isfile(root + path + "/" + file):
             files.append((path + "/" + file, file))
@@ -96,10 +94,9 @@ def navigate_source(request, path, project):
             directories.append((path + "/" + file, file))
 
     try:
-
         # Try to read the 'exclude' file
         if os.path.exists(root + path + '/' + '.exclude'):
-            exclude_file = open(root  + path + '/' + '.exclude', 'r')
+            exclude_file = open(root + path + '/' + '.exclude', 'r')
 
             # Remove the files or directories from the list gathered
             for exclude_file_name in exclude_file:
@@ -119,16 +116,16 @@ def navigate_source(request, path, project):
     # Fill HTML template
     template = get_template('pages/navigate_source.html')
     html = template.render(Context({
-        'meta_description' : 'Homepage of Jon Tedesco, a dedicated student and avid software developer at University' +
-                             'of Illinois at Urbana-Champaign',
-        'meta_keywords' : ' '.join(get_generic_keywords()),
-        'page_title' : 'Navigate Source &#183; ' + project,
-        'word_cloud_name' : 'home',
-        'server_root' : get_server_root(),
-        'path' : path,
-        'project' : project,
-        'files' : files,
-        'static' : True,
-        'directories' : directories
+        'meta_description': 'Homepage of Jon Tedesco, a dedicated student and avid software developer at University' +
+                            'of Illinois at Urbana-Champaign',
+        'meta_keywords': ' '.join(get_generic_keywords()),
+        'page_title': 'Navigate Source &#183; ' + project,
+        'word_cloud_name': 'about_me',
+        'server_root': get_server_root(),
+        'path': path,
+        'project': project,
+        'files': files,
+        'static': True,
+        'directories': directories
     }))
     return HttpResponse(html)

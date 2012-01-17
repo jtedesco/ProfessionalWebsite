@@ -20,7 +20,8 @@ __author__ = 'jon'
 
 # Global index schema & analyzer
 analyzer = StemmingAnalyzer() | CharsetFilter(accent_map)
-index_schema = Schema(content=TEXT(analyzer=analyzer, stored=True), title=TEXT(analyzer=analyzer, stored=True), url=TEXT(stored=True))
+index_schema = Schema(content=TEXT(analyzer=analyzer, stored=True), title=TEXT(analyzer=analyzer, stored=True),
+    url=TEXT(stored=True))
 
 def search(request, query):
     """
@@ -43,7 +44,6 @@ def search(request, query):
 
     # Run query
     if query is not None and len(query) > 0:
-
         # Convert the query to unicode
         try:
             query = unicode(query, 'utf-8')
@@ -54,10 +54,12 @@ def search(request, query):
         start_time = datetime.now()
         search_results, search_terms, spelling_suggestions, result_count = run_query(query, index)
         end_time = datetime.now()
-        stats = "Searched for <i>%s</i>, found %d hits in %1.3f seconds<br>" % (query, result_count, float((end_time-start_time).microseconds)/1000000.0)
-        spelling_suggestions=""
+        stats = "Searched for <i>%s</i>, found %d hits in %1.3f seconds<br>" % (
+        query, result_count, float((end_time - start_time).microseconds) / 1000000.0)
+        spelling_suggestions = ""
         try:
-            spelling_suggestions = "Did you mean <a href='../search/?query=%s'><i>%s</i></a>?" % (spelling_suggestions[0][0], spelling_suggestions[0][0])
+            spelling_suggestions = "Did you mean <a href='../search/?query=%s'><i>%s</i></a>?" % (
+            spelling_suggestions[0][0], spelling_suggestions[0][0])
         except Exception:
             pass
 
@@ -69,22 +71,22 @@ def search(request, query):
 
     # HTML Data for this page
     html = template.render(Context({
-        'meta_description' : 'Homepage of Jon Tedesco, a dedicated student and avid software developer at University' +
-                             'of Illinois at Urbana-Champaign',
-        'meta_keywords' : ' '.join(get_generic_keywords()),
-        'page_title' : title,
-        'word_cloud_name' : 'home',
-        'server_root' : get_server_root(),
-        'spelling_suggestions' : spelling_suggestions,
-        'search_results' : search_results,
-        'query' : query,
-        'stats' : stats
+        'meta_description': 'Homepage of Jon Tedesco, a dedicated student and avid software developer at University' +
+                            'of Illinois at Urbana-Champaign',
+        'meta_keywords': ' '.join(get_generic_keywords()),
+        'page_title': title,
+        'word_cloud_name': 'about_me',
+        'server_root': get_server_root(),
+        'spelling_suggestions': spelling_suggestions,
+        'search_results': search_results,
+        'query': query,
+        'stats': stats
     }))
 
     return HttpResponse(html)
 
-def create_index():
 
+def create_index():
     # Create the schema for this index, which denotes the types of each field, and next try to build the index itself
     #   using this schema. Note that this schema treats the URL as the unique identifier for documents in the index,
     #   and scores documents based on the title and content alone
@@ -100,7 +102,7 @@ def create_index():
     index_writer = index.writer()
 
     # Add the main pages to the index
-    for main_page in ['home', 'research', 'resume']:
+    for main_page in ['about_me', 'research', 'resume']:
         insert_document(index_writer, main_page, get_server_root() + main_page, main_page)
 
     # Add the blog entries
@@ -210,7 +212,6 @@ def run_query(query, index):
 
     # Iterate through the search results
     for search_result in search_results:
-
         # Grab the fields from the document
         title = search_result['title']
         content = search_result['content']
@@ -222,8 +223,8 @@ def run_query(query, index):
         # Add this new snippet to <code>results</code> dictionary
         if title not in results.keys():
             results[title] = {
-                'excerpts' : [],
-                'url' : url
+                'excerpts': [],
+                'url': url
             }
         results[title]['excerpts'].append(excerpt)
         result_count += 1
@@ -252,8 +253,8 @@ def format_results(results, search_terms):
     # Clean the results
     for result in results.keys():
         clean_results[result] = {
-            'excerpts' : [],
-            'url' : results[result]['url']
+            'excerpts': [],
+            'url': results[result]['url']
         }
         for entry in results[result]['excerpts']:
             parsed_content = white_space_re.sub(" ", entry)
@@ -265,7 +266,6 @@ def format_results(results, search_terms):
     # Loop through each key in the results (a page), and group it that way
     for title in clean_results.keys():
         if len(clean_results[title]['excerpts']) > 0:
-
             # Format the title of this section
             url = clean_results[title]['url']
             title_section = ("<h2><a href='%s'>" % url) + title.encode('ascii') + "</a></h2><p></p>"

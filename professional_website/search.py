@@ -84,7 +84,7 @@ def search(request, query):
                             'of Illinois at Urbana-Champaign',
         'meta_keywords': ' '.join(get_generic_keywords()),
         'page_title': title,
-        'word_cloud_name': 'home',
+        'word_cloud_name': 'about_me',
         'server_root': get_server_root(),
         'query': query,
         'time': time,
@@ -113,7 +113,7 @@ def create_index():
     index_writer = index.writer()
 
     # Add the main pages to the index
-    for main_page in ['home', 'research', 'resume']:
+    for main_page in ['about_me', 'research', 'resume']:
         insert_document(index_writer, main_page, get_server_root() + main_page, main_page)
 
     # Add the blog entries
