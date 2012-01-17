@@ -3,7 +3,7 @@ import os
 import re
 import subprocess
 from whoosh.analysis import CharsetFilter, StemmingAnalyzer
-from whoosh.fields import TEXT, Schema
+from whoosh.fields import TEXT, Schema, ID
 from whoosh.highlight import ContextFragmenter, HtmlFormatter, highlight
 from whoosh.index import create_in, open_dir, exists_in
 from whoosh.qparser.default import MultifieldParser
@@ -22,7 +22,14 @@ __author__ = 'jon'
 # Global index schema & analyzer
 analyzer = StemmingAnalyzer() | CharsetFilter(accent_map)
 index_schema = Schema(content=TEXT(analyzer=analyzer, stored=True), title=TEXT(analyzer=analyzer, stored=True),
-    url=TEXT(stored=True))
+    url=ID(unique=True, stored=True))
+
+
+# Create the index if it doesn't already exist, or open it if it does
+if exists_in('.index'):
+    index = open_dir('.index')
+else:
+    raise Exception("Could not find index!")
 
 
 def search(request, query):
@@ -32,20 +39,13 @@ def search(request, query):
         @param  query   The query to search
     """
 
-    # Create the index if it doesn't already exist, or open it if it does
-    if exists_in('.index'):
-        index = open_dir('.index')
-    else:
-        raise Exception("Could not find index!")
+    real_start_time = datetime.now()
 
     # Prepare defaults
     title = "Jon Tedesco &#183; Search"
-    search_results = "Please enter a query to search"
-    stats = ''
-    spelling_suggestions = ''
 
     # Run query
-    if query is not None and len(query) > 0:
+    if query is not None and len(query.strip()) > 0:
         # Convert the query to unicode
         try:
             query = unicode(query, 'utf-8')
@@ -73,7 +73,7 @@ def search(request, query):
         spelling_suggestion = None
         time = None
         number_of_results = None
-
+        search_results = None
 
     # Fill in the search template
     template = get_template('pages/search.html')
@@ -94,7 +94,8 @@ def search(request, query):
 
     }))
 
-    return HttpResponse(html)
+    response = HttpResponse(html)
+    return response
 
 
 def create_index():
@@ -236,6 +237,7 @@ def run_query(query, index):
 
     # Return the list of web pages along with the terms used in the search
     return results, search_terms, suggestions, result_count
+
 
 # Run this script crawl the website & create the index
 if __name__ == '__main__':
