@@ -18,9 +18,12 @@ from professional_website.models import Post, Project
 
 __author__ = 'jon'
 
+
 # Global index schema & analyzer
 analyzer = StemmingAnalyzer() | CharsetFilter(accent_map)
-index_schema = Schema(content=TEXT(analyzer=analyzer, stored=True), title=TEXT(analyzer=analyzer, stored=True), url=TEXT(stored=True))
+index_schema = Schema(content=TEXT(analyzer=analyzer, stored=True), title=TEXT(analyzer=analyzer, stored=True),
+    url=TEXT(stored=True))
+
 
 def search(request, query):
     """
@@ -43,25 +46,33 @@ def search(request, query):
 
     # Run query
     if query is not None and len(query) > 0:
-
         # Convert the query to unicode
         try:
             query = unicode(query, 'utf-8')
         except Exception:
+            # Skip if already unicode
             pass
 
-        # Run the query
+        # Run the query & get the stats
         start_time = datetime.now()
-        search_results, search_terms, spelling_suggestions, result_count = run_query(query, index)
+        search_results, search_terms, spelling_suggestions, number_of_results = run_query(query, index)
         end_time = datetime.now()
-        stats = "Searched for <i>%s</i>, found %d hits in %1.3f seconds<br>" % (query, result_count, float((end_time-start_time).microseconds)/1000000.0)
-        spelling_suggestions=""
-        try:
-            spelling_suggestions = "Did you mean <a href='../search/?query=%s'><i>%s</i></a>?" % (spelling_suggestions[0][0], spelling_suggestions[0][0])
-        except Exception:
-            pass
+        time = "%1.3f" % (float((end_time - start_time).microseconds) / 1000000.0)
 
+        # Parse out the most likely spelling suggestion
+        try:
+            spelling_suggestion = spelling_suggestions[0][0]
+        except Exception:
+            spelling_suggestion = None
+
+        # Update the title
         title += " &#183; '%s'" % query
+
+    else:
+        # Gracefully fail if someone gets to this page without a query
+        spelling_suggestion = None
+        time = None
+        number_of_results = None
 
 
     # Fill in the search template
@@ -69,22 +80,24 @@ def search(request, query):
 
     # HTML Data for this page
     html = template.render(Context({
-        'meta_description' : 'Homepage of Jon Tedesco, a dedicated student and avid software developer at University' +
-                             'of Illinois at Urbana-Champaign',
-        'meta_keywords' : ' '.join(get_generic_keywords()),
-        'page_title' : title,
-        'word_cloud_name' : 'home',
-        'server_root' : get_server_root(),
-        'spelling_suggestions' : spelling_suggestions,
-        'search_results' : search_results,
-        'query' : query,
-        'stats' : stats
+        'meta_description': 'Homepage of Jon Tedesco, a dedicated student and avid software developer at University' +
+                            'of Illinois at Urbana-Champaign',
+        'meta_keywords': ' '.join(get_generic_keywords()),
+        'page_title': title,
+        'word_cloud_name': 'home',
+        'server_root': get_server_root(),
+        'query': query,
+        'time': time,
+        'search_results': search_results,
+        'number_of_results': number_of_results,
+        'spelling_suggestion': spelling_suggestion
+
     }))
 
     return HttpResponse(html)
 
-def create_index():
 
+def create_index():
     # Create the schema for this index, which denotes the types of each field, and next try to build the index itself
     #   using this schema. Note that this schema treats the URL as the unique identifier for documents in the index,
     #   and scores documents based on the title and content alone
@@ -134,7 +147,7 @@ def insert_document(index_writer, title, url, name):
     content = subprocess.check_output(["cat", name])
     subprocess.call(["rm", name])
 
-    # Remove all HTML tags from content
+    # Remove all HTML tags from content (clean to plain text)
     parsed_content = content.replace("<br/>", "\n")
     closing_tag_re = re.compile("</.*?>")
     tag_re = re.compile("<.*?>")
@@ -147,11 +160,11 @@ def insert_document(index_writer, title, url, name):
     # Parse out the title
     try:
         title = unicode(title.replace(".html", ""), 'utf-8')
-    except:
+    except Exception:
         pass
 
     # Put this content into index
-    actualUrl = url.replace('http://localhost:8000/', 'http://jontedesco.net/')
+    actualUrl = url.replace(get_server_root(), 'http://jontedesco.net/')
     print actualUrl
     index_writer.add_document(content=parsed_content, title=title.title(), url=unicode(actualUrl))
 
@@ -204,28 +217,16 @@ def run_query(query, index):
     #   highlight the results
     formatter = HtmlFormatter()
 
-    # Create a dictionary of search result snippets, indexed by page, and a count of the number of results
-    results = {}
+    # Iterate through the search results, highlighting and counting the results
     result_count = 0
-
-    # Iterate through the search results
+    results = []
     for search_result in search_results:
-
-        # Grab the fields from the document
-        title = search_result['title']
-        content = search_result['content']
-        url = search_result['url']
-
-        # Build a list of HTML-highlighted excerpts
-        excerpt = highlight(content, search_terms, analyzer, fragmenter, formatter)
-
-        # Add this new snippet to <code>results</code> dictionary
-        if title not in results.keys():
-            results[title] = {
-                'excerpts' : [],
-                'url' : url
-            }
-        results[title]['excerpts'].append(excerpt)
+        # Collect this search result
+        results.append({
+            'content': highlight(search_result['content'], search_terms, analyzer, fragmenter, formatter),
+            'url': search_result['url'],
+            'title': search_result['title']
+        })
         result_count += 1
 
     # Build a list of 'suggest' words using the spell checker
@@ -233,52 +234,9 @@ def run_query(query, index):
     for term in search_terms:
         suggestions.append(spell_checker.suggest(term))
 
-    # Format the results into a nicer format
-    formatted_results = format_results(results, search_terms)
-
     # Return the list of web pages along with the terms used in the search
-    return formatted_results, search_terms, suggestions, result_count
+    return results, search_terms, suggestions, result_count
 
-
-def format_results(results, search_terms):
-    """
-        Formats the results from the Whoosh! query into something nicely formatted for a web page
-    """
-
-    # Filter out whitespace from results
-    white_space_re = re.compile("\s+")
-    clean_results = {}
-
-    # Clean the results
-    for result in results.keys():
-        clean_results[result] = {
-            'excerpts' : [],
-            'url' : results[result]['url']
-        }
-        for entry in results[result]['excerpts']:
-            parsed_content = white_space_re.sub(" ", entry)
-            if parsed_content not in clean_results[result]['excerpts']:
-                clean_results[result]['excerpts'].append(parsed_content)
-
-    formatted_results = ""
-
-    # Loop through each key in the results (a page), and group it that way
-    for title in clean_results.keys():
-        if len(clean_results[title]['excerpts']) > 0:
-
-            # Format the title of this section
-            url = clean_results[title]['url']
-            title_section = ("<h2><a href='%s'>" % url) + title.encode('ascii') + "</a></h2><p></p>"
-            formatted_results += title_section
-
-            for result in clean_results[title]['excerpts']:
-                excerpt = result.encode('ascii')
-                if len(excerpt) > 0:
-                    formatted_results += "..." + excerpt + "...<br>"
-            formatted_results += "<br><br>"
-
-    return formatted_results
-
-
+# Run this script crawl the website & create the index
 if __name__ == '__main__':
     create_index()

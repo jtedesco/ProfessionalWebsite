@@ -1,24 +1,22 @@
 # Django settings for ProfessionalWebsite project.
-import os
-from professional_website.common import get_root_directory
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     ('Jon Tedesco', 'jon@jontedesco.net'),
-)
+    )
 
 MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',   # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'professional_website',         # Or path to database file if using sqlite3.
-        'USER': 'root',                         # Not used with sqlite3.
-        'PASSWORD': 'root',                     # Not used with sqlite3.
-        'HOST': '',                             # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                             # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'professional_website', # Or path to database file if using sqlite3.
+        'USER': 'root', # Not used with sqlite3.
+        'PASSWORD': 'root', # Not used with sqlite3.
+        'HOST': '', # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '', # Set to empty string for default. Not used with sqlite3.
     }
 }
 
@@ -62,7 +60,7 @@ STATIC_ROOT = '/home/jon/Projects/ProfessionalWebsite/'
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = '/static/'
+STATIC_URL = '/static/admin/'
 
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
@@ -71,21 +69,15 @@ ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    os.path.join(get_root_directory(), 'content').replace('\\', '/'),
-    os.path.join(get_root_directory(), 'code').replace('\\', '/'),
-    os.path.join(get_root_directory(), 'images').replace('\\', '/'),
-    os.path.join(get_root_directory(), 'papers').replace('\\', '/'),
-    os.path.join(get_root_directory(), 'resume').replace('\\', '/'),
-    os.path.join(get_root_directory(), 'scripts').replace('\\', '/'),
-    os.path.join(get_root_directory(), 'style').replace('\\', '/'),
-)
+    '/'
+    )
 
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-)
+    )
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = ')nej#ijfbm^lbt$1m2lcey6$5j9&1agtr^6irfad^iqwhc5sjx'
@@ -94,10 +86,10 @@ SECRET_KEY = ')nej#ijfbm^lbt$1m2lcey6$5j9&1agtr^6irfad^iqwhc5sjx'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-)
+    )
 
 MIDDLEWARE_CLASSES = (
-    # Nothing needed here
+# Nothing needed here
 )
 
 ROOT_URLCONF = 'ProfessionalWebsite.urls'
@@ -105,13 +97,13 @@ ROOT_URLCONF = 'ProfessionalWebsite.urls'
 # Must be absolute paths
 TEMPLATE_DIRS = (
     STATIC_ROOT + 'templates/',
-)
+    )
 
 INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'ProfessionalWebsite.professional_website',
-)
+    )
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -132,6 +124,6 @@ LOGGING = {
             'handlers': ['mail_admins'],
             'level': 'ERROR',
             'propagate': True,
-        },
-    }
+            },
+        }
 }

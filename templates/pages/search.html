@@ -9,9 +9,46 @@
                         <div id="bg3">
                             <div id="box1" class="box-style1">
                                 <h2 class="title"><span>search</span> results</h2>
-                                <p class="byline">{{ spelling_suggestions|safe }} {{ stats|safe }}</p><br>
+
+                                <p class="byline">
+
+                                    {# If there was a spelling suggestion, show it as a link to re-query #}
+                                    {% if spelling_suggestion and number_of_results < 1 %}
+                                        Did you mean <a
+                                            href='/search/{{ spelling_suggestion }}'><i>spelling_suggestion</i></a>?"
+                                    {% endif %}
+
+                                    {# Show the stats for the query#}
+                                    Searched for <i>{{ query }}</i>, found {{ number_of_results }} hits in {{ time }}
+                                    seconds<br>
+
+                                </p><br>
+
                                 <div class="content" style="min-height: 700px;">
-                                    {{ search_results|safe }}
+
+                                    {# Format the search results if we found any, otherwise display a default message #}
+                                    {% if search_results %}
+                                        {% for search_result in search_results %}
+
+                                            {# The link to the original page, and title of the result #}
+                                            <h3>
+                                                <a href="{{ search_result.url }}">
+                                                    {{ search_result.title }}
+                                                </a>
+                                            </h3>
+
+                                            {# The keyword-highlighted result preview #}
+                                            ... {{ search_result.content|safe }} ...
+                                            <br/><br/><br/>
+
+                                        {% endfor %}
+
+                                    {% else %}
+
+                                        Please enter a query...
+
+                                    {% endif %}
+
                                 </div>
 
                             </div>
