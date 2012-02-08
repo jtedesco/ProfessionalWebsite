@@ -6,7 +6,7 @@ def get_root_directory():
 
 
 def get_server_root():
-    return "http://www.jontedesco.net/"
+    return "http://localhost:8000/"
 
 
 def get_generic_keywords():
