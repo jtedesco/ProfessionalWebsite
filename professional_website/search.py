@@ -39,8 +39,6 @@ def search(request, query):
         @param  query   The query to search
     """
 
-    real_start_time = datetime.now()
-
     # Prepare defaults
     title = "Jon Tedesco &#183; Search"
 
@@ -85,7 +83,7 @@ def search(request, query):
         'meta_keywords': ' '.join(get_generic_keywords()),
         'page_title': title,
         'word_cloud_name': 'about_me',
-        'server_root': get_server_root(request),
+        'server_root': get_server_root(),
         'query': query,
         'time': time,
         'search_results': search_results,
@@ -166,6 +164,7 @@ def insert_document(index_writer, title, url, name):
         pass
 
     # Put this content into index
+    actualUrl = url.replace(get_server_root(), 'http://jontedesco.net/')
     index_writer.add_document(content=parsed_content, title=title.title(), url=unicode(actualUrl))
 
 
