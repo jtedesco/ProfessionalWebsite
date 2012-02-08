@@ -5,8 +5,8 @@ def get_root_directory():
     return "/home/jon/Projects/ProfessionalWebsite"
 
 
-def get_server_root(request):
-    return "http://" + request.environ['HTTP_HOST'] + "/"
+def get_server_root():
+    return "http://www.jontedesco.net/"
 
 
 def get_generic_keywords():
