@@ -1,6 +1,5 @@
 /**
  * Submit a query, using the query form for input
- *  @param  serverRoot  The root URL of the server
  */
 function submitQuery(serverRoot) {
     var query = $("#query").val();
@@ -11,9 +10,8 @@ function submitQuery(serverRoot) {
 /**
  * Query, using directly given parameters
  *  @param  query       The query to search
- *  @param  serverRoot  The root URL of the server
  */
-function query(query, serverRoot) {
+function query(query) {
     $("#query").val(query);
-    submitQuery(serverRoot);
+    submitQuery('http://' + window.location.host + '/');
 }
