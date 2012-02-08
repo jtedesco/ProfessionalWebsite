@@ -21,7 +21,7 @@ def about_me(request):
         'page_title': 'About Me &#183; Jon Tedesco',
         'word_cloud_name': 'about_me',
         'static': True,
-        'server_root': get_server_root()
+        'server_root': get_server_root(request)
     }))
 
     return HttpResponse(html)
@@ -41,7 +41,7 @@ def research(request):
         'meta_keywords': ' '.join(["research", "papers", "interests", "projects"] + get_generic_keywords()),
         'page_title': 'Research &#183; Jon Tedesco',
         'word_cloud_name': 'research',
-        'server_root': get_server_root()
+        'server_root': get_server_root(request)
     }))
 
     return HttpResponse(html)
@@ -63,7 +63,7 @@ def resume(request):
             ["resume", "education", "experience", "skills", "coursework", "papers", "awards"] + get_generic_keywords()),
         'page_title': 'R&eacute;sum&eacute; &#183; Jon Tedesco',
         'word_cloud_name': 'resume',
-        'server_root': get_server_root()
+        'server_root': get_server_root(request)
     }))
 
     return HttpResponse(html)
@@ -100,7 +100,7 @@ def projects(request):
                                    "skills"] + get_generic_keywords()),
         'page_title': 'Projects &#183; Jon Tedesco',
         'word_cloud_name': 'projects',
-        'server_root': get_server_root(),
+        'server_root': get_server_root(request),
         'pages': pages,
         'number_of_pages': len(list(pages))
     }))
@@ -128,7 +128,7 @@ def project(request, name):
                                    "skills"] + get_generic_keywords()),
         'page_title': 'Projects &#183; Jon Tedesco &#183;' + project.title,
         'word_cloud_name': 'projects',
-        'server_root': get_server_root(),
+        'server_root': get_server_root(request),
         'static': True,
         'project': project
     }))
@@ -167,7 +167,7 @@ def blog(request):
             ["blog", "discussion", "geek", "projects", "software", "projects"] + get_generic_keywords()),
         'page_title': 'Blog &#183; Jon Tedesco',
         'word_cloud_name': 'blog',
-        'server_root': get_server_root(),
+        'server_root': get_server_root(request),
         'pages': pages,
         'number_of_pages': len(list(pages))
     }))
@@ -196,7 +196,7 @@ def blog_post(request, name):
             ["blog", "discussion", "geek", "projects", "software", "projects"] + get_generic_keywords()),
         'page_title': 'Blog &#183; Jon Tedesco &#183; ' + post.title,
         'word_cloud_name': 'blog',
-        'server_root': get_server_root(),
+        'server_root': get_server_root(request),
         'post': post
     }))
 

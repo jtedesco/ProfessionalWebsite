@@ -85,7 +85,7 @@ def search(request, query):
         'meta_keywords': ' '.join(get_generic_keywords()),
         'page_title': title,
         'word_cloud_name': 'about_me',
-        'server_root': get_server_root(),
+        'server_root': get_server_root(request),
         'query': query,
         'time': time,
         'search_results': search_results,
@@ -115,17 +115,18 @@ def create_index():
 
     # Add the main pages to the index
     for main_page in ['about_me', 'research', 'resume']:
-        insert_document(index_writer, main_page, get_server_root() + main_page, main_page)
+        insert_document(index_writer, main_page, 'http://www.jontedesco.net/' + main_page, main_page)
 
     # Add the blog entries
     blog_posts = list(Post.objects.all())
     for blog_post in blog_posts:
-        insert_document(index_writer, blog_post.title, get_server_root() + 'blog/' + blog_post.name, blog_post.name)
+        insert_document(index_writer, blog_post.title, 'http://www.jontedesco.net/blog/' + blog_post.name,
+            blog_post.name)
 
     # Add the projects
     projects = list(Project.objects.all())
     for project in projects:
-        insert_document(index_writer, project.title, get_server_root() + 'projects/' + project.name, project.name)
+        insert_document(index_writer, project.title, 'http://www.jontedesco.net/projects/' + project.name, project.name)
 
     # Commit all the changes, so that every change is flushed to disk, and we can safely query the index
     index_writer.commit()
@@ -165,8 +166,6 @@ def insert_document(index_writer, title, url, name):
         pass
 
     # Put this content into index
-    actualUrl = url.replace(get_server_root(), 'http://jontedesco.net/')
-    print actualUrl
     index_writer.add_document(content=parsed_content, title=title.title(), url=unicode(actualUrl))
 
 
