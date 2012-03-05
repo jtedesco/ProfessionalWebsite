@@ -170,6 +170,14 @@ posts = [
                 <a href="http://lifehacker.com/5063176/how-to-use-dropbox-as-the-ultimate-password-syncer">in combination with Dropbox</a>
                 to securely store my passwords so that they are accessible anywhere.
             </p>
+
+            <h5>Separation of Concerns</h5>
+            <p>
+                In order for this system to be effective, it requires us to take a look at our accounts be cautious of how we link
+                them together. In particular, 'secondary accounts' should really have minimal personal data associated with the account.
+                In most cases, I defer all payments to Paypal or Google Shopper, storing only a name, address, and my shopping history
+                on each online shopping site that I use.
+            </p>
             <br/>
             <p>
                 I hope that this is as useful for someone else as it was for me -- let's cautiously embrace the new age of cloud services!
