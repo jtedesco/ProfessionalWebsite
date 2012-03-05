@@ -54,7 +54,7 @@ class Post(models.Model):
 
     # The date & content of the blog post
     timestamp = DateTimeField()
-    content = CharField(max_length=4096)
+    content = CharField(max_length=16384)
 
     # The comments associated with this blog post
     comments = ForeignRelatedObjectsDescriptor(Comment)
