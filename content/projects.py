@@ -463,6 +463,29 @@ projects = [
             </p>
             ''',
         sourceUrl = 'https://github.com/jtedesco/FreeBox'
+    ),
+    Project(
+        name = 'nimbos',
+        title = 'Nimbos',
+        subtitle = 'A Hadoop cluster prediction framework',
+        active = True,
+        shortDescription = '''
+            <p>
+                As our course project for our <a href='https://wiki.engr.illinois.edu/display/cs598rco/Home'>cloud computing course</a>,
+                I have been working with two fellow students in the department to study how we can effectively predict machine
+                failures in hadoop clusters. We hope to use Hadoop logs to improve upon previous work done in other cloud
+                computing systems by leveraging machine learning to predict failures, the type of failure expected, as well
+                as time of failure expected.
+            </p>
+            ''',
+        longDescription = '''
+            <p>
+                Thus far, we have recreated previous work that predicts hardware failures in cloud systems using SVMs and
+                a sliding window view of logs. As detailed in our <a href='https://wiki.engr.illinois.edu/download/attachments/195766887/paper.pdf?version=3&modificationDate=1331931973141'>project proposal</a>,
+                we can take a similar sliding window approach, but plan to investigate alternative views of log data.
+            </p>
+            ''',
+        sourceUrl = 'https://github.com/jtedesco/Nimbos'
     )
 ]
 
