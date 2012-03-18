@@ -28,7 +28,7 @@
                                     <div class="page_{{ page.number }}">
                                         <div class="content">
 
-                                            {# Insert the 'current projects' header if there are any current projects , or the past#}
+                                            {# Insert the 'current projects' header if there are any current projects #}
                                             {% if page.projects_list.0.active %}
 
                                                 {# Current projects header #}
@@ -42,14 +42,6 @@
                                                 </p>
                                                 <br/>
 
-                                            {% else %}
-
-                                                {# Past projects header #}
-                                                <h1 class="title">
-                                                    <span>past</span> projects
-                                                </h1>
-                                                <br/>
-                                                
                                             {% endif %}
 
 
@@ -91,8 +83,10 @@
                                                 {% endif %}
                                                 <br/>
 
-                                                {# Handle the past projects header, wherever it occurs#}
-                                                {% if project.next and project.active and not project.next.active %}
+                                                {#  Insert the past project header if this project is active and the next isn't #}
+                                                {% if project.active and project.next and not project.next.active %}
+
+                                                    {# Past projects header #}
                                                     <h1 class="title">
                                                         <span>past</span> projects
                                                     </h1>

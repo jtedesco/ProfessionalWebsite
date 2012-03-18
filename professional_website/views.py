@@ -1,3 +1,4 @@
+from pprint import pprint
 from django.http import HttpResponse
 from django.template.context import Context
 from django.template.loader import get_template
@@ -77,7 +78,12 @@ def projects(request):
     # Get all projects, ordered by ID & grouped by active/inactive
     projects = list(Project.objects.extra(order_by=['-active', '-id']))
 
-    chunkedProjects = chunks(projects, 5)
+    # Split the projects ilnto chunks of 5 and add 'next' pointers
+    chunkedProjects = list(chunks(projects, 5))
+    for projectChunk in chunkedProjects:
+        for projectIndex in xrange(0, len(projectChunk)-1):
+            projectChunk[projectIndex].next = projectChunk[projectIndex+1]
+        projectChunk[len(projectChunk)-1].next = None
 
     # Split projects into numbered pages
     pages = []
