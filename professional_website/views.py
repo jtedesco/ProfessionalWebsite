@@ -96,7 +96,7 @@ def projects(request):
     html = template.render(Context({
         'meta_description': 'Jon Tedesco\'s projects &#183; Description, demos, and source code of Jon Tedesco\'s geeky projects'
         ,
-        'meta_keywords': ' '.join(["projects", "experience", "technology", "current", "past", "github", "sockit",
+        'meta_keywords': ' '.join(["projects", "experience", "technology", "github", "sockit",
                                    "skills"] + get_generic_keywords()),
         'page_title': 'Projects &#183; Jon Tedesco',
         'word_cloud_name': 'projects',
