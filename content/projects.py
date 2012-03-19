@@ -393,7 +393,7 @@ projects = [
         name = 'sockit',
         title = 'SockIt',
         subtitle = 'An asynchronous, client-side Jsavascript networking plugin',
-        active = True,
+        active = False,
         shortDescription = '''
             <p>
                 This summer, I spent the first month of my internship working on a project reminiscent
@@ -465,6 +465,37 @@ projects = [
         sourceUrl = 'https://github.com/jtedesco/FreeBox'
     ),
     Project(
+        name = 'removeDuplicateCodeInConstructorsRefactoring',
+        title = 'Java Eclipse Constructor Refactoring',
+        subtitle = 'An Eclipse Java refactoring to remove duplicate code from constructors',
+        active = False,
+        shortDescription = '''
+            <p>
+                For our course project for <a href='https://wiki.engr.illinois.edu/display/cs427fa11/CS+427+Fall+2011'>software engineering</a>,
+                I worked with three classmates to develop a plugin for the Eclipse refactoring engine that automatically
+                detects and removes duplicate code from class constructors. The project was intended to teach us how to practice XP,
+                and was entirely pair-programmed, strictly adhering to the extreme programming practices.
+            </p>
+            ''',
+        longDescription = '''
+            <p>
+                The refactoring is able to analyze any arbitrary types for constructors, detect duplicate code by tracing
+                through the Java program AST, and even allows the user to customize the extraction of duplicate code found
+                by the refactoring by introducing new helper methods or specifying access modifiers for methods or constuctors
+                created by the refactoring. Likewise, it provides refactoring previews and analysis of program errors to
+                the user via the Eclipse refactoring wizard interface.
+            </p>
+            <p>
+                In addition to our <a href='https://github.com/jtedesco/RemoveDuplicateCodeFromConstructors'>source code</a>
+                below, we have a <a href='https://github.com/jtedesco/RemoveDuplicateCodeFromConstructorsTests'>separate repository</a>
+                containing the tests for our refactoring, providing a thorough test suite of successful and unsuccessful
+                refactoring scenarios. Likewise, our full documentation, including sample use cases and a full set of
+                features, can be found <a href='static/admin/papers/refactoring_project_documentation.pdf'>here</a>.
+            </p>
+        ''',
+        sourceUrl = 'https://github.com/jtedesco/RemoveDuplicateCodeFromConstructors'
+    ),
+    Project(
         name = 'nimbos',
         title = 'Nimbos',
         subtitle = 'A Hadoop cluster prediction framework',
@@ -473,7 +504,7 @@ projects = [
             <p>
                 As our course project for our <a href='https://wiki.engr.illinois.edu/display/cs598rco/Home'>cloud computing course</a>,
                 I have been working with two fellow students in the department to study how we can effectively predict machine
-                failures in hadoop clusters. We hope to use Hadoop logs to improve upon previous work done in other cloud
+                failures in Hadoop clusters. We hope to use Hadoop logs to improve upon previous work done in other cloud
                 computing systems by leveraging machine learning to predict failures, the type of failure expected, as well
                 as time of failure expected.
             </p>
