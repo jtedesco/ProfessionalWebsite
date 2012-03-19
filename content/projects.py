@@ -496,6 +496,27 @@ projects = [
         sourceUrl = 'https://github.com/jtedesco/RemoveDuplicateCodeFromConstructors'
     ),
     Project(
+        name = 'eduwrite',
+        title = 'EduWrite',
+        subtitle = 'Real-time collaborative note-taking',
+        active = True,
+        shortDescription = '''
+            <p>
+                Still under active development, EduWrite is a semester project for
+                <a href='https://wiki.engr.illinois.edu/display/cs428sp12/Home'>Software Development II</a> that
+                leverages the open source project <a href='https://github.com/Pita/etherpad-lite'>Etherpad Lite</a> to
+                provide real-time note taking system for lecture-style classes.
+            </p>
+            <p>
+                This project is built on <a href='http://nodejs.org/'>node.js</a>, using modules such as <a href=''>express</a>,
+                <a href='https://github.com/visionmedia/mocha'>mocha</a>, <a href='https://github.com/mbrevoort/docco-husky'>docco-husky</a>,
+                and <a href='https://github.com/Pita/ueberDB'>ueberDB</a>, as well as Twitter's
+                <a href='http://twitter.github.com/bootstrap/'>Bootstrap</a> framework. It is currently hosted at a private
+                Github repository, but will be open-sourced soon.
+            </p>
+        '''
+    ),
+    Project(
         name = 'nimbos',
         title = 'Nimbos',
         subtitle = 'A Hadoop cluster prediction framework',
