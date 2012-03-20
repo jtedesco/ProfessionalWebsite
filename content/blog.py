@@ -221,8 +221,8 @@ def getPageRank(url):
                 simply assigning <code>None</code> in the case that:
                 <ul><br/>
                     <li>The PageRank could not be found (infrequent in practice)<br/></li><br/>
-                    <li>Your IP address has been rate limited by Google<br/></li>
-                    <li>Miscellaneous errors, such as URL not found<br/></li>
+                    <li>Your IP address has been rate limited by Google<br/></li><br/>
+                    <li>Miscellaneous errors, such as URL not found<br/></li><br/>
                 </ul>
                 These error cases can (and should) be handled individually, but for the sake of conciseness, this is omitted.
             </p>
