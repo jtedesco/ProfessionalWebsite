@@ -1,0 +1,3 @@
+[submodule "code/BitLibrary"]
+	path = code/BitLibrary
+	url = git@jontedesco.net:BitLibrary.git
