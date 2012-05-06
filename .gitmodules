@@ -1,3 +1,6 @@
 [submodule "code/BitLibrary"]
 	path = code/BitLibrary
 	url = git@jontedesco.net:BitLibrary.git
+[submodule "code/CollaborativeMusicFilter"]
+	path = code/CollaborativeMusicFilter
+	url = git@jontedesco.net:CollaborativeMusicFilter.git
