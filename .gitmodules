@@ -4,3 +4,6 @@
 [submodule "code/CollaborativeMusicFilter"]
 	path = code/CollaborativeMusicFilter
 	url = git@jontedesco.net:CollaborativeMusicFilter.git
+[submodule "code/DistributedFileSystem"]
+	path = code/DistributedFileSystem
+	url = git@jontedesco.net:DistributedFileSystem.git
