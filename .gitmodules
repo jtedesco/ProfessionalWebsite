@@ -25,3 +25,6 @@
 [submodule "code/PyGoogle"]
 	path = code/PyGoogle
 	url = git@jontedesco.net:PyGoogle.git
+[submodule "code/SportSQL"]
+	path = code/SportSQL
+	url = git@jontedesco.net:SportSQL.git
