@@ -22,3 +22,6 @@
 [submodule "code/GenerationsWebsite"]
 	path = code/GenerationsWebsite
 	url = git@jontedesco.net:GenerationsWebsite.git
+[submodule "code/PyGoogle"]
+	path = code/PyGoogle
+	url = git@jontedesco.net:PyGoogle.git
