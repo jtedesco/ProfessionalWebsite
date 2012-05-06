@@ -1,1 +1,0 @@
-This project is an implementation of a distributed hash table in C++. Each node of the hash table runs in a separate process, and communicates via TCP. 
