@@ -1,7 +1,0 @@
-.exclude
-command_file
-membership.conf
-create_memory_map.pl
-memory_map.conf
-Writeup.odt
-Writeup.pdf
