@@ -7,3 +7,6 @@
 [submodule "code/DistributedFileSystem"]
 	path = code/DistributedFileSystem
 	url = git@jontedesco.net:DistributedFileSystem.git
+[submodule "code/DistributedHashTable"]
+	path = code/DistributedHashTable
+	url = git@jontedesco.net:DistributedHashTable.git
