@@ -16,3 +16,6 @@
 [submodule "code/FdClosureCalculator"]
 	path = code/FDClosureCalculator
 	url = git@jontedesco.net:FdClosureCalculator.git
+[submodule "code/FlightData"]
+	path = code/FlightData
+	url = git@jontedesco.net:FlightData.git
