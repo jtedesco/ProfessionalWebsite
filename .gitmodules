@@ -19,3 +19,6 @@
 [submodule "code/FlightData"]
 	path = code/FlightData
 	url = git@jontedesco.net:FlightData.git
+[submodule "code/GenerationsWebsite"]
+	path = code/GenerationsWebsite
+	url = git@jontedesco.net:GenerationsWebsite.git
