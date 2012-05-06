@@ -14,7 +14,7 @@
 	path = code/DistributedSharedMemory
 	url = git@jontedesco.net:DistributedSharedMemory.git
 [submodule "code/FdClosureCalculator"]
-	path = code/FDClosureCalculator
+	path = code/FdClosureCalculator
 	url = git@jontedesco.net:FdClosureCalculator.git
 [submodule "code/FlightData"]
 	path = code/FlightData
