@@ -10,3 +10,6 @@
 [submodule "code/DistributedHashTable"]
 	path = code/DistributedHashTable
 	url = git@jontedesco.net:DistributedHashTable.git
+[submodule "code/DistributedSharedMemory"]
+	path = code/DistributedSharedMemory
+	url = git@jontedesco.net:DistributedSharedMemory.git
