@@ -1,0 +1,42 @@
+<p>
+    Recently, I discovered that on Ubuntu, or any Debian-based Linux operating system, you can backup
+    and restore and restore all packages, independent of the system or architectures itself.
+    In fact, I sought out this solution because I wanted to switch to 64-bit Ubuntu from 32-bit,
+    and didn't want to manually restore my programs and settings.
+</p>
+<p>
+    To backup all installed applications, we first backup <code>sources.list</code> and
+    the list of installed packages:<br/>
+
+<div style="margin-left: 30px;">
+                    <pre class="brush: plain">
+                        sudo cp /etc/apt/sources.list ./
+                        dpkg --get-selections > installed-software
+                    </pre><br/>
+</div>
+
+<p>
+    To restore these packages on a clean build, we simply need to perform the following:
+</p>
+
+<div style="margin-left: 30px;">
+                <pre class="brush: plain">
+                    sudo cat files/sources.list > /etc/apt/sources.list
+                    sudo apt-get update
+                    sudo apt-get install dselect
+                    sudo dpkg --set-selections < installed-software
+                    sudo dselect
+                </pre><br/>
+</div>
+
+<p>
+    I modified my own script to automatically install third-party applications that don't
+    include PPA's for for Ubuntu, such as <a href="http://www.jetbrains.com/idea/">IntelliJ IDEA</a> and
+    the <a href="http://developer.android.com/sdk/index.html">Android SDK</a>, and perform
+    other automated configuration, such as configuring Java alternatives, and setting the default
+    shell to <a href="http://www.zsh.org/">Zsh</a>.
+</p>
+<p>
+    The true benefit of using this method is that backups can be used for different Ubuntu architectures
+    and versions, and backups require minimal space.
+</p>

@@ -1,0 +1,97 @@
+<h5>Origin and Usage</h5>
+<p>
+    I first came up with this code, adopted from <a href='http://www.djangosnippets.org/snippets/221/'>Corey Goldberg</a>,
+    during my research for my senior thesis, studying entity search on the web. I adapted it slightly for my
+    own use, but credit for this code goes to its original author. Although Google does not explicitly provide
+    a utility for fetching the PageRank of a website, using the <a href='http://toolbar.google.com/'>Google toolbar</a>,
+    we can programmatically fetch what I assume to be the <i>approximate</i> PageRank of any URL, on a scale
+    from 0 to 10, the least to most reputable.
+</p>
+<h5>Code</h5>
+<p>
+    Below, you can see the code required to fetch the PageRank of the URL. At the top-level, all the work
+    can be abstracted into a single function call:
+<div style="margin-left: 0px;">
+                    <pre class="brush: python">
+def getPageRank(url):
+    hashedUrl = checkHash(hashUrl(url))
+    url = 'http://toolbarqueries.google.com/tbr' &#92;
+            + '?client=navclient-auto&features=Rank' &#92;
+            + '&ch=%s&q=info:%s' % (hashedUrl, urllib.quote(url))
+    try:
+        rank = int((urllib.urlopen(url)).read().strip()[9:])
+    except Exception:
+        rank = None
+    return rank
+                    </pre><br/>
+</div>
+Albeit this may not be the most elegant code on earth, but it gets the job done, handling error cases by
+simply assigning <code>None</code> in the case that:
+<ul><br/>
+    <li>The PageRank could not be found (infrequent in practice)<br/></li><br/>
+    <li>Your IP address has been rate limited by Google<br/></li><br/>
+    <li>Miscellaneous errors, such as URL not found<br/></li>
+</ul>
+These error cases can (and should) be handled individually, but for the sake of conciseness, this is omitted.
+</p>
+<p>
+    The helper functions used for hashing the URL to make use of the PageRank feature are shown below:
+<div style="margin-left: 0px;">
+                    <pre class="brush: python">
+def intStr(string, integer, factor):
+    for i in range(len(string)) :
+        integer *= factor
+        integer &= 0xFFFFFFFF
+        integer += ord(string[i])
+    return integer
+
+
+def hashUrl(string):
+    c1 = intStr(string, 0x1505, 0x21)
+    c2 = intStr(string, 0, 0x1003F)
+
+    c1 >>= 2
+    c1 = ((c1 >> 4) & 0x3FFFFC0) | (c1 & 0x3F)
+    c1 = ((c1 >> 4) & 0x3FFC00) | (c1 & 0x3FF)
+    c1 = ((c1 >> 4) & 0x3C000) | (c1 & 0x3FFF)
+
+    t1 = (c1 & 0x3C0) << 4
+    t1 |= c1 & 0x3C
+    t1 = (t1 << 2) | (c2 & 0xF0F)
+
+    t2 = (c1 & 0xFFFFC000) << 4
+    t2 |= c1 & 0x3C00
+    t2 = (t2 << 0xA) | (c2 & 0xF0F0000)
+
+    return t1 | t2
+
+
+def checkHash(hashInt):
+    hash_str = '%u' % hashInt
+    flag = 0
+    checkByte = 0
+
+    i = len(hash_str) - 1
+    while i >= 0:
+        byte = int(hash_str[i])
+        if 1 == (flag % 2):
+            byte *= 2
+            byte = byte / 10 + byte % 10
+        checkByte += byte
+        flag += 1
+        i -= 1
+
+    checkByte %= 10
+    if 0 != checkByte:
+        checkByte = 10 - checkByte
+        if 1 == flag % 2:
+            if 1 == checkByte % 2:
+                checkByte += 9
+            checkByte >>= 1
+
+    return '7' + str(checkByte) + hash_str
+                    </pre><br/>
+</div>
+If you do choose to use this code, please respect the terms of service laid out by Google, so that this feature
+remains available for free use.
+</p>
