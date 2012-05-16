@@ -1,0 +1,49 @@
+<p>
+    This extension will allow the ACM's collaborative music player to automatically
+    select good songs to play based on users in the room at any given time.
+</p>
+<p>
+    Our extension's implementation was broken into three primary components:<br/>
+<ul>
+    <li>
+        First, our application receives an socket-based request from Acoustics, which consists
+        of a set of users for which to find the set of tags that best represents the users'
+        common musical tastes.
+    </li><br/>
+    <li>
+        Using score-based and tag-based filtering mechanisms, find a set of tags that represents
+        the common interests of the given users.
+    </li><br/>
+    <li>
+        Use this ordered set of tags as a query to a Lucene index, where documents are represented
+        as songs indexed by tags. Finally, return this set of songs to Acoustics as the final result.
+    </li>
+</ul>
+</p>
+<p>
+    Below, we show a full diagram of the architecture of our system:
+<center><img style="padding:20px; margin-left:-10px;" width=500 src="/static/admin/images/projects/collaborative_music_filter_architecture.png"/></center>
+
+The four most important components of this architecture we specifically:<br/><br/>
+<ul>
+    <li>Last.fm crawler</li><br/>
+
+    Runs separately from the core Java code of our project, polls the Acoustics database for new songs,
+    albums, and artists, and fetches tag information from Last.fm<br/><br/>
+
+    <li>Project API</li><br/>
+
+    Provides a simple interface to our project from the core Acoustics code, and allows our project to be
+    run separately from Acoustics<br/><br/>
+
+    <li>Tag filter</li><br/>
+
+    Retrieves a ranked list of high-level musical tags that best represent the musical interests of a set of users<br/><br/>
+
+    <li>Song index</li><br/>
+
+    Uses this list of tags as a query to generate a pseudo-randomized playlist of songs to suggest to Acoustics<br/><br/>
+</ul>
+
+For a full explanation of our projects, take a look at our <a href="/static/admin/papers/collaborative_music_filter_paper.pdf">project writeup</a>.
+</p>

@@ -1,0 +1,15 @@
+<h4><br/>Coordinator</h4>
+<p>
+    This node provides hooks for running simulations in the shared memory system, and handles
+    mutual exclusion in our implementation. It reads input files to run commands in the
+    memory system, and intermediates between the nodes of the memory system.
+</p>
+<br/>
+
+<h4><br/>Shared Memory Node</h4>
+<p>
+    Each node of the memory system implements <a href="http://en.wikipedia.org/wiki/Release_consistency">release consistency</a>
+    by locally caching data as long as it knows that it is the only process in the critical section. Whenever
+    it must read some data, it contacts other nodes in the memory system, and itself holds only a small
+    portion of the total data of the system.
+</p>

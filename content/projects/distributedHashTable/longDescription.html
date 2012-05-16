@@ -1,0 +1,23 @@
+<h4><br/>Listener</h4>
+<p>
+    This process read input files, and sent commands to the entry point of the DHT
+    to simulate clients requesting data or adding or leaving the DHT. This was
+    used for performance analysis of the hash table, and to provide debugging hooks
+    to test our implementation.<br/><br/>
+</p>
+<h4><br/>DHT Node</h4>
+<p>
+    A node in the hash table represented a single process, that could leave or join
+    the table arbitrarily. When the node was connected to the hash table, it
+    was aware of its predecessor and successor in the ring, and held a table that
+    connected to <code>m</code> other nodes. These tables at each node formed
+    hypercube-like structure within the DHT, so that traversing the entire table to
+    perform some action requires on <code>log(n)</code> time.
+</p>
+<p>
+    Since each node was represented by a separate process, all communication between
+    nodes occurred via network communication. Likewise, all requests, including
+    finding data in the DHT, removing data from the DHT, or modifying the DHT
+    structure itself, were processed concurrently. While simple, this implementation
+    is scalable across many machines.
+</p>
