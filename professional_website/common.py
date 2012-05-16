@@ -2,7 +2,7 @@ __author__ = 'Jon Tedesco'
 
 
 def get_root_directory():
-    return "/home/jon/Projects/ProfessionalWebsite"
+    return "/home/jon/Documents/Dropbox/Projects/ProfessionalWebsite"
 
 
 def get_server_root():
