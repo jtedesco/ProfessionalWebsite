@@ -56,11 +56,12 @@ strong {
     color: #4b3938;
 }
 
-a {
+a, a:visited {
     color: #B84820;
 }
 
 a:hover {
+    color: #B84820;
     text-decoration: none;
 }
 
@@ -285,7 +286,7 @@ code, pre {
     font-size: 13px;
 }
 
-#footer a {
+#footer a, #footer a:visited {
     color: #654A48;
 }
 
