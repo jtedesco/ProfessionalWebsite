@@ -1,5 +1,5 @@
 import os
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.template.context import Context
 from django.template.loader import get_template
 import sys
@@ -29,47 +29,52 @@ def view_source(request, path):
     }
 
     # Read the source code file
-    source_file = open(get_root_directory() + "/code/" + path, 'r')
-    source_code = source_file.read()
-    source_file.close()
+    try:
+        source_file = open(get_root_directory() + "/code/" + path, 'r')
+        source_code = source_file.read()
+        source_file.close()
 
-    # Data structure to hold information for this page
-    data = {
-        'meta_description': 'Homepage of Jon Tedesco, a dedicated student and avid software developer at University' +
-                            'of Illinois at Urbana-Champaign',
-        'meta_keywords': ' '.join(get_generic_keywords()),
-        'page_title': 'View Source &#183; %s (%s)',
-        'word_cloud_name': 'about_me',
-        'server_root': get_server_root(),
-        'static': True,
-        'path': None,
-        'language': None,
-        'content': None
-    }
+        # Data structure to hold information for this page
+        data = {
+            'meta_description': 'Homepage of Jon Tedesco, a dedicated student and avid software developer at University' +
+                                'of Illinois at Urbana-Champaign',
+            'meta_keywords': ' '.join(get_generic_keywords()),
+            'page_title': 'View Source &#183; %s (%s)',
+            'word_cloud_name': 'about_me',
+            'server_root': get_server_root(),
+            'static': True,
+            'path': None,
+            'language': None,
+            'content': None
+        }
 
-    # Check if this is a binary file
-    binary_file_extensions = ['jpg', 'png', 'bmp', 'jpeg']
-    file_extension = path[path.rfind('.') + 1:]
-    if file_extension not in binary_file_extensions:
-        # Update data
-        data['content'] = source_code
-        if file_extension in languages:
-            data['language'] = languages[file_extension]
+        # Check if this is a binary file
+        binary_file_extensions = ['jpg', 'png', 'bmp', 'jpeg']
+        file_extension = path[path.rfind('.') + 1:]
+        if file_extension not in binary_file_extensions:
+            # Update data
+            data['content'] = source_code
+            if file_extension in languages:
+                data['language'] = languages[file_extension]
+            else:
+                data['language'] = 'plain'
+            data['path'] = path
+            data['page_title'] = data['page_title'] % (path, data['language'].title())
+
         else:
-            data['language'] = 'plain'
-        data['path'] = path
-        data['page_title'] = data['page_title'] % (path, data['language'].title())
+            data['path'] = path
+            data['page_title'] = 'View Source &#183; ' + path
+            data['image'] = True
 
-    else:
-        data['path'] = path
-        data['page_title'] = 'View Source &#183; ' + path
-        data['image'] = True
+        # Fill HTML template
+        template = get_template('pages/view_source.html')
+        html = template.render(Context(data))
+        return HttpResponse(html)
 
-    # Fill HTML template
-    template = get_template('pages/view_source.html')
-    html = template.render(Context(data))
-    return HttpResponse(html)
+    except IOError:
 
+        # Throw a 404 if the file can't be read
+        raise Http404
 
 def navigate_source(request, path, project):
     """
